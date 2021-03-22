@@ -5,7 +5,7 @@ const fs = require("fs");
 module.exports = {
   name: "leaderboard",
   run: async (client, message, args) => {
-   let data = db
+    let data = db
       .all()
       .filter(i => i.ID.startsWith(`xp_`))
       .sort((a, b) => b.data - a.data);
@@ -20,15 +20,11 @@ module.exports = {
       let id = data[i].ID.split(`_`)[1];
       let user = await client.users.fetch(id);
       user = user ? user.tag : "Unknown User#0000";
-     
+
       let rank = data.indexOf(data[i]) + 1;
       let level = db.get(`level_${id}_${message.guild.id}`) || 0;
       let xp = data[i].data;
-      lb [{user: { id, tag: user }}] = 
-       ({ rank,
-        level,
-        xp
-      });
+      lb.push({ user: { id, tag: user }, rank, level, xp });
     }
     const embed = new MessageEmbed().setTitle("Leaderboard").setColor("RANDOM");
     lb.forEach(d => {
@@ -39,6 +35,5 @@ module.exports = {
     });
     embed.setFooter(`Your Position: ${myrank}`);
     return message.channel.send(embed);
-  
-}};    
- 
+  }
+};
