@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const db = require("quick.db");
-const { getInfo } = require("../../XP.json");
+//const { getInfo } = require("../../XP.json");
 const fs = require ("fs")
 module.exports = {
   name: "leaderboard",
@@ -16,7 +16,7 @@ module.exports = {
         .indexOf(`xp_${message.author.id}_${message.guild.id}`) + 1 || "N/A";
     data.length = 20;
    // let lb = [];
-    let lb = JSON.parse(fs.readFileSync('../../XP.json', 'utf8'))
+    let lb = JSON.parse(fs.readFileSync('./xp.json', 'utf8'))
 
     for (let i in data) {
       let id = data[i].ID.split(`_`)[1];
@@ -31,12 +31,14 @@ module.exports = {
         level,
         xp
       });
-      fs.writeFile("../../XP.json", JSON.stringify(lb, null, 2), err => {
+      fs.writeFile("../../xp.json", JSON.stringify(lb, null, 2), err => {
       if (err) console.log(err);
     });
     }
+    let daa = lb.find(x => x.id === message.author.tag);
+    let value = lb.indexOf(daa);
     const embed = new MessageEmbed().setTitle("Leaderboard").setColor("RANDOM");
-    lb.forEach(d => {
+    lb[value].forEach(d => {
       embed.addField(
         d.rank,
         `${d.user.tag}\n exp: ${d.xp}\n level: ${d.level}`
