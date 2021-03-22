@@ -69,7 +69,7 @@ class Util {
 
       if (newlvl > oldlvl) sender.send(EmbedLevel);
     });
-    db.add(`xps_${message.author.id}_${message.guild.id}`, toadd);
+  return db.add(`xps_${message.author.id}_${message.guild.id}`, toadd);
     db.set(`level_${message.author.id}_${message.guild.id}`,newlvl);
   }
 }

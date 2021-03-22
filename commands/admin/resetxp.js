@@ -14,7 +14,7 @@ module.exports = {
     message.delete();
     const user = message.mentions.users.first() || message.author;
 
-    db.delete(`xp_${user.id}_${message.guild.id}`);
+    db.delete(`xps_${user.id}_${message.guild.id}`);
     db.delete(`level_${user.id}_${message.guild.id}`);
     message.channel.send(
       `${client.emotes.success} Successfully Reset XP And level`

@@ -17,14 +17,14 @@ module.exports = {
     let finalLb = "";
 
     for (let i in coins) {
-      if (coins[i].data === null) coins[i].data = 0;
+      if (coins[i].data === null) coins[i].data = 1;
 
       let userData = client.users.cache.get(coins[i].ID.split("_")[1])
         ? client.users.cache.get(coins[i].ID.split("_")[1]).tag
         : "Unknown#0000";
 
       finalLb += `__**${coins.indexOf(coins[i]) +
-        1}.**__ **${userData} » \`${coins[i].data || 0}\`**\n`;
+        1}.**__ **${userData} » \`${coins[i].data}\`**\n`;
     }
 
     let embed = new MessageEmbed()

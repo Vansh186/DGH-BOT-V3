@@ -27,7 +27,7 @@ module.exports = {
       .sort((a, b) => b.data - a.data);
   
     let xp = db.get(`xps_${user.id}_${message.guild.id}`) || 0;
-    let top = coins.map(m => m.ID).indexOf(`xps_${user.id}_${message.guild.id}`) + 1
+ // let top = coins.map(m => m.ID).indexOf(`xps_${user.id}`) + 1
     const { level, remxp, levelxp } = getInfo(xp);
     let image = db.get(`levelimg_${message.guild.id}`);
     const rank = new canvacord.Rank()
@@ -53,7 +53,7 @@ module.exports = {
         .setTimestamp()
         .setDescription(
           `**LEVEL** - ${level}
-**XP** - ${remxp}/${levelxp}\n**Top** - ${top}`
+**XP** - ${remxp}/${levelxp}`
         )
         .setImage("attachment://Rankcard.png")
         .attachFiles(attachment);
