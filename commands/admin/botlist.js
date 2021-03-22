@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-    name: 'bots',
+    name: 'botlist',
     cooldown: 5,
     run: async(client, message, args) => {
 
