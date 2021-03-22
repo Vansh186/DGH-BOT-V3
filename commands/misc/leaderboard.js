@@ -10,7 +10,7 @@ const bot = client
     const data = db
       .fetchAll()
       .filter((da) => da.ID.startsWith("xp_"))
-      .sort((a, b) => b.data - a.data);
+      .sort((a, b) => a.data - b.data);
 
     const embed = new MessageEmbed()
       .setTitle(`${message.guild.name} 's Leaderboard`)
@@ -20,8 +20,9 @@ const bot = client
 
     for (let i = 0; i < data.length; i++) {
       const guildId = message.guild.id;
-      const userId = data[i].ID.replace(`xp_${guildId}`, ""); // get user id
-      const user = bot.users.cache.get(userId); // Get user
+      const userId = data[i].ID
+      const idd = guildId.replace(`xp_${userId}_${guildId}`, ""); // get user id
+      const user = bot.users.cache.get(idd); // Get user
       if (user) {
         embed.addField(user.username, `${data[i].data}xp`, true);
       }
