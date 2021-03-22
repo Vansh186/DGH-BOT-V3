@@ -20,11 +20,25 @@ module.exports = {
       let id = data[i].ID.split(`_`)[1];
       let user = await client.users.fetch(id);
       user = user ? user.tag : "Unknown User#0000";
-
+const check = lb.find(x => x.id === message.author.id);
       let rank = data.indexOf(data[i]) + 1;
       let level = db.get(`level_${id}_${message.guild.id}`) || 0;
       let xp = data[i].data;
-      lb.push({ user: { id, tag: user }, rank, level, xp });
+        
+  if (check) {
+      if (check.badword.length === 5) {
+        return message.channel.send(
+          "You reached your limit, you can not add more than 5 website.")
+      }
+      let numb = lb.indexOf(check);
+      lb[numb].badword.push(args[0]);
+    } else {
+  database.push({
+        id: message.guild.id,
+        badword: [args[0]]
+      });
+    }    lb.push({
+      user: { id, tag: user }, rank, level, xp });
     }
     const embed = new MessageEmbed().setTitle("Leaderboard").setColor("RANDOM");
     lb.forEach(d => {
