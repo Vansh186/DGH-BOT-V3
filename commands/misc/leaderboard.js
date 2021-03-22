@@ -8,7 +8,7 @@ module.exports = {
   run: async (client, message, args) => {
     const coins = db
       .all()
-      .filter(data => data.ID.startsWith(`xps`))
+      .filter(data => data.ID.startsWith(`xp`))
       .sort((a, b) => b.data - a.data);
     const userBalance = await db.fetch(
       `level_${message.author.id}_${message.guild.id}`
@@ -23,8 +23,7 @@ module.exports = {
         ? client.users.cache.get(coins[i].ID.split("_")[1]).tag
         : "Unknown#0000";
 
-      finalLb += `__**${coins.indexOf(coins[i]) +
-        1}.**__ **${userData} » \`${coins[i].data}\`**\n`;
+      finalLb += `__**${coins.indexOf(coins[i]) + 1}.**__ **${userData} » \`${coins[i].data}\`**\n`;
     }
 
     let embed = new MessageEmbed()
@@ -33,7 +32,7 @@ module.exports = {
         `
             ${finalLb}
             `
-      )
+      ) 
       .setColor("#efcb83")
       .setFooter(
         `Your Level » ${userBalance} | Leaderboards are Global Statistics`

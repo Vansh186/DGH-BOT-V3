@@ -29,7 +29,7 @@ class Util {
 
   static addexp(message, client) {
     let toadd = Math.floor(Math.random() * 3 + 3);
-    let oldxp = db.get(`xps_${message.author.id}_${message.guild.id}`);
+    let oldxp = db.get(`xp_${message.author.id}_${message.guild.id}`);
     let oldlvl = Util.getLevel(oldxp);
     let newxp = oldxp + toadd;
     let newlvl = Util.getLevel(newxp);
@@ -69,8 +69,8 @@ class Util {
 
       if (newlvl > oldlvl) sender.send(EmbedLevel);
     });
-  return db.add(`xps_${message.author.id}_${message.guild.id}`, toadd);
-    db.set(`level_${message.author.id}_${message.guild.id}`,newlvl);
+    db.add(`xp_${message.author.id}_${message.guild.id}`, toadd);
+    db.set(`level_${message.author.id}_${message.guild.id}`, newlvl);
   }
 }
 module.exports = Util;
