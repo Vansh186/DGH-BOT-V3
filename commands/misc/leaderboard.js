@@ -5,9 +5,9 @@ const fs = require("fs");
 module.exports = {
   name: "leaderboard",
   run: async (client, message, args) => {
-     let data = db
+   let data = db
       .all()
-      .filter(i => i.ID.startsWith(`xp_${wtf}_${message.guild.id}`))
+      .filter(i => i.ID.startsWith(`xp_`))
       .sort((a, b) => b.data - a.data);
     if (data.length < 1) return message.channel.send("No leaderboard");
     let myrank =
@@ -20,18 +20,12 @@ module.exports = {
       let id = data[i].ID.split(`_`)[1];
       let user = await client.users.fetch(id);
       user = user ? user.tag : "Unknown User#0000";
-      
-      function wrt(){
-        user 
-        }
-      
-      
+     
       let rank = data.indexOf(data[i]) + 1;
       let level = db.get(`level_${id}_${message.guild.id}`) || 0;
       let xp = data[i].data;
-      lb.push({
-        user: { id, tag: user },
-        rank,
+      lb [{user: { id, tag: user }}] = 
+       ({ rank,
         level,
         xp
       });
@@ -45,5 +39,6 @@ module.exports = {
     });
     embed.setFooter(`Your Position: ${myrank}`);
     return message.channel.send(embed);
-  }
-};
+  
+}};    
+ 
