@@ -22,27 +22,18 @@ module.exports = {
       let rank = data.indexOf(data[i]) + 1;
       let level = db.get(`level_${id}_${message.guild.id}`) || 0;
       let xp = data[i].data;
-      let p = require("../../xp.json");
-      if (!xp[message.author.id]) {
-        p[{ id, tag: user }] = {
-          xp: 0,
-          level: 0,
-          rank: 0
-        };
-      }
-      let curxp = p[xp];
-      let curlvl = p[level].level;
-      let currank = p[rank].rank;
-      p[{ id, tag: user }] = curxp,curlvl,currank;
-
-      fs.writeFile("../../xp.json", JSON.stringify(p, null, 2), err => {
-        if (err) console.log(err);
+      let lb = [];
+      lb.push({
+        user: { id, tag: user },
+        rank,
+        level,
+        xp
       });
 
       const embed = new MessageEmbed()
         .setTitle("Leaderboard")
         .setColor("RANDOM");
-      p.forEach(d => {
+      lb.forEach(d => {
         embed.addField(
           d.rank,
           `${d.user.tag}\n exp: ${d.xp}\n level: ${d.level}`
