@@ -63,6 +63,7 @@ module.exports = async client => {
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{position}`, member.guild.members.cache.size)
       .replace(`{tag}`, member.user.tag) // Tag substitution
+       .replace(`{id}`, member.user.id)
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);

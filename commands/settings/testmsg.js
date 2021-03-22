@@ -90,14 +90,15 @@ module.exports = {
    let want  = ch2.replace(`{member}`, message.author) // Member mention substitution
       .replace(`{username}`, message.author.username) // Username substitution
       .replace(`{position}`, message.guild.members.cache.size)
-      .replace(`{position}`, message.guild.members.cache.size)
+      .replace(`{id}`, message.author.id)
       .replace(`{tag}`, message.author.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, message.guild.name) // Name Server substitution
       .replace(`{size}`, message.guild.members.cache.size), want2 =  ch.replace(`{member}`, message.author) // Member mention substitution
       .replace(`{username}`, message.author.username) // Username substitution
       .replace(`{position}`, message.guild.members.cache.size)
-      .replace(`{tag}`, message.author.tag) // Tag substitution
+       .replace(`{id}`, message.author.id)
+     .replace(`{tag}`, message.author.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, message.guild.name) // Name Server substitution
       .replace(`{size}`, message.guild.members.cache.size);

@@ -58,6 +58,7 @@ module.exports = async client => {
       .replace(`{tag}`, member.user.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY HH:mm:ss z")) // member guild joinedAt
       .replace(`{position}`, member.guild.members.cache.size)
+      .replace(`{id}`, member.user.id)
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
     const leaveembed = new Discord.MessageEmbed()
