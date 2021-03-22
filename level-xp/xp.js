@@ -70,7 +70,6 @@ class Util {
       if (newlvl > oldlvl) sender.send(EmbedLevel);
     });
     db.add(`xp_${message.author.id}_${message.guild.id}`, toadd);
-    db.set(`level_${message.author.id}_${message.guild.id}`, newlvl);
   }
 }
 module.exports = Util;

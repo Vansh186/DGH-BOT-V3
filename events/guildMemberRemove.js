@@ -50,7 +50,7 @@ module.exports = async client => {
       "welcome-image.png"
     );
     var date = moment.tz("Asia/Jakarta");
-    let chx = db.get(`levchannel_${member.guild.id}`) || "Good by {member}";
+    let chx = db.get(`levchannel_${member.guild.id}`);
     let ch = db
       .get(`levmsg_${member.guild.id}`)
       .replace(`{member}`, member) // Member mention substitution
