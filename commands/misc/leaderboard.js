@@ -24,8 +24,9 @@ module.exports = {
       let level = db.get(`level_${id}_${message.guild.id}`) || 0;
       let xp = data[i].data;
       lb.push({
-        user: { id, tag: user },
-        rank,
+          user: { id, tag: user },
+
+      rank,
         level,
         xp});
     }
