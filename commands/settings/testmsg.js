@@ -82,35 +82,37 @@ module.exports = {
     let chx = db.get(`levchannel_${message.guild.id}`);
    // let role =  db.get(`roles_${.guild.id}`);
     let ch2 = db
-      .get(`welmsg_${message.guild.id}`)
-      .replace(`{user}`, message.author) // Member mention substitution
-      .replace(`{member}`, message.author) // Member mention substitution
+      .get(`welmsg_${message.guild.id}`
+        ) || "Welcomer to my server {member}"
+      let ch = db
+      .get(`levmsg_${message.guild.id}`) || "Goodbye {member}"
+ 
+   let want  = ch2.replace(`{member}`, message.author) // Member mention substitution
+      .replace(`{username}`, message.author.username) // Username substitution
+      .replace(`{position}`, message.guild.members.cache.size)
+      .replace(`{position}`, message.guild.members.cache.size)
+      .replace(`{tag}`, message.author.tag) // Tag substitution
+      .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
+      .replace(`{server}`, message.guild.name) // Name Server substitution
+      .replace(`{size}`, message.guild.members.cache.size), want2 =  ch.replace(`{member}`, message.author) // Member mention substitution
       .replace(`{username}`, message.author.username) // Username substitution
       .replace(`{position}`, message.guild.members.cache.size)
       .replace(`{tag}`, message.author.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, message.guild.name) // Name Server substitution
       .replace(`{size}`, message.guild.members.cache.size);
-    let ch = db
-      .get(`levmsg_${message.guild.id}`)
-      .replace(`{user}`, message.author) // Member mention substitution
-      .replace(`{member}`, message.author) // Member mention substitution
-      .replace(`{username}`, message.author.username) // Username substitution
-      .replace(`{position}`, message.guild.members.cache.size)
-      .replace(`{tag}`, message.author.tag) // Tag substitution
-      .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
-      .replace(`{server}`, message.guild.name) // Name Server substitution
-      .replace(`{size}`, message.guild.members.cache.size);
+    ;
+    
     const welcomeembed2 = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .setTimestamp()
-      .setDescription(ch)
+      .setDescription(want2)
       .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
     const welcomeembed = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .setTimestamp()
-      .setDescription(ch2)
+      .setDescription(want)
       .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
     const sender = client.channels.cache.get(chx2);
