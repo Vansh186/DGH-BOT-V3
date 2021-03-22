@@ -13,14 +13,10 @@ module.exports = {
       .setFooter(message.author.username)
       .setTimestamp();
     const guildId = message.guild.id;
-    const allbots = message.guild.members.cache
-      .filter(m => m.user.members)
-      .map(m => m)
-      .map(m => `${m.id}`);
-    const userId = allbots; //  message.guild.members.cache.first(); //ldata[i].ID.replace(`xp_${guildId}_`, ""); // get user id
-    let oldxp = db.get(`xp_${userId}_${guildId}`);
+    const userId = message.guild.members.cache.forEach(member => member.presence.status !== "offline")//.map(member => member.user.id);
+    let oldxp = db.get(`xp_${userId.id}_${guildId}`);
     const { level, remxp, levelxp } = getInfo(oldxp);
-    const user = client.users.cache.get(userId); // Get user
+    const user = client.users.cache.get(userId.id); // Get user
 
     if (user) {
       embed.addField(user.username, `${oldxp}xp`, true);
