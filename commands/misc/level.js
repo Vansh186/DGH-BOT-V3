@@ -21,8 +21,13 @@ module.exports = {
     if (user.bot) {
       return message.channel.send("Bot do not have levels");
     }
-
+  const coins = db
+      .all()
+      .filter(data => data.ID.startsWith(`xps`))
+      .sort((a, b) => b.data - a.data);
+  
     let xp = db.get(`xps_${user.id}_${message.guild.id}`) || 0;
+    let top = coins.map(m => m.ID).indexOf(`xps_${user.id}_${message.guild.id}`) + 1
     const { level, remxp, levelxp } = getInfo(xp);
     let image = db.get(`levelimg_${message.guild.id}`);
     const rank = new canvacord.Rank()
@@ -48,7 +53,7 @@ module.exports = {
         .setTimestamp()
         .setDescription(
           `**LEVEL** - ${level}
-**XP** - ${remxp}/${levelxp}`
+**XP** - ${remxp}/${levelxp}\n**Top** - ${top}`
         )
         .setImage("attachment://Rankcard.png")
         .attachFiles(attachment);
