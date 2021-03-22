@@ -17,6 +17,7 @@ module.exports = {
     data.length = 20;
    // let lb = [];
     let lb = JSON.parse(fs.readFileSync('./xp.json', 'utf8'))
+  let lb2 = JSON.parse(fs.readFileSync('./xp.json', 'utf8'))
 
     for (let i in data) {
       let id = data[i].ID.split(`_`)[1];
@@ -26,19 +27,19 @@ module.exports = {
       let level = db.get(`level_${id}_${message.guild.id}`) || 0;
       let xp = data[i].data;
       lb.push({
-        user: { id, tag: user },
-        rank,
+        user:  id, tag: user },
+        lev: {rank,
         level,
-        xp
+        xp}
       });
-      fs.writeFile("../../xp.json", JSON.stringify(lb, null, 2), err => {
+      fs.writeFile("./xp.json", JSON.stringify(lb, null, 2), err => {
       if (err) console.log(err);
     });
     }
-    let daa = lb.find(x => x.id === message.author.tag);
-    let value = lb.indexOf(daa);
+    let daa = lb2.find(x => x.id === message.author.tag);
+    let value = lb2.indexOf(daa);
     const embed = new MessageEmbed().setTitle("Leaderboard").setColor("RANDOM");
-    lb[value].forEach(d => {
+    lb2[value].lev.forEach(d => {
       embed.addField(
         d.rank,
         `${d.user.tag}\n exp: ${d.xp}\n level: ${d.level}`
