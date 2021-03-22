@@ -21,8 +21,7 @@ module.exports = {
       let user = await client.users.fetch(id);
       user = user ? user.tag : "Unknown User#0000";
       let rank = data.indexOf(data[i]) + 1;
-      let x0p = db.get(`xp_${user.id}_${message.guild.id}`) || 0;
-     let level = getInfo(x0p);; //db.get(`xp_${id}`);
+      let level = db.get(`level_${id}_${message.guild.id}`) || 0;
       let xp = data[i].data;
       lb.push({
         user: { id, tag: user },
