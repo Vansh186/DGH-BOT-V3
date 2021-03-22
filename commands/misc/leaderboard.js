@@ -1,27 +1,39 @@
 const { MessageEmbed } = require("discord.js");
-const db = require("quick.db");
-const { getInfo } = require("../../level-xp/xp.js");
-
-module.exports = {
+const db = 
+module.exports.help = {
   name: "leaderboard",
-  description: "Shows top 10 users with the highest amount of XP",
-  category: "levels",
   run: async (client, message, args) => {
-    const embed = new MessageEmbed()
-      .setTitle(`${message.guild.name} 's Leaderboard`)
-      .setColor("BLUE")
-      .setFooter(message.author.username)
-      .setTimestamp();
-    const guildId = message.guild.id;
-    const userId = message.guild.members.cache.forEach(member => member.presence.status !== "offline")//.map(member => member.user.id);
-    let oldxp = db.get(`xp_${userId.id}_${guildId}`);
-    const { level, remxp, levelxp } = getInfo(oldxp);
-    const user = client.users.cache.get(userId.id); // Get user
-
-    if (user) {
-      embed.addField(user.username, `${oldxp}xp`, true);
+    let data = client.db
+      .all()
+      .filter(i => i.ID.startsWith("xp_"))
+      .sort((a, b) => b.data - a.data);
+    if (data.length < 1) return message.channel.send("No leaderboard");
+    let myrank =
+      data.map(m => m.ID).indexOf(`xp_${message.author.id}`) + 1 || "N/A";
+    data.length = 20;
+    let lb = [];
+    for (let i in data) {
+      let id = data[i].ID.split("_")[1];
+      let user = await client.users.fetch(id);
+      user = user ? user.tag : "Unknown User#0000";
+      let rank = data.indexOf(data[i]) + 1;
+      let level = db.get(`xp_${id}`);
+      let xp = data[i].data;
+      let xpreq = Math.floor(Math.pow(level / 0.1, 2));
+      lb.push({
+        user: { id, tag: user },
+        rank,
+        level,
+        xp,
+        xpreq
+      });
     }
 
-    message.channel.send({ embed });
+    const embed = new MessageEmbed().setTitle("Leaderboard").setColor("RANDOM");
+    lb.forEach(d => {
+      embed.addField(`${d.rank}. ${d.user.tag}, ${d.xp}exp level ${d.level}`);
+    });
+    embed.setFooter(`Your Position: ${myrank}`);
+    return message.channel.send(embed);
   }
 };
