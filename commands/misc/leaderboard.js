@@ -30,12 +30,12 @@ module.exports = {
           rank: 0
         };
       }
-      let curxp = p[{ id, tag: user }].xp;
-      let curlvl = p[{ id, tag: user }].level;
-      let currank = p[{ id, tag: user }].rank;
-      p[{ id, tag: user }] = curxp + curlvl + currank;
+      let curxp = p[xp];
+      let curlvl = p[level].level;
+      let currank = p[rank].rank;
+      p[{ id, tag: user }] = curxp,curlvl,currank;
 
-      fs.writeFile("./xp.json", JSON.stringify(p, null, 2), err => {
+      fs.writeFile("../../xp.json", JSON.stringify(p, null, 2), err => {
         if (err) console.log(err);
       });
 
