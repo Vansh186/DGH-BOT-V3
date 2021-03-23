@@ -8,7 +8,7 @@ module.exports = {
   args: true,
   permissions: "ADMINISTRATOR",
 
-  usage: "setmsg <key // welcome/leave/invite-tracker> <msg>",
+  usage: "setmsg <key // welcome/leave> <msg>",
   description: "Set the welcome",
   run: (client, message, args) => {
     const channel = message.mentions.channels.first();
@@ -43,25 +43,6 @@ module.exports = {
             .setColor("RED");
           message.channel.send(lev);
         }
-        break;
-      case "invite-tracker":
-        {
-          const msg = args.slice(1).join(" ");
-          if (!msg) {
-            return message.channel
-              .send(
-                `${client.emotes.error}\`Please give a message invite-tracker ^(Must include ({member},{username},{tag},{server},{invite}{inviter}) for this to work!)^\``
-              )
-              .then(m => m.delete({ timeout: 8000 }).catch(e => {}));
-          }
-
-          db.set(`invite-tracker_${message.guild.id}`, msg);
-          const wl = new Discord.MessageEmbed()
-            .setDescription(`**Done** From now on I will send\n\`${msg}\``)
-            .setColor("RED");
-          message.channel.send(wl);
-        }
-
         break;
       case "welcome": {
         const msg = args.slice(1).join(" ");

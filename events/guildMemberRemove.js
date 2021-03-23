@@ -50,10 +50,10 @@ module.exports = async client => {
       "welcome-image.png"
     );
     var date = moment.tz("Asia/Jakarta");
-    let chx = db.get(`levchannel_${member.guild.id}`);
-    let ch = db
-      .get(`levmsg_${member.guild.id}`)
-      .replace(`{member}`, member) // Member mention substitution
+    let chx = db.get(`levchannel_${member.guild.id}`) || db.get(`welchannel_${member.guild.id}`);
+    let ch9 = db
+      .get(`levmsg_${member.guild.id}`)|| "goodbye {member}"
+    const ch = ch9.replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY HH:mm:ss z")) // member guild joinedAt
