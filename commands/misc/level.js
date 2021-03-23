@@ -24,7 +24,7 @@ module.exports = {
 
     const points = new Discord.MessageEmbed()
       .setAuthor(`${member.username}'s Rank`, member.displayAvatarURL())
-      .addField(`XP / Points`, exp.toString(), true)
+      .addField(`XP / Points`, exp, true)
       .addField(`Level`, level, true)
       .addField(`Rank`, ranking, true)
       .setColor(member.displayHexColor)
