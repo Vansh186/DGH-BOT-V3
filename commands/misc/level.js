@@ -5,7 +5,7 @@ const canvacord = require("canvacord");
 const Discord = require("discord.js");
 module.exports = {
   name: "level",
-  aliases: ["lvl", "rank"],
+//  aliases: ["lvl", "rank"],
   description: "Get the level of Author or Mentioned",
   usage: "level [user]",
   category: "misc",
@@ -22,7 +22,7 @@ module.exports = {
       return message.channel.send("Bot do not have levels");
     }
 
-    let xp = db.get(`xp_${user.id}_${message.guild.id}`) || 0;
+    let xp = db.get(`xp_${message.guild.id}_${user.id}`) ;
     const { level, remxp, levelxp } = getInfo(xp);
     let image = db.get(`levelimg_${message.guild.id}`);
     const rank = new canvacord.Rank()
