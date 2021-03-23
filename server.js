@@ -18,7 +18,7 @@ const {
   Dashboard
 } = require("./config.js");
 
-const { addexp } = require("./level-xp/xp.js");
+//const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 const cooldowns = new Discord.Collection();
@@ -207,7 +207,7 @@ client.on("message", async message => {
 
     client.logger.error(error);
   }
-  return addexp(message, client);
+ // return addexp(message, client);
 });
 client
   .login(Token)
