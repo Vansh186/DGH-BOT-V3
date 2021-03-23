@@ -22,7 +22,8 @@ module.exports = {
       let userData = client.users.cache.get(coins[i].ID.split("_")[1])
         ? client.users.cache.get(coins[i].ID.split("_")[1]).tag
         : "Unknown#0000";
-
+//if(!userData){}
+  
       finalLb += `__**${coins.indexOf(coins[i]) + 1}.**__ **${userData} » \`${coins[i].data}\`**\n`;
     }
 
