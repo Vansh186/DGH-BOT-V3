@@ -1,5 +1,7 @@
-const db = require("quick.db");
-const { getInfo } = require("../../handlers/xp.js");
+//const db = require("quick.db");
+//const { getInfo } = require("../../handlers/xp.js");
+const fs = require("fs")
+let db = JSON.parse(fs.readFileSync("./database.json", "utf8"));
 const canvacord = require("canvacord");
 const Discord = require("discord.js");
 module.exports = {
@@ -20,35 +22,18 @@ module.exports = {
       return message.channel.send("Bot do not have levels");
     }
 
-    let xp =
-      db.get(
-        `xp_${message.guild.id}_${user.id}
-`
-      ) || 0;
-
-    const { level, remxp, levelxp } = getInfo(xp);
-
-    const rank = new canvacord.Rank()
-      .setAvatar(user.displayAvatarURL({ dynamic: false, format: "png" }))
-      .setCurrentXP(remxp)
-      .setRequiredXP(levelxp)
-      .setLevel(level)
-      .setStatus(user.presence.status)
-      .setProgressBar("#00FFFF", "COLOR")
-      .setUsername(user.username)
-      .setDiscriminator(user.discriminator)
-      .setRank(1, "a", false)
-      .setBackground(
-        "IMAGE",
-        "https://cdn.discordapp.com/attachments/815383261966499840/815384721227382784/card.jpg%22"
-      );
-
-    rank.build().then(data => {
-      const attachment = new Discord.MessageAttachment(
-        data,
-        "automodRankcard.png"
-      );
-      message.channel.send(attachment);
-    });
-  }
-};
+        let userInfo = db[message.author.id];
+        let member = message.mentions.members.first();
+        let embed = new Discord.MessageEmbed()
+        .setColor(0x4286f4)
+        .addField("**Level**", userInfo.level)
+        .addField("**XP**", userInfo.xp+"/99");
+        if(!member) return message.channel.sendEmbed(embed)
+        let memberInfo = db[member.id]
+        let embed2 = new Discord.RichEmbed()
+        .setColor(0x4286f4)
+        .addField("Level", memberInfo.level)
+        .addField("XP", memberInfo.xp+"/4")
+        message.channel.sendEmbed(embed2)
+    }
+ }
