@@ -4,7 +4,7 @@ const db = require("quick.db");
 const moment = require("moment-timezone");
 module.exports = {
         name: "test",
-        usage: `test <key // welcome/leave`,
+        usage: `test <key // welcome/leave>`,
         category: "settings",
         description: "welcome and leave test",
         args: false,

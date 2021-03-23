@@ -5,7 +5,7 @@ module.exports = {
   name: "setchannel",
   category: "settings",
   args: true,
-  usage: "setchannel <key //welcome/leave/report/level> <channel>",
+  usage: "setchannel <key //welcome/leave/report/level/invite-tracker> <channel>",
   description: "Set the channel",
   permissions: "ADMINISTRATOR",
  run: (client, message, args) => {
@@ -56,6 +56,22 @@ module.exports = {
           message.channel.send(welcome);
         }
 
+        break;
+      case "invite-tracker": {
+              if (!channel) {
+            return message.channel.send(
+              `${client.emotes.error}Pls Give Invalid channel... Try again...`
+            );
+          }
+          db.set(`invite-tracker-channel_${message.guild.id}`, channel.id);
+          const leae = new Discord.MessageEmbed()
+            .setDescription(
+              `**Done** From now on I will send invite-tracker in ${channel}`
+            )
+            .setColor("RED");
+          message.channel.send(leae);
+   
+        }
         break;
       case "report": {
         if (!channel) {
