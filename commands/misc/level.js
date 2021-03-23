@@ -1,36 +1,59 @@
+const db = require("quick.db");
+const discord = require("discord.js");
+const { getInfo } = require("../../level-xp/xp.js");
+const canvacord = require("canvacord");
 const Discord = require("discord.js");
 module.exports = {
-  name: "rank",
-  aliases: ["rk", "r", "level", "lvl", "points"],
-  description: "Returns the current rank of a member.",
-  run: async (client, message, args) => {
-    const db = require("quick.db");
+  name: "level",
+  aliases: ["lvl", "rank"],
+  description: "Get the level of Author or Mentioned",
+  usage: "level [user]",
+  category: "misc",
+  botpermission: ["MANAGE_GUILD"],
+  run: (client, message, args) => {
+    const user = message.mentions.users.first() || message.author;
 
-    let member = message.mentions.members.first() || message.author;
-    if (member.bot) return message.reply("bots aren't eligible for XP!");
+    if (user.id === client.user.id) {
+      //IF BOT
+      return message.channel.send(":wink: | I am on level 100");
+    }
 
-    // Data
-    let level = await db.get(`level_${message.guild.id}_${member.id}`);
-    let exp = await db.fetch(`xp_${message.guild.id}_${member.id}`);
-    let neededXP = Math.floor(Math.pow(level / 0.1, 2));
+    if (user.bot) {
+      return message.channel.send("Bot do not have levels");
+    }
 
-    // Rank
-    let every = await db.all();
-    every = every
-      .filter(i => i.ID.startsWith(`xp_${message.guild.id}_`))
-      .sort((a, b) => b.data - a.data);
-    let ranking =
-      every.map(x => x.ID).indexOf(`xp_${message.guild.id}_${member.id}`) + 1;
+    let xp = db.get(`xp_${user.id}_${message.guild.id}`) || 0;
+    const { level, remxp, levelxp } = getInfo(xp);
+    let image = db.get(`levelimg_${message.guild.id}`);
+    const rank = new canvacord.Rank()
+      .setAvatar(user.displayAvatarURL({ dynamic: false, format: "png" }))
+      .setCurrentXP(remxp)
+      .setRequiredXP(levelxp)
+      .setLevel(level)
+      .setStatus(user.presence.status)
+      .setProgressBar("#00FFFF", "COLOR")
+      .setUsername(user.username)
+      .setDiscriminator(user.discriminator)
+      .setRank(1, "a", false)
+      .setBackground(
+        "IMAGE",
+        image ||
+          "https://cdn.discordapp.com/attachments/816254133353840660/819965380406673475/IMG-20201117-WA0142.jpg"
+      );
+    rank.build().then(data => {
+      const attachment = new Discord.MessageAttachment(data, "Rankcard.png");
+      const EmbedLevel = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .setAuthor(user.username, message.guild.iconURL())
+        .setTimestamp()
+        .setDescription(
+          `**LEVEL** - ${level}
+**XP** - ${remxp}/${levelxp}`
+        )
+        .setImage("attachment://Rankcard.png")
+        .attachFiles(attachment);
 
-    const points = new Discord.MessageEmbed()
-      .setAuthor(`${member.username}'s Rank`, member.displayAvatarURL())
-      .addField(`XP / Points`, exp, true)
-      .addField(`Level`, level, true)
-      .addField(`Rank`, ranking, true)
-      .setColor(member.displayHexColor)
-      .setThumbnail(message.guild.iconURL())
-      .setFooter("Cooldown: 30 seconds")
-      .setTimestamp();
-    message.channel.send(points);
+      message.channel.send(EmbedLevel);
+    });
   }
 };

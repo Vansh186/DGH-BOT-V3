@@ -55,6 +55,7 @@ module.exports = {
             .setColor("RED");
           message.channel.send(welcome);
         }
+
         break;
       case "report": {
         if (!channel) {
