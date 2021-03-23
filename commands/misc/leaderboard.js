@@ -3,8 +3,8 @@ const db = require("quick.db");
 //const { getInfo } = require("../../XP.json");
 const fs = require("fs");
 module.exports = {
-  name: "leaderboard",
-  category: "misc",
+  name: "leadard",
+  category: "mis",
   run: async (client, message, args) => {
     const coins = db
       .all()
