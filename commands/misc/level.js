@@ -22,7 +22,7 @@ module.exports = {
       return message.channel.send("Bot do not have levels");
     }
 
-    let xp = db.get(`xp_${user.id}_${message.guild.id}`) || 1;
+    let xp = db.get(`xp_${user.id}_${message.guild.id}`) || 0;
     const { level, remxp, levelxp } = getInfo(xp);
     let image = db.get(`levelimg_${message.guild.id}`);
     const rank = new canvacord.Rank()

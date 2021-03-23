@@ -96,7 +96,7 @@ client.on("message", async message => {
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!command) return;
-    //<COMMAND USAGE AND DESCRIPTION>
+  //<COMMAND USAGE AND DESCRIPTION>
   if (command.args && !args.length) {
     return message.channel.send(
       new MessageEmbed()
@@ -208,7 +208,6 @@ client.on("message", async message => {
     client.logger.error(error);
   }
   return addexp(message, client);
- 
 });
 client
   .login(Token)
