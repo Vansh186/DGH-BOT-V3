@@ -50,7 +50,7 @@ module.exports = {
           if (!msg) {
             return message.channel
               .send(
-                `${client.emotes.error}\`Please give a message invite-tracker ^(Must include ({member},{username},{tag},{server},{invite},{inviter}) for this to work!)^\``
+                `${client.emotes.error}\`Please give a message invite-tracker ^(Must include ({member},{username},{tag},{server},{invite}{inviter}) for this to work!)^\``
               )
               .then(m => m.delete({ timeout: 8000 }).catch(e => {}));
           }
