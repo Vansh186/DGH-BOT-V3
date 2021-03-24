@@ -49,7 +49,37 @@ module.exports = {
 
     collector.on("collect", async (reaction, user) => {
       if (reaction._emoji.name === "◀️") {
-        await msg.edit(embed);
+        i0 = i0 - 10;
+        i1 = i1 - 10;
+        page = page - 1;
+
+        // if there is no guild to display, delete the message
+
+        description =
+          `Total Servers - ${bot.guilds.cache.size}\n\n` +
+          bot.guilds.cache
+            .sort((a, b) => b.memberCount - a.memberCount)
+            .map(r => r)
+            .map(
+              (r, i) =>
+                `**${i + 1}** - ${r.name} | ${r.memberCount} Members\nID - ${
+                  r.id
+                }\nLink Owner - [Here](https://discordapp.com/users/${
+                  r.owner.id
+                }/)`
+            )
+            .slice(i0, i1)
+            .join("\n\n");
+
+        // Update the embed with new informations
+        embed
+          .setFooter(
+            `Page - ${page}/${Math.round(bot.guilds.cache.size / 10 + 1)}`
+          )
+          .setDescription(description);
+
+        // Edit the message
+        msg.edit(embed);
       }
 
       if (reaction._emoji.name === "▶️") {
@@ -59,12 +89,6 @@ module.exports = {
         page = page + 1;
 
         // if there is no guild to display, delete the message
-        if (i1 > bot.guilds.cache.size + 10) {
-          return msg.delete();
-        }
-        if (!i0 || !i1) {
-          return msg.delete();
-        }
 
         description =
           `Total Servers - ${bot.guilds.cache.size}\n\n` +
