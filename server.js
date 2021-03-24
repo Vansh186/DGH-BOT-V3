@@ -213,16 +213,22 @@ client.on("message", async message => {
 function xp(message) {
   const randomnumber = Math.floor(Math.random() * 10) + 15;
   db.add(`guild_${message.guild.id}_xp_${message.author.id}`, randomnumber);
-  db.add(`guild_${message.guild.id}_xptotal_${message.guild.id}`, randomnumber);
   var level =
     db.get(`guild_${message.guild.id}_level_${message.author.id}`) || 1;
   var xp = db.get(`guild_${message.guild.id}_xp_${message.author.id}`);
   var xpNeeded = level * 100;
+  if(xpNeeded < xp){
+  db.add(`guild_${message.guild.id}_xptotal_${message.author.id}`, 1);
+ }
+     if(level > 50){
+  db.add(`guild_${message.guild.id}_xptotal_${message.author.id}`, 1);
+ }
   if (xpNeeded < xp) {
     var newLevel = db.add(
       `guild_${message.guild.id}_level_${message.author.id}`,
       1
     );
+ 
     db.subtract(`guild_${message.guild.id}_xp_${message.author.id}`, xpNeeded);
     if (message.guild.id === message.guild.id) {
       let channel_id = db.get(`levelch_${message.guild.id}`);

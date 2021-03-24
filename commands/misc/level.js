@@ -10,8 +10,8 @@ module.exports = {
   category: "misc",
   botpermission: ["MANAGE_GUILD"],
   run: (client, message, args) => {
-    var user = message.mentions.users.first(args.) || message.author;
-    var m = message.guild.members.first() || message.member;
+    var user = message.mentions.users.first() || message.author;
+    var m = message.mentions.members.first() || message.member;
     let image = db.get(`levelimg_${message.guild.id}`);
     var level = db.get(`guild_${message.guild.id}_level_${user.id}`) || 0;
     let xp = db.get(`guild_${message.guild.id}_xp_${user.id}`) || 0;
@@ -30,12 +30,6 @@ module.exports = {
     if (user.bot) {
       return message.channel.send("Bot do not have levels");
     }
-       let stat = {
-      online: "online",//https://emoji.gg/assets/emoji/9166_online.png",
-      idle: "idle",//https://emoji.gg/assets/emoji/3929_idle.png",
-      dnd: "dnd",//https://emoji.gg/assets/emoji/2531_dnd.png",
-      offline: "offline"//https://emoji.gg/assets/emoji/7445_status_offline.png"
-    };
  let color = m.displayHexColor;
 
 if (color == '#000000') color = m.hoistRole.hexColor;
@@ -45,7 +39,7 @@ if (color == '#000000') color = m.hoistRole.hexColor;
       .setCurrentXP(xp)
       .setRequiredXP(xpNeeded)
       .setStatus(user.presence.status)
-      .setProgressBar("#efcb83", "COLOR")
+      .setProgressBar("#00FFFF", "COLOR")
       .setUsername(user.username, color)
       .setDiscriminator(user.discriminator)
       .setLevel(level)
