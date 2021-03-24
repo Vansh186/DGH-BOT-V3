@@ -81,7 +81,7 @@ client.on("messageDelete", function(message, channel) {
 client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
   xp(message);
- let Prefix = await db.get(`Prefix_${message.guild.id}`);
+  let Prefix = await db.get(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
   const escapeRegex = str =>
     str.replace(/[.<>`•√π÷×¶∆£¢€¥*@_+?^${}()|[\]\\]/g, "\\$&");
@@ -210,16 +210,14 @@ client.on("message", async message => {
     client.logger.error(error);
   }
 });
-
 function xp(message) {
   const randomnumber = Math.floor(Math.random() * 10) + 15;
   db.add(`guild_${message.guild.id}_xp_${message.author.id}`, randomnumber);
   db.add(`guild_${message.guild.id}_xptotal_${message.guild.id}`, randomnumber);
-  const user = message.mentions.users.first() || message.author;
   var level =
     db.get(`guild_${message.guild.id}_level_${message.author.id}`) || 1;
   var xp = db.get(`guild_${message.guild.id}_xp_${message.author.id}`);
-  var xpNeeded = level + 15;
+  var xpNeeded = level * 50;
   if (xpNeeded < xp) {
     var newLevel = db.add(
       `guild_${message.guild.id}_level_${message.author.id}`,
@@ -227,12 +225,19 @@ function xp(message) {
     );
     db.subtract(`guild_${message.guild.id}_xp_${message.author.id}`, xpNeeded);
     if (message.guild.id === message.guild.id) {
-      const hcn = db.get(`levelch_${message.guild.id}`);
-      let levelchannel = client.channels.cache.get(hcn);
-      if (hcn === null) return;
-
+      let channel_id = db.get(`levelch_${message.guild.id}`);
+      let user = message.author;
+      let levelchannel = client.channels.cache.get(channel_id);
       let image = db.get(`levelimg_${message.guild.id}`);
-      const rank = new canvacord.Rank()
+        let every = db
+      .all()
+      .filter(i => i.ID.startsWith(`guild_${message.guild.id}_xptotal_`))
+      .sort((a, b) => b.data - a.data);
+    var rank =
+      every
+        .map(x => x.ID)
+        .indexOf(`guild_${message.guild.id}_xptotal_${user.id}`) + 1;
+      const ran = new canvacord.Rank()
         .setAvatar(user.displayAvatarURL({ dynamic: false, format: "png" }))
         .setCurrentXP(xp)
         .setRequiredXP(xpNeeded)
@@ -248,7 +253,7 @@ function xp(message) {
           image ||
             "https://cdn.discordapp.com/attachments/816254133353840660/819965380406673475/IMG-20201117-WA0142.jpg"
         );
-      rank.build().then(data => {
+      ran.build().then(data => {
         const attachment = new Discord.MessageAttachment(data, "Rankcard.png");
         const EmbedLevel = new Discord.MessageEmbed()
           .setColor("RANDOM")
@@ -263,10 +268,13 @@ function xp(message) {
 
         levelchannel.send(EmbedLevel);
       });
+    } else {
+      message.channel.send(
+        `${message.author}, You Have Leveled Up To Level **${newLevel}**`
+      );
     }
   }
 }
-
 client
   .login(Token)
   .catch(() =>

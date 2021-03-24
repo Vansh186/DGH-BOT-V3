@@ -28,8 +28,8 @@ module.exports = {
     if (isNaN(toadd))
       return message.channel.send("sorry This is not a number but text");
 
-    db.add(`xp_${user.id}_${message.guild.id}`, toadd);
-    message.channel.send(
+   let xp  db.get(`guild_${message.guild.id}_xp_${user.id}`) || 0;
+     message.channel.send(
       `${client.emotes.success} Successfully added XP by ${user} as much ${toadd}`
     );
   }
