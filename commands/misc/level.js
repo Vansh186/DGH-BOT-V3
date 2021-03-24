@@ -40,7 +40,7 @@ module.exports = {
       .setAvatar(user.displayAvatarURL({ format: "png" }))
       .setCurrentXP(xp)
       .setRequiredXP(xpNeeded)
-      .setStatus(stat[user.presence.status])
+      .setStatus(user.presence.status)
       .setProgressBar("#FFFFFF", "COLOR")
       .setUsername(user.username)
       .setDiscriminator(user.discriminator)
