@@ -220,9 +220,6 @@ function xp(message) {
   if(xpNeeded < xp){
   db.add(`guild_${message.guild.id}_xptotal_${message.author.id}`, 1);
  }
-     if(xpNeeded){
-  db.add(`guild_${message.guild.id}_xptotal_${message.author.id}`, 1);
- }
   if (xpNeeded < xp) {
     var newLevel = db.add(
       `guild_${message.guild.id}_level_${message.author.id}`,
@@ -245,15 +242,14 @@ function xp(message) {
         .indexOf(`guild_${message.guild.id}_xptotal_${user.id}`) + 1;
       const ran = new canvacord.Rank()
         .setAvatar(user.displayAvatarURL({ dynamic: false, format: "png" }))
-        .setCurrentXP(xp)
-        .setRequiredXP(xp)
+        .setCurrentXP(randomnumber)
+        .setRequiredXP(xpNeeded)
         .setLevel(newLevel)
         .setRank(rank)
         .setStatus(user.presence.status)
         .setProgressBar("#00FFFF", "COLOR")
         .setUsername(user.username)
         .setDiscriminator(user.discriminator)
-        .setRank(1, "a", false)
         .setBackground(
           "IMAGE",
           image ||
@@ -267,7 +263,7 @@ function xp(message) {
           .setTimestamp()
           .setDescription(
             `**LEVEL UP** - ${newLevel}
-**XP UP** - ${xp}/${xp}`
+**XP UP** - ${randomnumber}/${xpNeeded}`
           )
           .setImage("attachment://Rankcard.png")
           .attachFiles(attachment);
