@@ -52,9 +52,11 @@ module.exports = {
         i0 = i0 - 10;
         i1 = i1 - 10;
         page = page - 1;
-
         // if there is no guild to display, delete the message
-
+        if (i0 + 1 < 0) {
+          console.log(i0);
+          return msg.delete();
+        }
         description =
           `Total Servers - ${bot.guilds.cache.size}\n\n` +
           bot.guilds.cache
@@ -87,9 +89,12 @@ module.exports = {
         i0 = i0 + 10;
         i1 = i1 + 10;
         page = page + 1;
-
-        // if there is no guild to display, delete the message
-
+        if (i1 > bot.guilds.cache.size + 10) {
+          return msg.delete();
+        }
+        if (!i0 || !i1) {
+          return msg.delete();
+        }
         description =
           `Total Servers - ${bot.guilds.cache.size}\n\n` +
           bot.guilds.cache
