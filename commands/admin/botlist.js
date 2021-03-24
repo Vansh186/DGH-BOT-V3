@@ -5,7 +5,7 @@ module.exports = {
   category: "admin",
   cooldown: 5,
   run: async (client, message, args) => {
-    let checked = client.emotes.online;
+    let checked = client.emotes.on;
     let unchecked = client.emotes.off;
 
     const allbots = message.guild.members.cache

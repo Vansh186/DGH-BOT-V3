@@ -17,7 +17,7 @@ module.exports = {
   run: async (client, message, args) => {
     message.delete();
     const user = message.author.tag
-    const urls = args[0];
+    const urls = args[0].replace(`pornhub.com`,"❌");
     if (!urls)
       return message.channel
         .send(`\`\`\`\n${user},where is the link -_\n\`\`\``)
@@ -37,7 +37,7 @@ module.exports = {
        
       const embed = new Discord.MessageEmbed()
       .setDescription(`\`\`\`\nHere is a screenshot from requested URL\n\`\`\``)
-      .setImage("attachment://Screenshot.png")
+      .setColor("RANDOM").setImage("attachment://Screenshot.png")
       .attachFiles([{ attachment: body, name: "Screenshot.png" }]
      );
       return message.channel.send(
