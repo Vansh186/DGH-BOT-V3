@@ -22,13 +22,11 @@ module.exports = {
         ? client.users.cache.get(coins[i].ID.split("_")[3]).tag
         : "Unknown#0000";
 
-      finalLb += `__**${coins.indexOf(coins[i]) + 1}.**__ **${userData} » \`${
-        coins[i].data
-      }\`**\n`;
+      finalLb += `__**${coins.indexOf(coins[i]) + 1}.**__ **${userData} » \`${coins[i].data}\`**\n`;
     }
 
     let embed = new MessageEmbed()
-      .setTitle(`**Level Leaderboard ⬆️**`)
+      .setTitle(`**Leaderboard ${message.guild.name}**`)
       .setDescription(`${finalLb}`)
       .setColor("#efcb83")
       .setFooter(
