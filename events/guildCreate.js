@@ -1,8 +1,13 @@
 const Discord = require("discord.js");
+const { Default_Prefix } = require("./config.js");
 const MessageEmbed = require("discord.js");
 const db = require("quick.db");
 const moment = require("moment");
 module.exports = async client => {
+    client.user.setActivity(
+      `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
+      { type: "WATCHING" }
+    );
   client.on("guildCreate", async guild => {
     if (!guild.available) return;
     const embed = new Discord.MessageEmbed()
@@ -25,6 +30,6 @@ module.exports = async client => {
       )
       .setTimestamp() // moment().format('LLL'),
       .setFooter(`${client.user.tag}`);
-    guild.owner.send(embed)
+    guild.owner.send(embed);
   });
 };

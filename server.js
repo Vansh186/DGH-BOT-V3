@@ -26,7 +26,7 @@ const cooldowns = new Discord.Collection();
 client.queue = new Map();
 client.config = require("./emoji/emojis");
 client.emotes = client.config.emojis;
-
+client.db = db
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
   client.user.setStatus("dnd");
