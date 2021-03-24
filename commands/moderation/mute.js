@@ -60,7 +60,7 @@ try {
             db.set(`muteeid_${message.guild.id}_${mutee.id}`, userRoles)
           try {
             mutee.roles.set([muterole.id]).then(() => {
-                mutee.send(`**Hello, You Have Been Muted In ${message.guild.name} for - ${reason || "No Reason"}`).catch(() => null)
+                mutee.send(`**Hello, You Have Been Muted In ${message.guild.name} for - ${reason || "No Reason"}**`).catch(() => null)
             })
             } catch {
                  mutee.roles.set([muterole.id])                               
