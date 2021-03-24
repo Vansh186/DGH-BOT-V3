@@ -8,7 +8,7 @@ module.exports = {
   description: "Kick anyone with one shot xD",
   usage: "kick <@user> <raeson>",
   permissions: "KICK_MEMBERS",
-  botpermission: "KICK_MEMBERS",
+  botpermission: ["KICK_MEMBERS"],
   args: true,
   run: (client, message, args) => {
     try {
@@ -35,7 +35,7 @@ module.exports = {
       if (kickMember.user.bot)
         return message.channel.send("**Cannot Kick A Bot!**");
 
-      var reason = args.slice(1).join(" ");
+      var reason = args.slice(1).join(" ") ||"no reason";
       try {
         const sembed2 = new MessageEmbed()
           .setColor("RED")
