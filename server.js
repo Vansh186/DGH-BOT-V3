@@ -220,7 +220,7 @@ function xp(message) {
   if(xpNeeded < xp){
   db.add(`guild_${message.guild.id}_xptotal_${message.author.id}`, 1);
  }
-     if(level > 50){
+     if(xpNeeded){
   db.add(`guild_${message.guild.id}_xptotal_${message.author.id}`, 1);
  }
   if (xpNeeded < xp) {
