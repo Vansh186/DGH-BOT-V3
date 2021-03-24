@@ -78,8 +78,8 @@ module.exports = {
     /*  let UserAt = member
     const jss = UserAt.joinedAt*/
     var date = moment.tz("Asia/Jakarta");
-    let chx2 = db.get(`welchannel_${message.guild.id}`);
-    let chx = db.get(`levchannel_${message.guild.id}`);
+    let chx2 = db.get(`welchannel_${message.guild.id}`) || db.get(`levchannel_${message.guild.id}`);
+    let chx = db.get(`levchannel_${message.guild.id}`) || db.get(`welchannel_${message.guild.id}`);
    // let role =  db.get(`roles_${.guild.id}`);
     let ch2 = db
       .get(`welmsg_${message.guild.id}`)
