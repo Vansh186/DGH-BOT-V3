@@ -28,12 +28,19 @@ module.exports = {
     if (user.bot) {
       return message.channel.send("Bot do not have levels");
     }
+       let stat = {
+      online: "online",//https://emoji.gg/assets/emoji/9166_online.png",
+      idle: "idle",//https://emoji.gg/assets/emoji/3929_idle.png",
+      dnd: "dnd",//https://emoji.gg/assets/emoji/2531_dnd.png",
+      offline: "offline"//https://emoji.gg/assets/emoji/7445_status_offline.png"
+    };
+ 
     const rak = new canvacord.Rank()
 
       .setAvatar(user.displayAvatarURL({ format: "png" }))
       .setCurrentXP(xp)
       .setRequiredXP(xpNeeded)
-      .setStatus(user.presence.status)
+      .setStatus(stat[user.presence.status])
       .setProgressBar("#FFFFFF", "COLOR")
       .setUsername(user.username)
       .setDiscriminator(user.discriminator)
