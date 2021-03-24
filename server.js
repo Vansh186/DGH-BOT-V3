@@ -3,6 +3,7 @@ const fs = require("fs");
 const { Client } = require("discord.js");
 const db = require("quick.db");
 const ms = require("pretty-ms");
+const canvacord = require("canvacord");
 const mongoose = require("mongoose");
 const { MessageEmbed } = require("discord.js");
 const client = new Client({
@@ -79,7 +80,8 @@ client.on("messageDelete", function(message, channel) {
 //<SETUP>
 client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
-  let Prefix = await db.get(`Prefix_${message.guild.id}`);
+  xp(message);
+ let Prefix = await db.get(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
   const escapeRegex = str =>
     str.replace(/[.<>`•√π÷×¶∆£¢€¥*@_+?^${}()|[\]\\]/g, "\\$&");
@@ -207,17 +209,13 @@ client.on("message", async message => {
 
     client.logger.error(error);
   }
-  xp(message);
 });
 
 function xp(message) {
   const randomnumber = Math.floor(Math.random() * 10) + 15;
-  const hcn = db.get(`levelch_${message.guild.id}`);
-      const sender = client.channels.cache.get(hcn);
-      if (hcn === null) return;
-
   db.add(`guild_${message.guild.id}_xp_${message.author.id}`, randomnumber);
   db.add(`guild_${message.guild.id}_xptotal_${message.guild.id}`, randomnumber);
+  const user = message.mentions.users.first() || message.author;
   var level =
     db.get(`guild_${message.guild.id}_level_${message.author.id}`) || 1;
   var xp = db.get(`guild_${message.guild.id}_xp_${message.author.id}`);
@@ -228,13 +226,43 @@ function xp(message) {
       1
     );
     db.subtract(`guild_${message.guild.id}_xp_${message.author.id}`, xpNeeded);
-       if(message.guild.id === ){
-            let levelchannel = client.channels.cache.get("levelchannelid")
-            levelchannel.send(`${message.author}, You Have Leveled Up To Level **${newLevel}**`)
-        } else {
-      message.channel.send(
-        `${message.author}, You Have Leveled Up To Level **${newLevel}**`
-      );
+    if (message.guild.id === message.guild.id) {
+      const hcn = db.get(`levelch_${message.guild.id}`);
+      let levelchannel = client.channels.cache.get(hcn);
+      if (hcn === null) return;
+
+      let image = db.get(`levelimg_${message.guild.id}`);
+      const rank = new canvacord.Rank()
+        .setAvatar(user.displayAvatarURL({ dynamic: false, format: "png" }))
+        .setCurrentXP(xp)
+        .setRequiredXP(xpNeeded)
+        .setLevel(newLevel)
+        .setRank(rank)
+        .setStatus(user.presence.status)
+        .setProgressBar("#00FFFF", "COLOR")
+        .setUsername(user.username)
+        .setDiscriminator(user.discriminator)
+        .setRank(1, "a", false)
+        .setBackground(
+          "IMAGE",
+          image ||
+            "https://cdn.discordapp.com/attachments/816254133353840660/819965380406673475/IMG-20201117-WA0142.jpg"
+        );
+      rank.build().then(data => {
+        const attachment = new Discord.MessageAttachment(data, "Rankcard.png");
+        const EmbedLevel = new Discord.MessageEmbed()
+          .setColor("RANDOM")
+          .setAuthor(user.username, message.guild.iconURL())
+          .setTimestamp()
+          .setDescription(
+            `**LEVEL UP** - ${newLevel}
+**XP UP** - ${xp}/${xpNeeded}`
+          )
+          .setImage("attachment://Rankcard.png")
+          .attachFiles(attachment);
+
+        levelchannel.send(EmbedLevel);
+      });
     }
   }
 }
