@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const canvacord = require("canvacord");
+const toHex = require("colornames");
 const db = require("quick.db");
 module.exports = {
   name: "level",
@@ -34,15 +35,17 @@ module.exports = {
       dnd: "dnd",//https://emoji.gg/assets/emoji/2531_dnd.png",
       offline: "offline"//https://emoji.gg/assets/emoji/7445_status_offline.png"
     };
- 
+ let color = user.displayHexColor;
+
+if (color == '#000000') color = user.hoistRole.hexColor;
     const rak = new canvacord.Rank()
 
       .setAvatar(user.displayAvatarURL({ format: "png" }))
       .setCurrentXP(xp)
       .setRequiredXP(xpNeeded)
       .setStatus(user.presence.status)
-      .setProgressBar("#FFFFFF", "COLOR")
-      .setUsername(user.username, user.displayHexColor)
+      .setProgressBar("#efcb83", "COLOR")
+      .setUsername(user.username, color)
       .setDiscriminator(user.discriminator)
       .setLevel(level)
       .setRank(rank)
