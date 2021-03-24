@@ -236,7 +236,7 @@ function xp(message) {
     var rank =
       every
         .map(x => x.ID)
-        .indexOf(`guild_${message.guild.id}_xptotal_${user.id}`) + xp;
+        .indexOf(`guild_${message.guild.id}_xptotal_${user.id}`) + 1;
       const ran = new canvacord.Rank()
         .setAvatar(user.displayAvatarURL({ dynamic: false, format: "png" }))
         .setCurrentXP(xp)
