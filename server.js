@@ -18,7 +18,7 @@ const {
   Dashboard
 } = require("./config.js");
 
-const { addexp } = require("./level-xp/xp.js");
+//const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 const cooldowns = new Discord.Collection();
@@ -207,8 +207,66 @@ client.on("message", async message => {
 
     client.logger.error(error);
   }
-  return addexp(message, client);
+ // return addexp(message, client);
 });
+
+client.on('message', async message =>{
+    if(message.author.bot) return 
+    xp(message)
+     if(message.content.toLowerCase().startsWith('+rank')) {
+         var user = message.mentions.users.first() || message.author
+         var level = db.get(`guild_${message.guild.id}_level_${user.id}`) || 0
+         level = level.toString()
+         let xp = db.get(`guild_${message.guild.id}_xp_${user.id}`) || 0
+         var xpNeeded = level * 500 + 500
+         let every = db.all().filter(i => i.ID.startsWith(`guild_${message.guild.id}_xptotal_`)).sort((a, b) => b.data - a.data)
+         var rank = every.map(x => x.ID).indexOf(`guild_${message.guild.id}_xptotal_${user.id}`) + 1
+         rank = rank.toString() 
+         var image = await canvas.rank({
+             username: user.username,
+             discrim: user.discriminator,
+             status: user.presence.status,
+             currentXP: xp.toString(),
+             neededXP: xpNeeded.toString(),
+             rank,
+             level,
+             avatarURL: user.displayAvatarURL({format: "png" }),
+             color: "white"
+         })
+  return message.channel.send(new Discord.MessageAttachment(image, "rank.png"))
+
+     }
+})
+
+function xp(message) {
+    const randomnumber = Math.floor(Math.random() * 10) + 15
+    db.add(`guild_${message.guild.id}_xp_${message.author.id}`, randomnumber)
+    db.add(`guild_${message.guild.id}_xptotal_${message.guild.id}`, randomnumber)
+    var level = db.get(`guild_${message.guild.id}_level_${message.author.id}`) || 1 
+    var xp = db.get(`guild_${message.guild.id}_xp_${message.author.id}`)
+    var xpNeeded = level * 500
+    if(xpNeeded < xp) {
+        var newLevel = db.add(`guild_${message.guild.id}_level_${message.author.id}`, 1)
+        db.subtract(`guild_${message.guild.id}_xp_${message.author.id}`, xpNeeded)
+        if(message.guild.id === "767315935694028821"){
+            let levelchannel = client.channels.cache.get("levelchannelid")
+            levelchannel.send(`${message.author}, You Have Leveled Up To Level **${newLevel}**`)
+        }else{
+
+        message.channel.send(`${message.author}, You Have Leveled Up To Level **${newLevel}**`)
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+
 client
   .login(Token)
   .catch(() =>
