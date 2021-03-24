@@ -72,7 +72,7 @@ module.exports = {
         .setColor("GREEN")
         .setTitle("Commands")
         .setDescription(
-          `🛡️ Join our for help and updates!\n\`\`\`xl\n${prefix}help [Category]\n\`\`\``
+          `🛡️ Join our for help and updates!\n\`\`\`xl\n${prefix||"!"}help [Category]\n\`\`\``
         )
         .addField(
           `${client.emotes.moderation || "⚙️"} Moderation`,

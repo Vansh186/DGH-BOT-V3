@@ -42,7 +42,7 @@ module.exports = {
       .setRequiredXP(xpNeeded)
       .setStatus(user.presence.status)
       .setProgressBar("#FFFFFF", "COLOR")
-      .setUsername(user.username)
+      .setUsername(user.username, user.displayHexColor)
       .setDiscriminator(user.discriminator)
       .setLevel(level)
       .setRank(rank)
