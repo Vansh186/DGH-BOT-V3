@@ -10,7 +10,8 @@ module.exports = {
   category: "misc",
   botpermission: ["MANAGE_GUILD"],
   run: (client, message, args) => {
-    var user = message.mentions.users.first() || message.author;
+    var user = message.mentions.users.first(args.) || message.author;
+    var m = message.guild.members.first() || message.member;
     let image = db.get(`levelimg_${message.guild.id}`);
     var level = db.get(`guild_${message.guild.id}_level_${user.id}`) || 0;
     let xp = db.get(`guild_${message.guild.id}_xp_${user.id}`) || 0;
@@ -35,9 +36,9 @@ module.exports = {
       dnd: "dnd",//https://emoji.gg/assets/emoji/2531_dnd.png",
       offline: "offline"//https://emoji.gg/assets/emoji/7445_status_offline.png"
     };
- let color = user.displayHexColor;
+ let color = m.displayHexColor;
 
-if (color == '#000000') color = user.hoistRole.hexColor;
+if (color == '#000000') color = m.hoistRole.hexColor;
     const rak = new canvacord.Rank()
 
       .setAvatar(user.displayAvatarURL({ format: "png" }))
