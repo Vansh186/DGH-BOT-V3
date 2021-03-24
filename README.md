@@ -25,18 +25,18 @@ A Advanced Music Bot With Filters & Other Cool Stuff ;)
 
 ### Information
 - This command has additional features
-| Name | Description | Usage It works |  |
+| Name | Description | Usage It works |
 | :--- | :--- | :--- | :--- |
 | **args** | Activate command usage, and commands Description | `args: false/true,` |  |
 | **owner** | This can only be used by the owner | `owner: false/true` |  |
 | **permissions** | This gives permission to cmd | `premissons: Name permission` |  |
 | **cooldown** | This gives permission to cooldown the command | `cooldown: 3` |  |
-| **guildOnlyli | this can only be on the server not on dm | `guildOnly: false/true` | |
+| **guildOnly** | this can only be on the server not on dm | `guildOnly: false/true` | |
 
-et Your Ass If You Ever Say **This Is My Bot & Coded By Me Or Smth**, Make Sure To Give Credit (In Bot Or Commands) :D
+Your Ass If You Ever Say **This Is My Bot & Coded By Me Or Smth**, Make Sure To Give Credit (In Bot Or Commands) :D
 
 - Author - 𝙁𝘾 么 Glitch Editz#5631 
-- Support - [Click Me](
+- Support - [Click Me](https://discord.gg/MKwyk4qdeb)
 - create cmd - 𝙁𝘾 么 Glitch Editz#5631
 - for cmd music - Legendary Emoji#1742
 - for additional feature settings - 𝙁𝘾 么 Glitch Editz#5631ttps://discord.gg/MKwyk4qdeb)
