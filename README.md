@@ -25,8 +25,8 @@ A Advanced Music Bot With Filters & Other Cool Stuff ;)
 
 ### Information
 - This command has additional features
-| Name | Description | Usage It works |
 
+| Name | Description | Usage It works |
 | :--- | :--- | :--- |
 
 | **args** | Activate command usage, and commands Description | `args: false/true,` |  
