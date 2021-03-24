@@ -13,7 +13,7 @@ module.exports = {
     let image = db.get(`levelimg_${message.guild.id}`);
     var level = db.get(`guild_${message.guild.id}_level_${user.id}`) || 0;
     let xp = db.get(`guild_${message.guild.id}_xp_${user.id}`) || 0;
-    var xpNeeded = 100 || level * 50
+    var xpNeeded = 100 || level * 100
     let every = db
       .all()
       .filter(i => i.ID.startsWith(`guild_${message.guild.id}_xptotal_`))
