@@ -116,7 +116,7 @@ client.on("message", async message => {
   if (command.bot) {
     let neededPerms = [];
 
-    command.botpermission.forEach(p => {
+    command.bot.forEach(p => {
       if (!message.guild.me.hasPermission(p)) neededPerms.push("`" + p + "`");
     });
 

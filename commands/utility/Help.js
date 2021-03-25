@@ -39,7 +39,7 @@ module.exports = {
           .addField(
             `Commands:`,
             `${client.commands
-              .filter(command => command.category.includes(args[0]))
+              .filter(command => "Invalid Category"||command.category.includes(args[0]))
               .map(command => `\`${command.name}\``)
               .join(", ")}` || `\u200b`
           );

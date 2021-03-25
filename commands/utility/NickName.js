@@ -1,24 +1,55 @@
-const Discord = require("discord.js");
+const { MessageEmbed } = require('discord.js');
+const db = require('quick.db');
 module.exports = {
   name: "nickname",
-  usage: `nickname <{tag}/text>`,
+  usage: `nickname <user> <{tag}/text>`,
   category: "utility",
   description: "set nickname for member",
   args: true,
   cooldown: 1,
   permission: "",
+  bot: ['CHANGE_NICKNAME'
+,'MANAGE_NICKNAMES'],
   run: async (client, message, args) => {
     //code
-    const nick = args.join(" ").replace(`{tag}`,message.author.username)
-    message.member
-      .setNickname(nick)
-      .catch(error => message.channel.send("Couldn't update your nickname. Owner"));
-    const embed = new Discord.MessageEmbed()
-      .addField(
-        "NickName",
-        `successfully replaced by name \`\`${nick}\`\``
-      )
-      .setColor("GREEN");
-    message.channel.send(embed);
-  }
-};
+if (!args[0]) return message.channel.send("**Please Enter A User!**")
+      
+        let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase()) || message.member;
+        if (!member) return message.channel.send("**Please Enter A Username!**");
+
+        if (member.roles.highest.comparePositionTo(message.guild.me.roles.highest) >= 0) return message.channel.send('**Cannot Set or Change Nickname Of This User!**')
+
+        if (!args[1]) return message.channel.send("**Please Enter A Nickname**");
+
+        let nick = args.slice(1).join(' ').replace(`{tag}`,member.user.username);
+
+        try {
+        member.setNickname(nick)
+        const embed = new MessageEmbed()
+            .setColor("GREEN")
+            .setDescription(`**Changed Nickname of ${member.displayName} to ${nick}**`)
+        message.channel.send(embed)
+        } catch {
+            return message.channel.send("**Missing Permissions - [CHANGE_NICKNAME]")
+        }
+
+        let channel = db.fetch(`modlog_${message.guild.id}`)
+        if (!channel) return;
+
+        const sembed = new MessageEmbed()
+            .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL())
+            .setColor("#ff0000")
+            .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
+            .setFooter(message.guild.name, message.guild.iconURL())
+            .addField("**Moderation**", "setnick")
+            .addField("**Nick Changed Of**", member.user.username)
+            .addField("**Nick Changed By**", message.author.username)
+            .addField("**Nick Changed To**", nick)
+            .addField("**Date**", message.createdAt.toLocaleString())
+            .setTimestamp();
+
+            var sChannel = message.guild.channels.cache.get(channel)
+            if (!sChannel) return;
+            sChannel.send(sembed)
+    }
+}
