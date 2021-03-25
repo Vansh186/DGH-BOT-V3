@@ -16,15 +16,9 @@ module.exports = {
     var level = db.get(`guild_${message.guild.id}_level_${user.id}`) || 0;
     let xp = db.get(`guild_${message.guild.id}_xp_${user.id}`) || 0;
     var xpNeeded = level * 100
-    let every = db
-      .all()
-      .filter(i => i.ID.startsWith(`guild_${message.guild.id}_xptotal_`))
-      .sort((a, b) => b.data - a.data);
-    var rank =
-      every
-        .map(x => x.ID)
-        .indexOf(`guild_${message.guild.id}_xptotal_${user.id}`) + 1;
-    if (user.id === client.user.id) {
+    let every = db.all().filter(i => i.ID.startsWith(`guild_${message.guild.id}_xptotal_`)).sort((a, b) => b.data - a.data)
+         var rank = every.map(x => x.ID).indexOf(`guild_${message.guild.id}_xptotal_${user.id}`) + 1;
+   if (user.id === client.user.id) {
       return message.channel.send(":wink: | I am on level 100");
     }
     if (user.bot) {

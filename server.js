@@ -218,9 +218,6 @@ function xp(message) {
   var xp = db.get(`guild_${message.guild.id}_xp_${message.author.id}`);
   var xpNeeded = level * 100;
   var xpNeeded2 = level * 200;
-  if(xpNeeded < xp){
-  db.add(`guild_${message.guild.id}_xptotal_${message.author.id}`, 1);
- }
   if (xpNeeded < xp) {
     var newLevel = db.add(
       `guild_${message.guild.id}_level_${message.author.id}`,
@@ -233,14 +230,7 @@ function xp(message) {
       let user = message.author;
       let levelchannel = client.channels.cache.get(channel_id);
       let image = db.get(`levelimg_${message.guild.id}`);
-        let every = db
-      .all()
-      .filter(i => i.ID.startsWith(`guild_${message.guild.id}_xptotal_`))
-      .sort((a, b) => b.data - a.data);
-    var rank =
-      every
-        .map(x => x.ID)
-        .indexOf(`guild_${message.guild.id}_xptotal_${user.id}`) + 1;
+       var rank = db.get(`guild_${message.guild.id}_xptotal_${user.id}`);
        let color = message.member.displayHexColor;
 
 if (color == '#000000') color = message.member.hoistRole.hexColor;
