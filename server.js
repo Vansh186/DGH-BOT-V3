@@ -217,6 +217,7 @@ function xp(message) {
     db.get(`guild_${message.guild.id}_level_${message.author.id}`) || 1;
   var xp = db.get(`guild_${message.guild.id}_xp_${message.author.id}`);
   var xpNeeded = level * 100;
+  var xpNeeded2 = level * 200;
   if(xpNeeded < xp){
   db.add(`guild_${message.guild.id}_xptotal_${message.author.id}`, 1);
  }
@@ -249,7 +250,7 @@ if (color == '#000000') color = message.member.hoistRole.hexColor;
       const ran = new canvacord.Rank()
         .setAvatar(user.displayAvatarURL({ dynamic: false, format: "png" }))
         .setCurrentXP(randomnumber)
-        .setRequiredXP(xpNeeded)
+        .setRequiredXP(xpNeeded2)
         .setLevel(newLevel)
         .setRank(rank)
         .setStatus(user.presence.status)
@@ -269,7 +270,7 @@ if (color == '#000000') color = message.member.hoistRole.hexColor;
           .setTimestamp()
           .setDescription(
             `**LEVEL UP** - ${newLevel}
-**XP UP** - ${randomnumber}/${xpNeeded}`
+**XP UP** - ${randomnumber}/${xpNeeded2}`
           )
           .setImage("attachment://Rankcard.png")
           .attachFiles(attachment);
