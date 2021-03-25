@@ -7,8 +7,9 @@ module.exports = {
   args: true,
   usage: "setchannel <key //welcome/leave/report/level/modlog> <channel>",
   description: "Set the channel",
-  permissions: "ADMINISTRATOR",
-  run: (client, message, args) => {
+  bot: ['VIEW_CHANNEL','EMBED_LINKS','ATTACH_FILES','MANAGE_CHANNELS','MANAGE_GUILD'],
+  author: 'VIEW_CHANNEL'||'EMBED_LINKS'||'ATTACH_FILES'||'MANAGE_CHANNELS'||'MANAGE_GUILD',
+ run: (client, message, args) => {
     const channel = message.mentions.channels.first();
     const [key, ...value] = args;
     switch (key) {

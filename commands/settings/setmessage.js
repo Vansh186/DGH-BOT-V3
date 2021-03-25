@@ -7,7 +7,8 @@ module.exports = {
   category: "settings",
   args: true,
       permissions: "ADMINISTRATOR",
-
+ bot: ['VIEW_CHANNEL','EMBED_LINKS','ATTACH_FILES','MANAGE_CHANNELS','MANAGE_GUILD'],
+  author: 'VIEW_CHANNEL'||'EMBED_LINKS'||'ATTACH_FILES'||'MANAGE_CHANNELS'||'MANAGE_GUILD',
  usage: "setmsg <key // welcome/leave> <msg>",
   description: "Set the welcome",
   run: (client, message, args) => {

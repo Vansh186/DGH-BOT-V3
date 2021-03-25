@@ -6,8 +6,8 @@ module.exports = {
   category: "settings",
   args: true,
   usage: "setimage <key //welcome/leave/level> <url image>",
-  permissions: "ADMINISTRATOR",
-
+ bot: ['VIEW_CHANNEL','EMBED_LINKS','ATTACH_FILES','MANAGE_CHANNELS','MANAGE_GUILD'],
+  author: 'VIEW_CHANNEL'||'EMBED_LINKS'||'ATTACH_FILES'||'MANAGE_CHANNELS'||'MANAGE_GUILD', 
   description: "Set the background",
   run: (client, message, args) => {
     function isURL(url) {

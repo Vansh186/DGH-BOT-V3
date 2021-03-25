@@ -6,7 +6,7 @@ module.exports = {
   category: "misc",
   usage: "snipe",
   description: "get deleted messages",
-  bot: ['MANAGE_MESSAGES','ATTACH_FILES','MANAGE_GUILD'
+  bot: ['MANAGE_MESSAGES','ATTACH_FILES','MANAGE_GUILD'],
   run: async (client, message, args) => {
     const msg = client.snipe.get(message.channel.id);
     if (!msg)

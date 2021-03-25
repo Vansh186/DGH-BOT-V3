@@ -8,7 +8,7 @@ module.exports = {
   args: true,
   usage: "mute <@mention> <reason>",
   permissions: "MANAGE_ROLES",
-  botpermission: ["MANAGE_ROLES","MANAGE_GUILD"],
+  bot: ["MANAGE_ROLES","MANAGE_GUILD"],
   run: async (client, message, args) => {
 try { 
   var mutee = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());

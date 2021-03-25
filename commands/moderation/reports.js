@@ -5,6 +5,7 @@ module.exports = {
   category: "moderation",
   description: "Report a user of your choice!",
   usage: "report <User mention>",
+  bot: ['MANAGE_GUILD','VIEW_CHANNEL'],
   run: async (client, message, args) => {
     const bot = client;
     if (!message.member.permissions.has("MANAGE_MESSAGES"))

@@ -7,8 +7,9 @@ module.exports = {
   category: "settings",
   args: true,
   usage: "viewmsg <key // welcome/leave>",
-      permissions: "ADMINISTRATOR",
- description: "View Message <welcome/leave>",
+ bot: ['VIEW_CHANNEL','EMBED_LINKS','ATTACH_FILES','MANAGE_CHANNELS','MANAGE_GUILD'],
+  author: 'VIEW_CHANNEL'||'EMBED_LINKS'||'ATTACH_FILES'||'MANAGE_CHANNELS'||'MANAGE_GUILD',
+  description: "View Message <welcome/leave>",
   run: (client, message, args) => {
     const channel = message.mentions.channels.first();
     const [key, ...value] = args;

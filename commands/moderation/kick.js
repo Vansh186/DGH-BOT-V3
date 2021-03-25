@@ -8,7 +8,7 @@ module.exports = {
   description: "Kick anyone with one shot xD",
   usage: "kick <@user> <raeson>",
   permissions: "KICK_MEMBERS",
-  botpermission: ["KICK_MEMBERS"],
+  bot: ["KICK_MEMBERS"],
   args: true,
   run: (client, message, args) => {
     try {

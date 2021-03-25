@@ -7,7 +7,8 @@ module.exports = {
   aliases: ["newprefix", "sp"],
   category: "settings",
   args: true,
-  permission: "MANAGE_GUILD",
+  bot: ['VIEW_CHANNEL','EMBED_LINKS','ATTACH_FILES','MANAGE_CHANNELS','MANAGE_GUILD'],
+  author: 'VIEW_CHANNEL'||'EMBED_LINKS'||'ATTACH_FILES'||'MANAGE_CHANNELS'||'MANAGE_GUILD',
   description: "Set The Prefix Of Bot!",
   usage: "Setprefix <New Prefix>",
   run: async (client, message, args) => {

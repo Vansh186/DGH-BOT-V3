@@ -5,7 +5,8 @@ module.exports = {
   aliases: ["setmute", "smrole", "smr"],
   description: "Sets A Mute Role For Muted Users!",
   usage: "[role name | role mention | role ID]",
-  permissions: "ADMINISTRATOR",
+  bot: ['VIEW_CHANNEL','EMBED_LINKS','ATTACH_FILES','MANAGE_CHANNELS','MANAGE_GUILD'],
+  author: 'VIEW_CHANNEL'||'EMBED_LINKS'||'ATTACH_FILES'||'MANAGE_CHANNELS'||'MANAGE_GUILD',
   category: "settings",
   run: async (client, message, args) => {
     const bot = client;

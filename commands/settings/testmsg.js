@@ -9,8 +9,9 @@ module.exports = {
   description: "welcome and leave test",
   args: false,
   cooldown: 2,
-  permissions: "ADMINISTRATOR",
-  run: async (client, message, args) => {
+   bot: ['VIEW_CHANNEL','EMBED_LINKS','ATTACH_FILES','MANAGE_CHANNELS','MANAGE_GUILD'],
+  author: 'VIEW_CHANNEL'||'EMBED_LINKS'||'ATTACH_FILES'||'MANAGE_CHANNELS'||'MANAGE_GUILD',
+ run: async (client, message, args) => {
     //code
     let image = db.get(`welimage_${message.guild.id}`);
 
