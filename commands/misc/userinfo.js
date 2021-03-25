@@ -34,6 +34,27 @@ module.exports = {
       );
     }
 
+    // Format Permissions
+    const permissions = user.permissions.toArray().map(perm => {
+      return perm
+        .toLowerCase()
+        .replace(/_/g, " ") // Replace all underscores with spaces
+        .replace(/\w\S*/g, txt => {
+          // Capitalize the first letter of each word
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    });
+
+    // Calculate Join Position
+    let joinPosition;
+    const members = message.guild.members.cache.array();
+    members.sort((a, b) => a.joinedAt - b.joinedAt);
+    for (let i = 0; i < members.length; i++) {
+      if (members[i].id == message.guild.member(message.author).id)
+        joinPosition = i;
+    }
+  
+    
     //OPTIONS FOR STATUS
 
     let stat = {
@@ -108,8 +129,8 @@ Bot: ${user.user.bot}
 Deleted User: ${user.deleted}`
       )
       .addField("Badges", newbadges.join(", ").toLowerCase() || "None")
-      //  .addField(user.user.presence.status, stat[user.user.presence.status])
-      //.addField ("Status Member:",)
+      .addField("Position", joinPosition )
+      .addField("Permissions", permissions.join(", ") )
       .setFooter(user.user.presence.status, stat[user.user.presence.status]);
 
     return message.channel.send(embed).catch(err => {
