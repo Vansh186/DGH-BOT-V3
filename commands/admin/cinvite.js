@@ -6,6 +6,7 @@ module.exports = {
   name: "cinvite",
   category: "admin",
   permissions: "MANAGE_CHANNELS",
+  bot: ["MANAGE_CHANNELS"],
   run: async (client, message, args) => {
     message.delete();
     const channels =

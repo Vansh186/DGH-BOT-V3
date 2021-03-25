@@ -8,7 +8,7 @@ module.exports = {
   description: "Get the level of Author or Mentioned",
   usage: "level [user]",
   category: "misc",
-  botpermission: ["MANAGE_GUILD"],
+  bot: ["MANAGE_GUILD"],
   run: (client, message, args) => {
     var user = message.mentions.users.first() || message.author;
     var m = message.mentions.members.first() || message.member;

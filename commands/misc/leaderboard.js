@@ -4,6 +4,8 @@ const fs = require("fs");
 module.exports = {
   name: "leaderboard",
   category: "misc",
+  bot: ["MANAGE_GUILD"],
+  
   run: async (client, message, args) => {
     const coins = db
       .all()

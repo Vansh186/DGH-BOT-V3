@@ -6,6 +6,8 @@ module.exports = {
    usage: "lock <channel>",
   args: true,
  category: "admin",
+  bot: ['MANAGE_SERVER', 'MANAGE_CHANNELS'],
+  author: 'MANAGE_SERVER'||'MANAGE_CHANNELS',
    run: async(client, message, args) => {
    if (!message.member.hasPermission('MANAGE_SERVER', 'MANAGE_CHANNELS')) {
    return message.channel.send("You don't have enough Permissions")

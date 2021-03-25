@@ -7,6 +7,8 @@ module.exports = {
      usage: "timelock <time>",
   args: true,
 category: "admin",
+  author: "MANAGE_SERVER"|| "MANAGE_CHANNELS",
+  bot : ["MANAGE_SERVER", "MANAGE_CHANNELS"],
   run: async(client, message, args) => {
         const time = args.join(" ");
         if (!time) {

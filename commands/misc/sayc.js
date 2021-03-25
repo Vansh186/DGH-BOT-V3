@@ -8,26 +8,22 @@ module.exports = {
   description: "sayc channel send :/",
   usage: "sayc [#Channel] [...Text]\nsayc -json [#Channel] [Color] [...Text]",
   args: true,
+  bot: ["VIEW_CHANNEL"],
   run: async (client, message, args, del, member) => {
     message.delete();
     let channel = message.mentions.channels.first();
-    let chnnel = message.guild.channels.cache.find(
-      x => x.id === db.get(`say_${message.guild.id}`, channel.id)
-    );
-  await db.set(`say_${message.guild.id}`, channel.id);
-
+    let chnnel = client.channels.cache.get(channel);
     const [key, ...value] = args;
     switch (key) {
       case "-json": {
-          const embed = new Discord.MessageEmbed()
-            .setColor(args[2])
-            .setDescription(args.slice(3).join(" ")
-        );
+        const embed = new Discord.MessageEmbed()
+          .setColor(args[2])
+          .setDescription(args.slice(3).join(" "));
 
-          return chnnel.send(embed);
-        }
+        return chnnel.send(embed);
       }
-    
+    }
+
     const arg = args[0];
     if (!channel) {
       return message.channel
@@ -40,7 +36,7 @@ module.exports = {
         .send(`${message.author}, sayc <channel> <msg>`)
         .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
     let say = args.slice(1).join(" ");
-  
+
     //  const Channel = member.guild.channels.cache.get("797491226567114753"); //insert channel id that you want to send to
     chnnel.send(say);
   }

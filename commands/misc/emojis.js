@@ -13,7 +13,7 @@ module.exports = {
   aliases: ["emojilist"],
 
   usage: "hey emojis",
-
+bot: ["MANAGE_EMOJIS"],
   run: async (bot, message, args, cha) => {
 
     message.delete();
