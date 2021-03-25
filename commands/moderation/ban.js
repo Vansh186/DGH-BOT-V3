@@ -9,7 +9,7 @@ module.exports = {
   usage: "ban <@user> <reason>",
   args: true,
   permissions: "BAN_MEMBERS",
-  botpermission: ["BAN_MEMBERS,MANAGE_GUILDS"],
+  botpermission: ["BAN_MEMBERS"],
   run: async (client, message, args) => {
  try {
     const bot = client  

@@ -10,6 +10,8 @@ module.exports = {
   args: true,
   description: "stealemoji <emoji name>",
   usage: "stealemoji <emoji name>",
+  author: "MANAGE_EMOJIS",
+  bot: ["MANAGE_EMOJIS"],
   run: async (client, message, args) => {
     
     const emoji = args[0];

@@ -113,7 +113,7 @@ client.on("message", async message => {
         )
     );
   }
-  if (command.botpermission) {
+  if (command.bot) {
     let neededPerms = [];
 
     command.botpermission.forEach(p => {
@@ -133,7 +133,7 @@ client.on("message", async message => {
       );
   }
 
-  if (command.permissions || command.permission) {
+  if (command.author || command.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
     if (
       !authorPerms ||
