@@ -6,6 +6,7 @@ module.exports = {
   description: "Unban a user from the guild!",
   usage: "unban [name | tag | mention | ID] <reason> (optional)",
   aliases: ["ub", "unbanish"],
+  category: "moderation",
   run: async (client, message, args) => {
     const bot = client;
     if (!message.member.hasPermission("BAN_MEMBERS"))

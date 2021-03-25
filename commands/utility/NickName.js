@@ -12,16 +12,16 @@ module.exports = {
 ,'MANAGE_NICKNAMES'],
   run: async (client, message, args) => {
     //code
-if (!args[0]) return message.channel.send("**Please Enter A User!**")
+if (!args.slice(1).join(' ')) return message.channel.send("**Please Enter A User!**")
       
-        let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase()) || message.member;
+        let member = /*message.mentions.members.first(args.slice(1).join(' ')) ||*/ message.guild.members.cache.get(args.slice(1).join(' ')) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args.slice(1).join(' ').toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args.slice(1).join(' ').toLocaleLowerCase()) || message.member;
         if (!member) return message.channel.send("**Please Enter A Username!**");
 
         if (member.roles.highest.comparePositionTo(message.guild.me.roles.highest) >= 0) return message.channel.send('**Cannot Set or Change Nickname Of This User!**')
 
-        if (!args[1]) return message.channel.send("**Please Enter A Nickname**");
+        if (!args.slice(0).join(' ')) return message.channel.send("**Please Enter A Nickname**");
 
-        let nick = args.slice(1).join(' ').replace(`{tag}`,member.user.username);
+        let nick = args[0].replace(`{tag}`,`${member.user.username}​`);
 
         try {
         member.setNickname(nick)
