@@ -31,7 +31,7 @@ module.exports = {
         "Your role can't be more than 100 characters long"
       );
     }
-    message.guild.roles.create({
+   const rr = await message.guild.roles.create({
       data: {
         name: name,
         color: toHex(args[0])
@@ -43,7 +43,7 @@ module.exports = {
         message.author.displayAvatarURL()
       )
       .setColor("RANDOM").setDescription(`
-**Role: ** ${name}
+**Role: ** ${rr}
 **Action: ** New Role Created
 **Role Color: ** ${args[0]}
 **Channel: ** ${message.channel}

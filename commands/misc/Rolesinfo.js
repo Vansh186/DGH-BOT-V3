@@ -25,6 +25,7 @@ module.exports = {
             .addField("**ID**", `\`${role.id}\``, true)
             .addField("**Name**", role.name, true)
             .addField("**Hex**", role.hexColor, true)
+            .addField("**Color**", role.color, true)
             .addField("**Members**", role.members.size, true)
             .addField("**Position**", role.position, true)
   //          .addField("**Permissions**", role.permission.join(", "), true)
