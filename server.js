@@ -240,6 +240,12 @@ function xp(message) {
       every
         .map(x => x.ID)
         .indexOf(`guild_${message.guild.id}_xptotal_${user.id}`) + 1;
+       let color = message.member.displayHexColor;
+
+if (color == '#000000') color = message.member.hoistRole.hexColor;
+    const rak = new canvacord.Rank()
+
+
       const ran = new canvacord.Rank()
         .setAvatar(user.displayAvatarURL({ dynamic: false, format: "png" }))
         .setCurrentXP(randomnumber)
@@ -248,7 +254,7 @@ function xp(message) {
         .setRank(rank)
         .setStatus(user.presence.status)
         .setProgressBar("#00FFFF", "COLOR")
-        .setUsername(user.username)
+        .setUsername(user.username, color)
         .setDiscriminator(user.discriminator)
         .setBackground(
           "IMAGE",
