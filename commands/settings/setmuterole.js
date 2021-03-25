@@ -6,6 +6,7 @@ module.exports = {
   description: "Sets A Mute Role For Muted Users!",
   usage: "[role name | role mention | role ID]",
   permissions: "ADMINISTRATOR",
+  category: "settings",
   run: async (client, message, args) => {
     const bot = client;
     if (!args[0]) {

@@ -43,7 +43,7 @@ readdirSync("./commands/").forEach(dir => {
   );
   for (let file of commands) {
     let command = require(`./commands/${dir}/${file}`);
-    console.log(`${command.name} Has Been Loaded - ✅`);
+    console.log(`${command.category}|${command.name} Has Been Loaded - ✅`);
     if (command.name) client.commands.set(command.name, command);
     if (command.aliases) {
       command.aliases.forEach(alias => client.aliases.set(alias, command.name));

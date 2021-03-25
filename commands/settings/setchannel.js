@@ -5,7 +5,7 @@ module.exports = {
   name: "setchannel",
   category: "settings",
   args: true,
-  usage: "setchannel <key //welcome/leave/report/level> <channel>",
+  usage: "setchannel <key //welcome/leave/report/level/modlog> <channel>",
   description: "Set the channel",
   permissions: "ADMINISTRATOR",
   run: (client, message, args) => {
