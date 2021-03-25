@@ -2,8 +2,8 @@ const { MessageEmbed } = require("discord.js");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 module.exports = {
-  name: "evel",
-  category: "admin",
+  name: "---",
+  category: "admi",
   usage: "evel <code>",
   args: true,
   run: async (client, message, args) => {
