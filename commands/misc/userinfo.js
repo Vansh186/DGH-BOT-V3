@@ -16,7 +16,7 @@ module.exports = {
     } else {
       // Display info about the user specified by the first argument
       user = message.guild.member(
-        message.mentions.users.first()) || message.guild.member.fetch(args[0])
+        message.mentions.members.first() || await message.guild.members.fetch(args[0]))
    
     }
     if (!user) {

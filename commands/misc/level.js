@@ -10,32 +10,47 @@ module.exports = {
   category: "misc",
   bot: ["MANAGE_GUILD"],
   run: (client, message, args) => {
-    var user = message.mentions.users.first() || message.author;
-    var m = message.mentions.members.first() || message.member;
+    let user;
+    if (!args.length) {
+      // Display info about the calling user
+      user = message.guild.member(message.author);
+    } else {
+      // Display info about the user specified by the first argument
+      user = message.guild.member(
+        message.mentions.members.first() || message.guild.members.fetch(args[0])
+      );
+    }
+    let m = user;
     let image = db.get(`levelimg_${message.guild.id}`);
-    var level = db.get(`guild_${message.guild.id}_level_${user.id}`) || 0;
-    let xp = db.get(`guild_${message.guild.id}_xp_${user.id}`) || 0;
-    var xpNeeded = level * 100
-    let every = db.all().filter(i => i.ID.startsWith(`guild_${message.guild.id}_xptotal_`)).sort((a, b) => b.data - a.data)
-         var rank = every.map(x => x.ID).indexOf(`guild_${message.guild.id}_xptotal_${user.id}`) + 1;
-   if (user.id === client.user.id) {
+    var level = db.get(`guild_${message.guild.id}_level_${user.user.id}`) || 0;
+    let xp = db.get(`guild_${message.guild.id}_xp_${user.user.id}`) || 0;
+    var xpNeeded = level * 100;
+    let every = db
+      .all()
+      .filter(i => i.ID.startsWith(`guild_${message.guild.id}_xptotal_`))
+      .sort((a, b) => b.data - a.data);
+    var rank =
+      every
+        .map(x => x.ID)
+        .indexOf(`guild_${message.guild.id}_xptotal_${user.user.id}`) + 1;
+    if (user.id === client.user.id) {
       return message.channel.send(":wink: | I am on level 100");
     }
     if (user.bot) {
       return message.channel.send("Bot do not have levels");
     }
- let color = m.displayHexColor;
+    let color = m.displayHexColor;
 
-if (color == '#000000') color = m.hoistRole.hexColor;
+    if (color == "#000000") color = m.hoistRole.hexColor;
     const rak = new canvacord.Rank()
 
-      .setAvatar(user.displayAvatarURL({ format: "png" }))
+      .setAvatar(user.user.displayAvatarURL({ format: "png" }))
       .setCurrentXP(xp)
       .setRequiredXP(xpNeeded)
-      .setStatus(user.presence.status)
+      .setStatus(user.user.presence.status)
       .setProgressBar("#00FFFF", "COLOR")
-      .setUsername(user.username, color)
-      .setDiscriminator(user.discriminator)
+      .setUsername(user.user.username, color)
+      .setDiscriminator(user.user.discriminator)
       .setLevel(level)
       .setRank(rank)
       .setBackground(
@@ -47,7 +62,7 @@ if (color == '#000000') color = m.hoistRole.hexColor;
     rak.build().then(data => {
       const attachment = new Discord.MessageAttachment(data, "RankCard.png");
       let embed = new Discord.MessageEmbed()
-        .setAuthor(user.username, message.guild.iconURL())
+        .setAuthor(user.user.username, message.guild.iconURL())
         .setColor("#ff2050")
         .setDescription(
           `**LEVEL** - ${level}\n**Rank** - ${rank}\n**XP** - ${xp}/${xpNeeded}`
