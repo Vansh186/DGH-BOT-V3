@@ -16,9 +16,10 @@ module.exports = {
       user = message.guild.member(message.author);
     } else {
       // Display info about the user specified by the first argument
-      user = message.guild.member(
-        message.mentions.members.first() || message.guild.members.fetch(args[0])
-      );
+      user = message.guild.member(message.mentions.members.first());
+    }
+    if (!user) {
+      return message.channel.send(":x: Unable to find this person!");
     }
     let m = user;
     let image = db.get(`levelimg_${message.guild.id}`);
@@ -36,17 +37,17 @@ module.exports = {
     if (user.id === client.user.id) {
       return message.channel.send(":wink: | I am on level 100");
     }
-    if (user.bot) {
+    if (user.user.bot) {
       return message.channel.send("Bot do not have levels");
     }
-    let color = m.displayHexColor;
+    let color = m.user.displayHexColor;
 
-    if (color == "#000000") color = m.hoistRole.hexColor;
+    if (color == "#000000") color = m.user.hoistRole.hexColor;
     const rak = new canvacord.Rank()
 
       .setAvatar(user.user.displayAvatarURL({ format: "png" }))
       .setCurrentXP(xp)
-      .setRequiredXP(xpNeeded)
+      .setRequiredXP(xpNeeded || 100)
       .setStatus(user.user.presence.status)
       .setProgressBar("#00FFFF", "COLOR")
       .setUsername(user.user.username, color)
