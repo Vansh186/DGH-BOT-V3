@@ -26,7 +26,9 @@ const cooldowns = new Discord.Collection();
 client.queue = new Map();
 client.config = require("./emoji/emojis");
 client.emotes = client.config.emojis;
-client.db = db
+client.db = db;
+client.ra = random;
+
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
   client.user.setStatus("dnd");
@@ -223,19 +225,18 @@ function xp(message) {
       `guild_${message.guild.id}_level_${message.author.id}`,
       1
     );
- 
+
     db.subtract(`guild_${message.guild.id}_xp_${message.author.id}`, xpNeeded);
     if (message.guild.id === message.guild.id) {
       let channel_id = db.get(`levelch_${message.guild.id}`);
       let user = message.author;
       let levelchannel = client.channels.cache.get(channel_id);
       let image = db.get(`levelimg_${message.guild.id}`);
-       var rank = db.get(`guild_${message.guild.id}_xptotal_${user.id}`);
-       let color = message.member.displayHexColor;
+      var rank = db.get(`guild_${message.guild.id}_xptotal_${user.id}`);
+      let color = message.member.displayHexColor;
 
-if (color == '#000000') color = message.member.hoistRole.hexColor;
-    const rak = new canvacord.Rank()
-
+      if (color == "#000000") color = message.member.hoistRole.hexColor;
+      const rak = new canvacord.Rank();
 
       const ran = new canvacord.Rank()
         .setAvatar(user.displayAvatarURL({ dynamic: false, format: "png" }))
@@ -272,6 +273,26 @@ if (color == '#000000') color = message.member.hoistRole.hexColor;
         `${message.author}, You Have Leveled Up To Level **${newLevel}**`
       );
     }
+  }
+}
+
+function random(length = 5) {
+  if (length <= 0) throw new RangeError("Lenght cannot go below 0");
+  const chars =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let str = "";
+  for (var i = 0; i < length; i++)
+    str += chars[Math.floor(Math.random() * chars.length)];
+  return str;
+  function random(options = { max: 100, min: 0 }) {
+    if (options.max <= options.min)
+      throw new RangeError(
+        "options.max cannot be less than or equal to options.min"
+      );
+
+    return Math.floor(
+      Math.random() * (options.max - options.min + 1) + options.min
+    );
   }
 }
 client
