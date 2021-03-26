@@ -6,10 +6,6 @@ const moment = require("moment");
 module.exports = async client => {
   client.on("guildCreate", async guild => {
     if (!guild.available) return;
-    client.user.setActivity(
-      `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
-      { type: "WATCHING" }
-    );
     const embed = new Discord.MessageEmbed()
       .setTitle("Hello, I'm DGH BOT!")
       .setColor("RANDOM")
