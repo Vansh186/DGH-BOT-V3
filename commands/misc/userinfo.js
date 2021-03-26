@@ -39,8 +39,7 @@ module.exports = {
     const members = message.guild.members.cache.array();
     members.sort((a, b) => a.joinedAt - b.joinedAt);
     for (let i = 0; i < members.length; i++) {
-      if (members[i].id == message.guild.member(user).id)
-        joinPosition = i;
+      if (members[i].id == message.guild.member(user).id) joinPosition = i;
     }
 
     //OPTIONS FOR STATUS
@@ -116,10 +115,11 @@ ID: \`${user.user.id}\`
 Discriminator: \`${user.user.discriminator}\`
 Bot: ${user.user.bot}
 Deleted User: ${user.deleted}
-Position: ${joinPosition}
-      `)
+Position: ${joinPosition ||}
+      `
+      )
       .addField("Badges", newbadges.join(", ").toLowerCase() || "None")
-      .addField("Permissions", permissions.join(", "))
+      .addField("Permissions", `**\`${permissions.join("\n")}\`**`)
       .setFooter(user.user.presence.status, stat[user.user.presence.status]);
 
     return message.channel.send(embed).catch(err => {
