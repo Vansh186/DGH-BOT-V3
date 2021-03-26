@@ -61,7 +61,8 @@
     "canvacord": "^5.1.0",
     "sourcebin_js": "^0.0.2",
     "mongoose": "^5.11.20",
-    "discord.js": "^12.5.1"
+    "discord.js": "^12.5.1",
+    "randomstring": "^1.1.5"
   },
   "engines": {
     "node": "12.x"

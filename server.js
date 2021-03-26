@@ -27,8 +27,6 @@ client.queue = new Map();
 client.config = require("./emoji/emojis");
 client.emotes = client.config.emojis;
 client.db = db;
-client.ra = random;
-
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
   client.user.setStatus("dnd");
@@ -273,26 +271,6 @@ function xp(message) {
         `${message.author}, You Have Leveled Up To Level **${newLevel}**`
       );
     }
-  }
-}
-
-function random(length = 5) {
-  if (length <= 0) throw new RangeError("Lenght cannot go below 0");
-  const chars =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let str = "";
-  for (var i = 0; i < length; i++)
-    str += chars[Math.floor(Math.random() * chars.length)];
-  return str;
-  function random(options = { max: 100, min: 0 }) {
-    if (options.max <= options.min)
-      throw new RangeError(
-        "options.max cannot be less than or equal to options.min"
-      );
-
-    return Math.floor(
-      Math.random() * (options.max - options.min + 1) + options.min
-    );
   }
 }
 client
