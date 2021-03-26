@@ -111,12 +111,13 @@ module.exports = {
       )
       .addField(
         "Common Information",
-        `ID: \`${user.user.id}\`
-Discriminator: ${user.user.discriminator}
-Bot: ${(user.user.bot).replace("false","No").replace("true","Yes")}
+        `Tags: \`${user.user.username}\`
+ID: \`${user.user.id}\`
+Discriminator: \`${user.user.discriminator}\`
+Bot: ${user.user.bot}
 Deleted User: ${user.deleted}
-Position: ${joinPosition}`
-      )
+Position: ${joinPosition}
+      `)
       .addField("Badges", newbadges.join(", ").toLowerCase() || "None")
       .addField("Permissions", permissions.join(", "))
       .setFooter(user.user.presence.status, stat[user.user.presence.status]);
