@@ -77,6 +77,16 @@ module.exports = {
     // data.timestamp
     /*  let UserAt = member
     const jss = UserAt.joinedAt*/
+     let joinPosition;
+    const members = message.guild.members.cache.array();
+    members.sort((a, b) => a.joinedAt - b.joinedAt);
+    for (let i = 0; i < members.length; i++) {
+     if (members[i].id == message.guild.member(message.author).id)
+       joinPosition = i;
+    }
+
+  
+   
     var date = moment.tz("Asia/Jakarta");
     let chx2 =
       db.get(`welchannel_${message.guild.id}`) ||
@@ -91,7 +101,7 @@ module.exports = {
       .replace(`{user}`, message.author) // Member mention substitution
       .replace(`{member}`, message.author) // Member mention substitution
       .replace(`{username}`, message.author.username) // Username substitution
-      .replace(`{position}`, message.guild.members.cache.size)
+      .replace(`{position}`, joinPosition)
       .replace(`{tag}`, message.author.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, message.guild.name) // Name Server substitution
@@ -101,7 +111,7 @@ module.exports = {
       .replace(`{user}`, message.author) // Member mention substitution
       .replace(`{member}`, message.author) // Member mention substitution
       .replace(`{username}`, message.author.username) // Username substitution
-      .replace(`{position}`, message.guild.members.cache.size)
+      .replace(`{position}`, joinPosition)
       .replace(`{tag}`, message.author.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, message.guild.name) // Name Server substitution
