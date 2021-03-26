@@ -3,14 +3,14 @@ const { Message, MessageEmbed } = require("discord.js");
 const ms = require("ms");
 const db = require("quick.db");
 const category = new Discord.Collection();
-category.set("misc"|| "Misc", "**Misc Commands**");
-category.set("utility"|| "Utility", "**Utility Commands**");
-category.set("moderation"||"Moderation", "**Moderation Commands**");
-category.set("settings"||"Settings", "**Settings Commands**");
-category.set("admin"||"Admin", "**Admin Commands**");
-category.set("music"||"Music", "**Music Commands For Member**");
-category.set("search"||"Search", "**Search Commands**");
-category.set("fun"||"Fun", "**Fun Commands**");
+category.set("misc" || "Misc", "**Misc Commands**");
+category.set("utility" || "Utility", "**Utility Commands**");
+category.set("moderation" || "Moderation", "**Moderation Commands**");
+category.set("settings" || "Settings", "**Settings Commands**");
+category.set("admin" || "Admin", "**Admin Commands**");
+category.set("music" || "Music", "**Music Commands For Member**");
+category.set("search" || "Search", "**Search Commands**");
+category.set("fun" || "Fun", "**Fun Commands**");
 module.exports = {
   name: "help",
   description:
@@ -27,8 +27,16 @@ module.exports = {
      */
     const prefix = db.get(`Prefix_${message.guild.id}`);
     message.delete().catch(O_o => {}); // eslint-disable-line
-  //  const file = args[0];
-    const cc = args[0].replace(`Misc`,`misc`).replace(`Moderation`,`moderation`).replace(`Misc`,`misc`).replace(`Music`,`music`).replace(`Fun`,`fun`).replace(`Search`,`search`).replace(`Utility`,`utility`).replace(`Settings`,`settings`)
+    //  const file = args[0];
+    const cc = args[0]
+      .replace(`Misc`, `misc`)
+      .replace(`Moderation`, `moderation`)
+      .replace(`Misc`, `misc`)
+      .replace(`Music`, `music`)
+      .replace(`Fun`, `fun`)
+      .replace(`Search`, `search`)
+      .replace(`Utility`, `utility`)
+      .replace(`Settings`, `settings`);
     if (args.length) {
       if (category.has(cc)) {
         let embed = new Discord.MessageEmbed()
@@ -48,23 +56,31 @@ module.exports = {
       }
     }
     const name = args[0];
-   const command =
+    const command =
       client.commands.get(name) ||
       client.commands.find(c => c.aliases && c.aliases.includes(name));
     if (!command) {
     } else {
       let embed = new Discord.MessageEmbed()
         .setColor("RANDOM")
-        .setTitle(`**${command.name}** Command`)
-        .setDescription(`${command.description}`)
-        .addField(`Category`, `• ${command.category}`, true)
-        .addField(`Aliases`, `${command.aliases.join(", ")}`, true)
+        .setTitle(`**\`${command.name}\`** Command`)
+        .setDescription(`\`${command.description}\``)
+        .addField(`Category`, `• \`${command.category}\``, true)
+        .addField(
+          `Aliases`,
+          `\`${command.aliases.join(", ") || "No Aliases"}\``,
+          true
+        )
         .addField(
           `Required Permission`,
           `\`\`\`html\n<${command.permissions || "No Permission"}>\n\`\`\``,
           false
         )
-       .addField(`Usage`, `\`\`\`html\n${command.usage}\n\`\`\``, false);
+        .addField(
+          `Usage`,
+          `\`\`\`html\n${command.usage || "No Usage"}\n\`\`\``,
+          false
+        );
       return message.channel.send(embed);
     }
 
@@ -73,7 +89,8 @@ module.exports = {
         .setColor("GREEN")
         .setTitle("Commands")
         .setDescription(
-          `🛡️ Join our for help and updates!\n\`\`\`xl\n${prefix||"!"}help [Category]\n\`\`\``
+          `🛡️ Join our for help and updates!\n\`\`\`xl\n${prefix ||
+            "!"}help [Category]\n\`\`\``
         )
         .addField(
           `${client.emotes.moderation || "⚙️"} Moderation`,
