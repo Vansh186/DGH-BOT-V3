@@ -3,14 +3,14 @@ const { Message, MessageEmbed } = require("discord.js");
 const ms = require("ms");
 const db = require("quick.db");
 const category = new Discord.Collection();
-category.set("misc", "**Misc Commands**");
-category.set("utility", "**Utility Commands**");
-category.set("moderation", "**Moderation Commands**");
-category.set("settings", "**Settings Commands**");
-category.set("admin", "**Admin Commands**");
-category.set("music", "**Music Commands For Member**");
-category.set("search", "**Search Commands**");
-category.set("fun", "**Fun Commands**");
+category.set("misc"|| "Misc", "**Misc Commands**");
+category.set("utility"|| "Utility", "**Utility Commands**");
+category.set("moderation"||"Moderation", "**Moderation Commands**");
+category.set("settings"||"Settings", "**Settings Commands**");
+category.set("admin"||"Admin", "**Admin Commands**");
+category.set("music"||"Music", "**Music Commands For Member**");
+category.set("search"||"Search", "**Search Commands**");
+category.set("fun"||"Fun", "**Fun Commands**");
 module.exports = {
   name: "help",
   description:
@@ -27,19 +27,20 @@ module.exports = {
      */
     const prefix = db.get(`Prefix_${message.guild.id}`);
     message.delete().catch(O_o => {}); // eslint-disable-line
-    const file = args[0];
+  //  const file = args[0];
+    const cc = args[0].replace(`Misc`,`misc`).replace(`Moderation`,`moderation`).replace(`Misc`,`misc`).replace(`Music`,`music`).replace(`Fun`,`fun`).replace(`Search`,`search`).replace(`Utility`,`utility`).replace(`Settings`,`settings`)
     if (args.length) {
-      if (category.has(args[0])) {
+      if (category.has(cc)) {
         let embed = new Discord.MessageEmbed()
           .setColor("RANDOM")
           .setTimestamp()
           .setDescription(
-            `${category.get(args[0])}\n\`\`\`xl\nhelp [Command]\n\`\`\``
+            `${category.get(cc)}\n\`\`\`xl\nhelp [Command]\n\`\`\``
           )
           .addField(
             `Commands:`,
             `${client.commands
-              .filter(command => command.category.includes(args[0]))
+              .filter(command => command.category.includes(cc))
               .map(command => `\`${command.name}\``)
               .join(", ")}` || `\u200b`
           );
@@ -57,10 +58,10 @@ module.exports = {
         .setTitle(`**${command.name}** Command`)
         .setDescription(`${command.description}`)
         .addField(`Category`, `• ${command.category}`, true)
- //       .addField(`Aliases`, `${command.aliases.join("[, ]")}`, true)
+        .addField(`Aliases`, `${command.aliases.join(", ")}`, true)
         .addField(
           `Required Permission`,
-          `\`\`\`html\n<${command.permissions}>\n\`\`\``,
+          `\`\`\`html\n<${command.permissions || "No Permission"}>\n\`\`\``,
           false
         )
        .addField(`Usage`, `\`\`\`html\n${command.usage}\n\`\`\``, false);
@@ -93,8 +94,7 @@ module.exports = {
         .addField(`${client.emotes.search || "🔍"} Search`, `\`search\``, true)
         .addField(`${client.emotes.misc || "📋"} Misc`, `\`misc\``, true)
         .addField(`${client.emotes.music || "🎶"} Music`, `\`music\``, true)
-         .addField(`${client.emotes.fun || "😂"} Fun`, `\`fun\``, true)
-        // .addField("💠 Support", `\`info\``, true)
+        .addField(`${client.emotes.fun || "😂"} Fun`, `\`fun\``, true)
         .setTimestamp()
     );
   }
