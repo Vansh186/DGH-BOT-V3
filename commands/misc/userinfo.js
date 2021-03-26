@@ -9,8 +9,14 @@ module.exports = {
   category: "info",
   description: "Get advance stats of given person or yourself",
   run: async (client, message, args) => {
-    let user = message.mentions.members.first() || message.member;
-
+    let user;
+    if (!args.length) {
+      // Display info about the calling user
+      user = message.guild.member(message.author);
+    } else {
+      // Display info about the user specified by the first argument
+      user = message.guild.member(message.mentions.users.first());
+    }
     if (!user) {
       return message.channel.send(
         "<a:failed:798526823976796161> Unable to find this person!"
