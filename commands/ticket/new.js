@@ -1,5 +1,6 @@
 const randomstring = require("randomstring");
 const Discord = require("discord.js");
+const db = require ("quick.db")
 module.exports = {
   name: "ticket",
   category: "ticket",
@@ -9,7 +10,7 @@ module.exports = {
       length: 5,
       charset: "numeric"
     });
-    const strat = client.db.get(`ticket_${message.guild.id}`)
+    const strat = db.get(`ticket_${message.guild.id}`)
     const channel = await message.guild.channels
       .create(`Ticket-${numbers}`, {
         type: "text",
