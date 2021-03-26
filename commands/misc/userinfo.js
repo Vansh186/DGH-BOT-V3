@@ -39,7 +39,7 @@ module.exports = {
     const members = message.guild.members.cache.array();
     members.sort((a, b) => a.joinedAt - b.joinedAt);
     for (let i = 0; i < members.length; i++) {
-      if (members[i].id == message.guild.member(message.author).id)
+      if (members[i].id == message.guild.member(user).id)
         joinPosition = i;
     }
 

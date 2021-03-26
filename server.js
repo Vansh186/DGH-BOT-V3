@@ -29,18 +29,11 @@ client.emotes = client.config.emojis;
 client.db = db
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
-/*  client.user.setStatus("dnd");
+  client.user.setStatus("dnd");
   client.user.setActivity(
     `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
     { type: "WATCHING" }
-  );*/
-     client.user.setPresence({
-        game: { 
-            name: 'my code',
-            type: 'WATCHING'
-        },
-        status: 'idle'
-    })
+  );
 });
 
 const { readdirSync } = require("fs");
