@@ -15,7 +15,9 @@ module.exports = {
       user = message.guild.member(message.author);
     } else {
       // Display info about the user specified by the first argument
-      user = message.guild.member(message.mentions.users.first());
+      user = message.guild.member(
+        message.mentions.users.first()) || message.guild.member.fetch(args[0])
+   
     }
     if (!user) {
       return message.channel.send(
@@ -115,7 +117,7 @@ ID: \`${user.user.id}\`
 Discriminator: \`${user.user.discriminator}\`
 Bot: ${user.user.bot}
 Deleted User: ${user.deleted}
-Position: ${joinPosition ||}
+Position: ${joinPosition || 1}
       `
       )
       .addField("Badges", newbadges.join(", ").toLowerCase() || "None")
