@@ -113,7 +113,7 @@ module.exports = {
         "Common Information",
         `ID: \`${user.user.id}\`
 Discriminator: ${user.user.discriminator}
-Bot: ${user.user.bot}
+Bot: ${(user.user.bot).replace("false","No").replace("true","Yes")}
 Deleted User: ${user.deleted}
 Position: ${joinPosition}`
       )
