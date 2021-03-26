@@ -5,28 +5,14 @@ const moment = require("moment");
 module.exports = {
   name: "userinfo",
   aliases: ["whois", "user"],
-  usage: "userinfo <MENTION>",
+  usage: "userinfo <MENTION/ID>",
   category: "info",
   description: "Get advance stats of given person or yourself",
   run: async (client, message, args) => {
-    let user;
-
-    if (!args[0]) {
-      user = message.member;
-    } else {
-      if (isNaN(args[0]))
-        return message.channel.send(
-          "<a:failed:798526823976796161> Invalid ID of the user."
-        );
-
-      user =
-        message.mentions.members.first() ||
-        (await message.guild.members.fetch(args[0]).catch(err => {
-          return message.channel.send(
-            "<a:failed:798526823976796161> Unable to find this Person"
-          );
-        }));
-    }
+    let user =
+      message.member ||
+      message.mentions.members.first() ||
+      message.guild.members.fetch(args.join(" "));
 
     if (!user) {
       return message.channel.send(
@@ -53,8 +39,7 @@ module.exports = {
       if (members[i].id == message.guild.member(message.author).id)
         joinPosition = i;
     }
-  
-    
+
     //OPTIONS FOR STATUS
 
     let stat = {
@@ -126,11 +111,11 @@ module.exports = {
         `ID: \`${user.user.id}\`
 Discriminator: ${user.user.discriminator}
 Bot: ${user.user.bot}
-Deleted User: ${user.deleted}`
+Deleted User: ${user.deleted}
+Position: ${joinPosition}`
       )
       .addField("Badges", newbadges.join(", ").toLowerCase() || "None")
-      .addField("Position", joinPosition )
-      .addField("Permissions", permissions.join(", ") )
+      .addField("Permissions", permissions.join(", "))
       .setFooter(user.user.presence.status, stat[user.user.presence.status]);
 
     return message.channel.send(embed).catch(err => {

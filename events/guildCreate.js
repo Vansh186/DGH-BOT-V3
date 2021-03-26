@@ -12,6 +12,7 @@ module.exports = async client => {
     );
     const embed = new Discord.MessageEmbed()
       .setTitle("Hello, I'm DGH BOT!")
+      .setColor("RANDOM")
       .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
       .addField(
         "Information",
