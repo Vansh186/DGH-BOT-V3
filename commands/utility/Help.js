@@ -68,7 +68,7 @@ module.exports = {
         .addField(`Category`, `• \`${command.category}\``, true)
         .addField(
           `Aliases`,
-          `\`${command.aliases.join(", ") || "No Aliases"}\``,
+          `\`\`\`html\n${command.aliases.join(", ") || "No Aliases"}\n\`\`\``,
           true
         )
         .addField(
