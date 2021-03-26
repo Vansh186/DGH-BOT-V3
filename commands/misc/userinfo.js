@@ -9,10 +9,7 @@ module.exports = {
   category: "info",
   description: "Get advance stats of given person or yourself",
   run: async (client, message, args) => {
-    let user =
-      message.member ||
-      message.mentions.members.first() ||
-      message.guild.members.fetch(args.join(" "));
+    let user = message.mentions.members.first() || message.member;
 
     if (!user) {
       return message.channel.send(
