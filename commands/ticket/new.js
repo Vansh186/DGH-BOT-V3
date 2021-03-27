@@ -15,8 +15,10 @@ module.exports = {
   permission: "",
   bot: ["MANAGE_CHANNELS", "VIEW_CHANNEL", "MANAGE_ROLES"],
   run: async (client, message, args) => {
+    const strat = db.get(`ticket_${message.guild.id}`)
     const cc = await message.guild.channels
       .create(`Ticket_${numbers}`, {
+        parent: strat.id,
         type: "text",
         topic: `Common Information:\nTicket Name: ${
           message.author.username
