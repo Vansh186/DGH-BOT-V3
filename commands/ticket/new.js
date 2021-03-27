@@ -18,7 +18,11 @@ module.exports = {
     const cc = await message.guild.channels
       .create(`Ticket_${numbers}`, {
         type: "text",
-        topic: `TicketID: ${message.author.id}\nBy: ${message.aurhor.username}\nSubject: **\`${args.join(" ")}\`**\nDate: ${message.createdAt.toLocaleString()}`,
+        topic: `Common Information:\nTicket Name: ${
+          message.author.username
+        }\nTicket ID: ${message.author.id}\nSubject: **\`${args.join(
+          " "
+        )}\`**\nDate: ${message.createdAt}`,
         permissionOverwrites: [
           {
             id: message.guild.id,
@@ -61,8 +65,8 @@ module.exports = {
           (reaction, user) => user.id === message.author.id
         );
         collector.on("collect", async (reaction, user) => {
-          if (reaction._emoji.name === "◀️") {
-            cc.edit({
+          if (reaction._emoji.name === "❌") {
+         channel.edit({
               permissionOverwrites: [
                 {
                   id: message.guild.id,
@@ -92,7 +96,8 @@ module.exports = {
               ]
             });
           }
-        });
+        }); 
+        
       });
   }
 };
