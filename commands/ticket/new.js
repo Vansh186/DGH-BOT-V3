@@ -6,23 +6,72 @@ let numbers = randomstring.generate({
   charset: "numeric"
 });
 module.exports = {
-  name: "name",
-  usage: `usage`,
-  category: "category",
-  description: "",
-  args: false,
-  cooldown: 0,
+  name: "new",
+  usage: `new <reason>`,
+  category: "ticket",
+  description: "create your ticket",
+  args: true,
+  cooldown: 5,
   permission: "",
+  bot: ["MANAGE_CHANNELS", "VIEW_CHANNEL", "MANAGE_ROLES"],
   run: async (client, message, args) => {
-    message.guild.channels
+  const cc = await message.guild.channels
       .create(`Ticket_${numbers}`, {
         type: "text",
-        topic: "hi"
+        topic: `TicketID: ${message.author.id}\nSubject: ${args.join(" ")}`,
+        permissionOverwrites: [
+          {
+            id: message.guild.id,
+            deny: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"]
+          },
+          {
+            id: message.author.id,
+            allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"]
+          },
+          {
+            id: client.user.id,
+            allow: [
+              "VIEW_CHANNEL",
+              "MANAGE_CHANNELS",
+              "MANAGE_MESSAGES",
+              "SEND_MESSAGES"
+            ]
+          }
+        ]
       })
       .then(async channel => {
         message.reply(`click <#${channel.id}> to view your ticket`);
 
-        channel.send(`${message.author}, welcome to your ticket!`);
+       const ww = await channel.send(
+          new Discord.MessageEmbed()
+            .setColor("RANDOM")
+            .addField("Subject", `${args.join(" ")}`)
+            .addField(
+              "Explain",
+              "Describe your topic so it could be resolved faster!"
+            )
+            .addField("Ticket by", message.author.tag)
+            .setDescription(
+              `Thank you for creating a ticket.\nThe support team will assist you soon!\nClick :x: to delete this channel`
+            )
+        );
+      
+       await ww.react("❌");
+          let collector = ww.createReactionCollector(
+      (reaction, user) => user.id === message.author.id
+    );
+      collector.on("collect", async (reaction, user) => {
+  if (reaction._emoji.name === "◀️") {
+    
+   
+      cc.edit(
+      )
+    
+  }})   
+      
+      
+  
+
       });
   }
 };
