@@ -25,7 +25,7 @@ module.exports = {
           message.author.username
         }\nTicket ID: ${message.author.id}\nSubject: **\`${args.join(
           " "
-        )}\`**\nDate: ${message.createdAt}`,
+        )}\`**\nDate: ${message.createdAt.toLocaleString()}`,
         permissionOverwrites: [
           {
             id: message.guild.id,

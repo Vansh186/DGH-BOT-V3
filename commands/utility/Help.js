@@ -7,11 +7,11 @@ category.set("misc" || "Misc", "**Misc Commands**");
 category.set("utility" || "Utility", "**Utility Commands**");
 category.set("moderation" || "Moderation", "**Moderation Commands**");
 category.set("settings" || "Settings", "**Settings Commands**");
+category.set("ticket" || "Ticket", "**Ticket Commands**");
 category.set("admin" || "Admin", "**Admin Commands**");
 category.set("music" || "Music", "**Music Commands For Member**");
 category.set("search" || "Search", "**Search Commands**");
 category.set("fun" || "Fun", "**Fun Commands**");
-category.set("ticket" || "Ticket", "**Ticket Commands**");
 module.exports = {
   name: "help",
   description:
@@ -28,17 +28,7 @@ module.exports = {
      */
     const prefix = db.get(`Prefix_${message.guild.id}`);
     message.delete().catch(O_o => {}); // eslint-disable-line
-    //  const file = args[0];
-    const c = args[0]
-      const cc = c.replace(`Misc`, `misc`)
-      .replace(`Moderation`, `moderation`)
-      .replace(`Misc`, `misc`)
-      .replace(`Music`, `music`)
-      .replace(`Fun`, `fun`)
-      .replace(`Search`, `search`)
-      .replace(`Utility`, `utility`)
-      .replace(`Ticket`, `ticket`)
-      .replace(`Settings`, `settings`);
+    const cc = args[0];
     if (args.length) {
       if (category.has(cc)) {
         let embed = new Discord.MessageEmbed()
