@@ -15,7 +15,7 @@ module.exports = {
   permission: "",
   bot: ["MANAGE_CHANNELS", "VIEW_CHANNEL", "MANAGE_ROLES"],
   run: async (client, message, args) => {
-  const cc = await message.guild.channels
+    const cc = await message.guild.channels
       .create(`Ticket_${numbers}`, {
         type: "text",
         topic: `TicketID: ${message.author.id}\nSubject: ${args.join(" ")}`,
@@ -42,7 +42,7 @@ module.exports = {
       .then(async channel => {
         message.reply(`click <#${channel.id}> to view your ticket`);
 
-       const ww = await channel.send(
+        const ww = await channel.send(
           new Discord.MessageEmbed()
             .setColor("RANDOM")
             .addField("Subject", `${args.join(" ")}`)
@@ -55,23 +55,44 @@ module.exports = {
               `Thank you for creating a ticket.\nThe support team will assist you soon!\nClick :x: to delete this channel`
             )
         );
-      
-       await ww.react("❌");
-          let collector = ww.createReactionCollector(
-      (reaction, user) => user.id === message.author.id
-    );
-      collector.on("collect", async (reaction, user) => {
-  if (reaction._emoji.name === "◀️") {
-    
-   
-      cc.edit(
-      )
-    
-  }})   
-      
-      
-  
 
+        await ww.react("❌");
+        let collector = ww.createReactionCollector(
+          (reaction, user) => user.id === message.author.id
+        );
+        collector.on("collect", async (reaction, user) => {
+          if (reaction._emoji.name === "◀️") {
+            cc.edit({
+              permissionOverwrites: [
+                {
+                  id: message.guild.id,
+                  deny: [
+                    "VIEW_CHANNEL",
+                    "SEND_MESSAGES",
+                    "READ_MESSAGE_HISTORY"
+                  ]
+                },
+                {
+                  id: message.author.id,
+                  deny: [
+                    "VIEW_CHANNEL",
+                    "SEND_MESSAGES",
+                    "READ_MESSAGE_HISTORY"
+                  ]
+                },
+                {
+                  id: client.user.id,
+                  allow: [
+                    "VIEW_CHANNEL",
+                    "MANAGE_CHANNELS",
+                    "MANAGE_MESSAGES",
+                    "SEND_MESSAGES"
+                  ]
+                }
+              ]
+            });
+          }
+        });
       });
   }
 };
