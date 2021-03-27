@@ -23,13 +23,19 @@ module.exports = {
             )
             .setDescription("Error: Invalid Key provided, Please try again.")
         );
-      case "channel": {
-        const name = args[1]
-        
-        if(!name){ return send('please provide the channel name')}
-        
-        const tpi = args.slice(2).join(" ")
-        if(!tpi) {
+      case "channel":
+        {
+        const name = args[1];
+        if (!name) {
+          return send("please provide the channel name", message);
+        }
+        const tpi = args.slice(2).join(" ");
+        if (!tpi) {
+          return send(
+            "Please provide the reason for creating the channel",
+            message
+          );
+        }}
         message.guild.channels
           .create(name, {
             type: "text",
@@ -42,11 +48,16 @@ module.exports = {
             ]
           })
           .then(async channel => {
-            send(`Successfully Create <#${channel.id}> Channel`);
+            send(`Successfully Create <#${channel.id}> Channel`, message);
           });
-      }
+      
+  break;
+  case "category":
+  {
+        if (!args.slice(1).join(" ")) {
+          return send("please provide the channel name", message);
+        }
 
-      case "category": {
         message.guild.channels
           .create(args.slice(1).join(" "), {
             type: "category",
@@ -58,10 +69,14 @@ module.exports = {
             ]
           })
           .then(async channel => {
-            send(`Successfully Create <#${channel.id}> Category`);
+            send(`Successfully Create <#${channel.id}> Category`, message);
           });
       }
+        break;
       case "voice": {
+        if (!args.slice(1).join(" ")) {
+          return send("please provide the channel name", message);
+        }
         message.guild.channels
           .create(args.slice(1).join(" "), {
             type: "voice",
@@ -73,7 +88,7 @@ module.exports = {
             ]
           })
           .then(async channel => {
-            send(`Successfully Create <#${channel.id}> Voice`);
+            send(`Successfully Create <#${channel.id}> Voice`, message);
           });
       }
     }
@@ -83,6 +98,6 @@ module.exports = {
       return message.channel.send({
         embed: { description: content, color: color }
       });
-    }
+    }}
   }
 };
