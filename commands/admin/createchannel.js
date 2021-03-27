@@ -24,44 +24,57 @@ module.exports = {
             .setDescription("Error: Invalid Key provided, Please try again.")
         );
       case "channel": {
-        message.guild.channels.create(``, {
-          parent: 0,
-          type: "text",
-          topic: ``,
-          permissionOverwrites: [
-            {
-              id: client.user.id,
-              allow: 2081422591
-            }
-          ]
-        });
+        const name = args[1]
+        
+        if(!name){ return send('please provide the channel name')}
+        
+        const tpi = args.slice(2).join(" ")
+        if(!tpi) {
+        message.guild.channels
+          .create(name, {
+            type: "text",
+            topic: args[0],
+            permissionOverwrites: [
+              {
+                id: client.user.id,
+                allow: 2081422591
+              }
+            ]
+          })
+          .then(async channel => {
+            send(`Successfully Create <#${channel.id}> Channel`);
+          });
       }
 
       case "category": {
-        message.guild.channels.create(``, {
-          parent: 0,
-          type: "category",
-          topic: ``,
-          permissionOverwrites: [
-            {
-              id: client.user.id,
-              allow: 2081422591
-            }
-          ]
-        });
+        message.guild.channels
+          .create(args.slice(1).join(" "), {
+            type: "category",
+            permissionOverwrites: [
+              {
+                id: client.user.id,
+                allow: 2081422591
+              }
+            ]
+          })
+          .then(async channel => {
+            send(`Successfully Create <#${channel.id}> Category`);
+          });
       }
       case "voice": {
-        message.guild.channels.create(``, {
-          parent: 0,
-          type: "voice",
-          topic: ``,
-          permissionOverwrites: [
-            {
-              id: client.user.id,
-              allow: 66584384
-            }
-          ]
-        });
+        message.guild.channels
+          .create(args.slice(1).join(" "), {
+            type: "voice",
+            permissionOverwrites: [
+              {
+                id: client.user.id,
+                allow: 66584384
+              }
+            ]
+          })
+          .then(async channel => {
+            send(`Successfully Create <#${channel.id}> Voice`);
+          });
       }
     }
     //--------------------------------------------------- F U N C T I O N S ---------------------------------------------
