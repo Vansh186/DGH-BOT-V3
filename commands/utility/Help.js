@@ -29,8 +29,8 @@ module.exports = {
     const prefix = db.get(`Prefix_${message.guild.id}`);
     message.delete().catch(O_o => {}); // eslint-disable-line
     //  const file = args[0];
-    const cc = args[0]
-      .replace(`Misc`, `misc`)
+    const c = args[0]
+      const cc = c.replace(`Misc`, `misc`)
       .replace(`Moderation`, `moderation`)
       .replace(`Misc`, `misc`)
       .replace(`Music`, `music`)
