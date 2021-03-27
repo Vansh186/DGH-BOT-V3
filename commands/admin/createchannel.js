@@ -48,7 +48,19 @@ module.exports = {
               ]
             })
             .then(async channel => {
-              send(`Successfully Create <#${channel.id}> Channel`, message);
+              const ss = await send(
+                `Successfully Create <#${channel.id}> Channel`,
+                message
+              );
+              await ss.react("❌");
+              let collector = ss.createReactionCollector(
+                (reaction, user) => user.id === message.author.id
+              );
+              collector.on("collect", async (reaction, user) => {
+                if (reaction._emoji.name === "❌") {
+                  channel.delete();
+                }
+              });
             });
         }
 
@@ -70,22 +82,20 @@ module.exports = {
               ]
             })
             .then(async channel => {
-              send(`Successfully Create <#${channel.id}> Category`, message);
-           await cahnnel.react("❌");
-        let collector = channel.createReactionCollector(
-          (reaction, user) => user.id === message.author.id
-        );
-        collector.on("collect", async (reaction, user) => {
-          if (reaction._emoji.name === "❌") {
-            channel.delete(
-      )
-        }  
-          
-          
-          });
-          
-     
-          
+              const ww = await send(
+                `Successfully Create <#${channel.id}> Category`,
+                message
+              );
+              await ww.react("❌");
+              let collector = ww.createReactionCollector(
+                (reaction, user) => user.id === message.author.id
+              );
+              collector.on("collect", async (reaction, user) => {
+                if (reaction._emoji.name === "❌") {
+                  channel.delete();
+                }
+              });
+            });
         }
         break;
       case "voice":
@@ -104,7 +114,19 @@ module.exports = {
               ]
             })
             .then(async channel => {
-              send(`Successfully Create <#${channel.id}> Voice`, message);
+              const dd = await send(
+                `Successfully Create <#${channel.id}> Voice`,
+                message
+              );
+              await dd.react("❌");
+              let collector = dd.createReactionCollector(
+                (reaction, user) => user.id === message.author.id
+              );
+              collector.on("collect", async (reaction, user) => {
+                if (reaction._emoji.name === "❌") {
+                  channel.delete();
+                }
+              });
             });
         }
 
