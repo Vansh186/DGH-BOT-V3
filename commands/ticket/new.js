@@ -104,23 +104,22 @@ module.exports = {
         if (chan == null) return;
 
         if (!chan) return;
-
-        const embed = new MessageEmbed()
-          .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL())
-          .setColor("#ff0000")
-          .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
-          .setFooter(message.guild.name, message.guild.iconURL())
-          .addField("**Moderation**", "Ticket New")
-          .addField("**Username**", `${message.author.username}`)
-          .addField("**ID**", message.author.id)
-          .addField("**Subject**", args.join(" "))
-          .addField("**Channel**", `<#${channel.id}>`)
-          .addField("**Date**", message.createdAt.toLocaleString())
-          .setTimestamp();
-
         var sChannel = message.guild.channels.cache.get(chan);
         if (!sChannel) return;
-        sChannel.send(embed);
+        sChannel.send(
+          new Discord.MessageEmbed()
+            .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL())
+            .setColor("#ff0000")
+            .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
+            .setFooter(message.guild.name, message.guild.iconURL())
+            .addField("**Moderation**", "Ticket New")
+            .addField("**Username**", `${message.author.username}`)
+            .addField("**ID**", message.author.id)
+            .addField("**Subject**", args.join(" "))
+            .addField("**Channel**", `<#${channel.id}>`)
+            .addField("**Date**", message.createdAt.toLocaleString())
+            .setTimestamp()
+        );
       });
   }
 };

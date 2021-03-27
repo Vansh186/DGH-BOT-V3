@@ -11,6 +11,7 @@ category.set("admin" || "Admin", "**Admin Commands**");
 category.set("music" || "Music", "**Music Commands For Member**");
 category.set("search" || "Search", "**Search Commands**");
 category.set("fun" || "Fun", "**Fun Commands**");
+category.set("ticket" || "Ticket", "**Ticket Commands**");
 module.exports = {
   name: "help",
   description:
@@ -36,6 +37,7 @@ module.exports = {
       .replace(`Fun`, `fun`)
       .replace(`Search`, `search`)
       .replace(`Utility`, `utility`)
+      .replace(`Ticket`, `ticket`)
       .replace(`Settings`, `settings`);
     if (args.length) {
       if (category.has(cc)) {
@@ -103,6 +105,7 @@ module.exports = {
           true
         )
         .addField(`${client.emotes.admin || "🔗"} Admin`, `\`admin\``, true)
+        .addField(`${client.emotes.ticket || "🎟️"} Ticket`, `\`ticket\``, true)
         .addField(
           `${client.emotes.utility || "📜"} Utility`,
           `\`utility\``,
