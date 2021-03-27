@@ -1,6 +1,6 @@
 module.exports = {
   name: "create",
-  usage: `create <channel/Category/voice>`,
+  usage: `create <channel/Category/voice> <name> <reason>`,
   category: "admin",
   description: "create all channels ",
   args: true,
@@ -9,44 +9,40 @@ module.exports = {
   bot: ["MANAGE_CHANNELS", "VIEW_CHANNEL", "MANAGE_ROLES"],
   run: async (client, message, args) => {
     //code
-  const cc = args.slice(1).join(" ")
-  const ccw = args[0]
-  const pp = ccw.replace("channel",`text`).replace("category",`category`).replace("voice",`voice`).replace("Channel",`text`).replace("Category",`text`).replace("Voice",`text`)
+    const cc = args.slice(2).join(" ");
+    const c = args.slice(1).join(" ");
+    if (!cc) {
+      return message.channel.send(
+        "please provide the reason why you created the channel"
+      );
+    }
+    if (!c) {
+      return message.channel.send("please provide the channel name");
+    }
+    const ccw = args[0];
+    if (!ccw) {
+      return message.channel.send("invalid channel");
+    }
+    const pp = ccw
+      .replace("channel", `text`)
+      .replace("category", `category`)
+      .replace("voice", `voice`)
+      .replace("Channel", `text`)
+      .replace("Category", `category`)
+      .replace("Voice", `voice`);
     message.guild.channels
-      .create(cc, {
+      .create(c, {
         type: pp,
-        topic: `Common Information:\nTicket Name: ${
-          message.author.username
-        }\nTicket ID: ${message.author.id}\nSubject: **\`${args.join(
-          " "
-        )}\`**\nDate: ${message.createdAt}`,
+        topic: cc,
         permissionOverwrites: [
           {
-            id: message.guild.id,
-            deny: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"]
-          },
-          {
-            id: message.author.id,
-            allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"]
-          },
-          {
             id: client.user.id,
-            allow: [
-              "VIEW_CHANNEL",
-              "MANAGE_CHANNELS",
-              "MANAGE_MESSAGES",
-              "SEND_MESSAGES"
-            ]
+            allow: 2147483647
           }
         ]
       })
       .then(async channel => {
         message.reply(`Successfully created ${ccw} <#${channel.id}>`);
-})
-    
-    
-    
-    
-    
+      });
   }
 };
