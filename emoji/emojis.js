@@ -10,6 +10,7 @@ module.exports = {
         settings: '<a:settings:813017145083559968>',
         misc: '<:misc:813018165155725363>',
         music: '<:music:813016916972273725>',
+        ticket: '<:TicketTool:825203435308580875>',
         admin: '<:admin:813017614393671690>',
         utility: '<:utility:813017738741678090>',
         search: '<a:Search:813018021345886249>',

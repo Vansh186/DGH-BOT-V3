@@ -1,5 +1,6 @@
 const randomstring = require("randomstring");
-const Discord = require("discord.js");
+const Discord = require("discord.js"),
+  MessageEmbed = require("discord.js");
 const db = require("quick.db");
 let numbers = randomstring.generate({
   length: 5,
@@ -15,7 +16,7 @@ module.exports = {
   permission: "",
   bot: ["MANAGE_CHANNELS", "VIEW_CHANNEL", "MANAGE_ROLES"],
   run: async (client, message, args) => {
-    const strat = db.get(`ticket_${message.guild.id}`)
+    const strat = db.get(`ticket_${message.guild.id}`);
     const cc = await message.guild.channels
       .create(`Ticket_${numbers}`, {
         parent: strat.id,
@@ -68,7 +69,7 @@ module.exports = {
         );
         collector.on("collect", async (reaction, user) => {
           if (reaction._emoji.name === "❌") {
-         channel.edit({
+            channel.edit({
               permissionOverwrites: [
                 {
                   id: message.guild.id,
@@ -98,8 +99,28 @@ module.exports = {
               ]
             });
           }
-        }); 
-        
+        });
+        let chan = db.fetch(`modlog_${message.guild.id}`);
+        if (chan == null) return;
+
+        if (!chan) return;
+
+        const embed = new MessageEmbed()
+          .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL())
+          .setColor("#ff0000")
+          .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
+          .setFooter(message.guild.name, message.guild.iconURL())
+          .addField("**Moderation**", "Ticket New")
+          .addField("**Username**", `${message.author.username}`)
+          .addField("**ID**", message.author.id)
+          .addField("**Subject**", args.join(" "))
+          .addField("**Channel**", `<#${channel.id}>`)
+          .addField("**Date**", message.createdAt.toLocaleString())
+          .setTimestamp();
+
+        var sChannel = message.guild.channels.cache.get(chan);
+        if (!sChannel) return;
+        sChannel.send(embed);
       });
   }
 };
