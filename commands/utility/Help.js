@@ -3,15 +3,15 @@ const { Message, MessageEmbed } = require("discord.js");
 const ms = require("ms");
 const db = require("quick.db");
 const category = new Discord.Collection();
-category.set("misc" || "Misc", "**Misc Commands**");
-category.set("utility" || "Utility", "**Utility Commands**");
-category.set("moderation" || "Moderation", "**Moderation Commands**");
-category.set("settings" || "Settings", "**Settings Commands**");
-category.set("ticket" || "Ticket", "**Ticket Commands**");
-category.set("admin" || "Admin", "**Admin Commands**");
-category.set("music" || "Music", "**Music Commands For Member**");
-category.set("search" || "Search", "**Search Commands**");
-category.set("fun" || "Fun", "**Fun Commands**");
+category.set("misc", "**Misc Commands**");
+category.set("utility", "**Utility Commands**");
+category.set("moderation", "**Moderation Commands**");
+category.set("settings", "**Settings Commands**");
+category.set("ticket", "**Ticket Commands**");
+category.set("admin", "**Admin Commands**");
+category.set("music", "**Music Commands For Member**");
+category.set("search", "**Search Commands**");
+category.set("fun", "**Fun Commands**");
 module.exports = {
   name: "help",
   description:
@@ -56,11 +56,11 @@ module.exports = {
       let embed = new Discord.MessageEmbed()
         .setColor("RANDOM")
         .setTitle(`**\`${command.name}\`** Command`)
-        .setDescription(`\`${command.description}\``)
-        .addField(`Category`, `• \`${command.category}\``, true)
+        .setDescription(`\`${command.description || "No Description"}\``)
+        .addField(`Category`, `• \`${command.category|| "--"}\``, true)
         .addField(
           `Aliases`,
-          `\`\`\`html\n${command.aliases.join(", ") || "No Aliases"}\n\`\`\``,
+          `\`\`\`html\n${"No Aliases" ||command.aliases.join(", ") || "No Aliases"}\n\`\`\``,
           true
         )
         .addField(
