@@ -25,79 +25,96 @@ module.exports = {
         );
       case "channel":
         {
-        const name = args[1];
-        if (!name) {
-          return send("please provide the channel name", message);
-        }
-        const tpi = args.slice(2).join(" ");
-        if (!tpi) {
-          return send(
-            "Please provide the reason for creating the channel",
-            message
-          );
-        }}
-        message.guild.channels
-          .create(name, {
-            type: "text",
-            topic: args[0],
-            permissionOverwrites: [
-              {
-                id: client.user.id,
-                allow: 2081422591
-              }
-            ]
-          })
-          .then(async channel => {
-            send(`Successfully Create <#${channel.id}> Channel`, message);
-          });
-      
-  break;
-  case "category":
-  {
-        if (!args.slice(1).join(" ")) {
-          return send("please provide the channel name", message);
+          const name = args[1];
+          if (!name) {
+            return send("please provide the channel name", message);
+          }
+          const tpi = args.slice(2).join(" ");
+          if (!tpi) {
+            return send(
+              "Please provide the reason for creating the channel",
+              message
+            );
+          }
+          message.guild.channels
+            .create(name, {
+              type: "text",
+              topic: tpi,
+              permissionOverwrites: [
+                {
+                  id: client.user.id,
+                  allow: 2081422591
+                }
+              ]
+            })
+            .then(async channel => {
+              send(`Successfully Create <#${channel.id}> Channel`, message);
+            });
         }
 
-        message.guild.channels
-          .create(args.slice(1).join(" "), {
-            type: "category",
-            permissionOverwrites: [
-              {
-                id: client.user.id,
-                allow: 2081422591
-              }
-            ]
-          })
-          .then(async channel => {
-            send(`Successfully Create <#${channel.id}> Category`, message);
-          });
-      }
         break;
-      case "voice": {
-        if (!args.slice(1).join(" ")) {
-          return send("please provide the channel name", message);
-        }
-        message.guild.channels
-          .create(args.slice(1).join(" "), {
-            type: "voice",
-            permissionOverwrites: [
-              {
-                id: client.user.id,
-                allow: 66584384
-              }
-            ]
-          })
-          .then(async channel => {
-            send(`Successfully Create <#${channel.id}> Voice`, message);
+      case "category":
+        {
+          if (!args.slice(1).join(" ")) {
+            return send("please provide the channel name", message);
+          }
+
+          message.guild.channels
+            .create(args.slice(1).join(" "), {
+              type: "category",
+              permissionOverwrites: [
+                {
+                  id: client.user.id,
+                  allow: 2081422591
+                }
+              ]
+            })
+            .then(async channel => {
+              send(`Successfully Create <#${channel.id}> Category`, message);
+           await cahnnel.react("❌");
+        let collector = channel.createReactionCollector(
+          (reaction, user) => user.id === message.author.id
+        );
+        collector.on("collect", async (reaction, user) => {
+          if (reaction._emoji.name === "❌") {
+            channel.delete(
+      )
+        }  
+          
+          
           });
-      }
+          
+     
+          
+        }
+        break;
+      case "voice":
+        {
+          if (!args.slice(1).join(" ")) {
+            return send("please provide the channel name", message);
+          }
+          message.guild.channels
+            .create(args.slice(1).join(" "), {
+              type: "voice",
+              permissionOverwrites: [
+                {
+                  id: client.user.id,
+                  allow: 66584384
+                }
+              ]
+            })
+            .then(async channel => {
+              send(`Successfully Create <#${channel.id}> Voice`, message);
+            });
+        }
+
+        //--------------------------------------------------- F U N C T I O N S ---------------------------------------------
+        function send(content, message, color) {
+          if (!color) color = "GREEN";
+          return message.channel.send({
+            embed: { description: content, color: color }
+          });
+        }
     }
-    //--------------------------------------------------- F U N C T I O N S ---------------------------------------------
-    function send(content, message, color) {
-      if (!color) color = "GREEN";
-      return message.channel.send({
-        embed: { description: content, color: color }
-      });
-    }}
   }
 };
