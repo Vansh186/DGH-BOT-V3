@@ -18,7 +18,7 @@ module.exports = {
     const cc = await message.guild.channels
       .create(`Ticket_${numbers}`, {
         type: "text",
-        topic: `TicketID: ${message.author.id}\nSubject: ${args.join(" ")}`,
+        topic: `TicketID: ${message.author.id}\nBy: ${message.aurhor.username}\nSubject: **\`${args.join(" ")}\`**\nDate: ${message.createdAt.toLocaleString()}`,
         permissionOverwrites: [
           {
             id: message.guild.id,
@@ -52,7 +52,7 @@ module.exports = {
             )
             .addField("Ticket by", message.author.tag)
             .setDescription(
-              `Thank you for creating a ticket.\nThe support team will assist you soon!\nClick :x: to delete this channel`
+              `Thank you for creating a ticket.\nThe support team will assist you soon!\n\nClick :x: to delete this channel`
             )
         );
 
