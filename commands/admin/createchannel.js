@@ -23,7 +23,7 @@ module.exports = {
             )
             .setDescription("Error: Invalid Key provided, Please try again.")
         );
-      case "channel"|| "Channel": {
+      case "channel": {
         message.guild.channels.create(``, {
           parent: 0,
           type: "text",
@@ -36,6 +36,40 @@ module.exports = {
           ]
         });
       }
+
+      case "category": {
+        message.guild.channels.create(``, {
+          parent: 0,
+          type: "category",
+          topic: ``,
+          permissionOverwrites: [
+            {
+              id: client.user.id,
+              allow: 2081422591
+            }
+          ]
+        });
+      }
+      case "voice": {
+        message.guild.channels.create(``, {
+          parent: 0,
+          type: "voice",
+          topic: ``,
+          permissionOverwrites: [
+            {
+              id: client.user.id,
+              allow: 66584384
+            }
+          ]
+        });
+      }
+    }
+    //--------------------------------------------------- F U N C T I O N S ---------------------------------------------
+    function send(content, message, color) {
+      if (!color) color = "GREEN";
+      return message.channel.send({
+        embed: { description: content, color: color }
+      });
     }
   }
 };
