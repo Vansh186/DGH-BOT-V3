@@ -26,14 +26,11 @@ module.exports = {
         "Please provide the message id of the user or bot"
       );
     }
-    if (args[1] > 19)
+    if (args[1] > 20) {
       return message.channel.send(
         "Please provide the message id of the user or bot"
       );
-    if (args[1] < 2)
-      return message.channel.send(
-        "Please provide the message id of the user or bot"
-      );
+    }
     const m = await message.channel.messages.fetch(args[1]);
     const filter1 = (reaction, user) =>
       reaction.emoji.name === args[0] && user.id === message.author.id;
