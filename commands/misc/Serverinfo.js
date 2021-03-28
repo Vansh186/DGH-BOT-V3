@@ -16,37 +16,35 @@ module.exports = {
             )}`
       )
       .setColor(3447003)
-      .setDescription(
-        `Owner: ${message.guild.owner.user.tag} (${message.guild.owner.id})`
-      )
       .addField(
         "Common Information",
         `
-       Member Count: \`${message.guild.memberCount}\`\nEmojis: \`${
+       **Server:** \`${message.guild.name} (${
+          message.guild.id
+        })\`\n**Owner:** \`${message.guild.owner.user.tag} (${
+          message.guild.owner.id
+        })\`\n\n**Member Count:** \`${message.guild.memberCount}\`\n**Emojis:** \`${
           message.guild.emojis.cache.size
-        }\`\nChannel Categories: \`${
+        }\`\n**Channel Categories:** \`${
           message.guild.channels.cache.filter(
             channel => channel.type === "category"
           ).size
-        }\`\nText Channels: ${
+        }\`\n**Text Channels:** \`${
           message.guild.channels.cache.filter(
             channel => channel.type === "text"
           ).size
-        }\`\n
-       Voice Channels: 
-        \`${
+        }\`\n**Voice Channels:** \`${
           message.guild.channels.cache.filter(
             channel => channel.type === "voice"
           ).size
-        }\`\nAFK Timeout: \`${message.guild.afkTimeout / 60}\` Minutes\n
-       AFK Channel: \`${
-         message.guild.afkChannelID === null
-           ? "No AFK Channel"
-           : client.channels.get(message.guild.afkChannelID).name
-       }\`\n
-       Location: \`${
-         message.guild.region
-       }\`Created: \`${message.guild.createdAt.toLocaleString()}\``,
+        }\`\n**AFK Timeout:** \`${message.guild.afkTimeout /
+          60}\` Minutes\n**AFK Channel:** \`${
+          message.guild.afkChannelID === null
+            ? "No AFK Channel"
+            : client.channels.get(message.guild.afkChannelID).name
+        }\`\n**Location:** \`${
+          message.guild.region
+        }\`\n**Created:** \`${message.guild.createdAt.toLocaleString()}\``,
         true
       )
       .setImage(message.guild.splash ? message.guild.splashURL() : null)
