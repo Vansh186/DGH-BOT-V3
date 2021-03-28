@@ -239,7 +239,7 @@ function xp(message) {
       const ran = new canvacord.Rank()
         .setAvatar(user.displayAvatarURL({ dynamic: false, format: "png" }))
         .setCurrentXP(randomnumber)
-        .setRequiredXP(xpNeeded2)
+        .setRequiredXP(level)
         .setLevel(newLevel)
         .setRank(rank)
         .setStatus(user.presence.status)
@@ -259,7 +259,7 @@ function xp(message) {
           .setTimestamp()
           .setDescription(
             `**LEVEL UP** - ${newLevel}
-**XP UP** - ${randomnumber}/${xpNeeded2}`
+**XP UP** - ${randomnumber}/${level}`
           )
           .setImage("attachment://Rankcard.png")
           .attachFiles(attachment);
