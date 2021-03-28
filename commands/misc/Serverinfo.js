@@ -23,7 +23,9 @@ module.exports = {
           message.guild.id
         })\`\n**Owner:** \`${message.guild.owner.user.tag} (${
           message.guild.owner.id
-        })\`\n\n**Member Count:** \`${message.guild.memberCount}\`\n**Emojis:** \`${
+        })\`\n\n**Member Count:** \`${
+          message.guild.memberCount
+        }\`\n**Emojis:** \`${
           message.guild.emojis.cache.size
         }\`\n**Channel Categories:** \`${
           message.guild.channels.cache.filter(
@@ -38,7 +40,7 @@ module.exports = {
             channel => channel.type === "voice"
           ).size
         }\`\n**AFK Timeout:** \`${message.guild.afkTimeout /
-          60}\` Minutes\n**AFK Channel:** \`${
+          60} Minutes\`\n**AFK Channel:** \`${
           message.guild.afkChannelID === null
             ? "No AFK Channel"
             : client.channels.get(message.guild.afkChannelID).name
