@@ -90,7 +90,10 @@ module.exports = {
         embed.setDescription(array.join(" "));
       }
     }
-
+    //Check Roles used by members
+ let roles = user.roles.cache.map(r => `<@&${r.id}>`).join(', ').replace(new RegExp(`<@&${message.guild.id}>`, 'g'), '');
+        if (roles.length === 0) roles = '-';
+                   
     //EMBED COLOR BASED ON member
     embed.setColor(
       user.displayHexColor === "#000000" ? "#ffffff" : user.displayHexColor
@@ -121,6 +124,7 @@ Position: ${joinPosition || 1}
       `
       )
       .addField("Badges", newbadges.join(", ").toLowerCase() || "None")
+      .addField("Roles", roles)
       .addField("Permissions", `**\`${permissions.join("\n")}\`**`)
       .setFooter(user.user.presence.status, stat[user.user.presence.status]);
 
