@@ -3,14 +3,28 @@ module.exports = {
   category: "misc",
   args: true,
   usage: "react <emojiname> <id msg>",
-  bot: ['ADD_REACTIONS','MANAGE_MESSAGES','MANAGE_EMOJIS'],
-  description: "Emoji Reaction with ID Message and it must be the name of the emoji, not mentioning emoji",
+  bot: ["ADD_REACTIONS", "MANAGE_MESSAGES", "MANAGE_EMOJIS"],
+  description:
+    "Emoji Reaction with ID Message and it must be the name of the emoji, not mentioning emoji",
   run: async (client, message, args) => {
     message.delete();
-    const m = await message.channel.messages.fetch(args[1]);
     const reactionEmoji = message.guild.emojis.cache.find(
       emoji => emoji.name === args[0]
     );
+    if (!reactionEmoji) {
+      return message.channel.send(
+        "Please give the name of the emojis, no mention of the emojis"
+      );
+    }
+    if (isNaN(reactionEmoji)) {
+      return message.channel.send("Please give the name of the emojis, no mention of the emojis");
+    }
+    const m = await message.channel.messages.fetch(args[1]);
+    if (isNaN(m)) {
+      return message.channel.send(
+        "Please provide the message id of the user or bot"
+      );
+    }
     const filter1 = (reaction, user) =>
       reaction.emoji.name === args[0] && user.id === message.author.id;
     await m.react(reactionEmoji);
