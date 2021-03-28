@@ -31,9 +31,7 @@ module.exports = {
       reaction.emoji.name === args[0] && user.id === message.author.id;
     await m.react(reactionEmoji);
 
-    const collector1 = await m.createReactionCollector(filter1, {
-      time: 60000
-    });
+    const collector1 = await m.createReactionCollector(filter1);
     collector1.on("collect", async (reaction, user) => {
       reaction.users.remove(client.user.id); // <<== This removes also the bot reaction
     });
