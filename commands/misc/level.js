@@ -70,7 +70,9 @@ module.exports = {
         )
         .setImage("attachment://RankCard.png")
         .attachFiles(attachment);
+      message.channel.startTyping();
       message.channel.send(embed);
+      message.channel.stopTyping();
     });
   }
 };
