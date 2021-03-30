@@ -76,20 +76,17 @@ module.exports = {
         .get(`${channel}`)
         .send(":tada: **GIVEAWAY** :tada:", embed);
       await msg.react("🎉");
-      const clock = await setTimeout(() => {
+
+      let ss;
+      ss = await setTimeout(() => {
         started_time_duration--;
         msg.edit(
           embed.setDescription(
             `React with 🎉 to enter!\nTime duration: **${started_time_duration}** ${time_length}\n\nHosted by: ${message.author}`
           )
-        ), 1000
-      }, time_duration);
-
-      if (started_time_duration == 0) {
-        clearInterval(clock);
-      }
-      setTimeout(() => {
+        );
         msg.reactions.cache.get("🎉").users.remove(client.user.id);
+
         setTimeout(() => {
           let winner = msg.reactions.cache.get("🎉").users.cache.random();
           if (msg.reactions.cache.get("🎉").users.cache.size < 1) {
@@ -113,6 +110,9 @@ module.exports = {
               .setTimestamp()
               .setFooter("Ended at");
             msg.edit(":tada: **Giveaway Ended** :tada:", winner_embed);
+            if (started_time_duration == 0) {
+              clearInterval(ss);
+            }
           }
         }, 1000);
       }, time_duration);
