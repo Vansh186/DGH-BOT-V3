@@ -11,12 +11,54 @@ module.exports = {
   aliases: ["hastebin"],
   run: async (client, message, args) => {
     message.delete();
-    var filter = m => m.author.id === message.author.id;
-    
-    const embed = new discord.MessageEmbed()
-    . setDescription ("
-    
-    const Content = args.join(" ");
+  var filter = m => m.author.id === message.author.id;
+    message.channel
+      .send(
+        `:eight_pointed_black_star:| **Send Give the Code Name**`
+      )
+      .then(msg => {
+        message.channel
+          .awaitMessages(filter, {
+            max: 1,
+            time: 20000,
+            errors: ["time"]
+          })
+          .then(collected => {
+            let room = collected.first().content;
+            collected.first().delete();
+            msg
+              .edit(":eight_pointed_black_star:| **Send give me the code**")
+              .then(msg => {
+                message.channel
+                  .awaitMessages(filter, {
+                    max: 1,
+                    time: 20000,
+                    errors: ["time"]
+                  })
+                  .then(collected => {
+                    if (!collected.first().content.match(/[1-60][s,m,h,d,w]/g))
+                      return message.channel.send(
+                        "**The Bot Not Support This Time**"
+                      );
+                    duration = collected.first().content;
+                    collected.first().delete();
+                    msg
+                      .edit(
+                        ":eight_pointed_black_star:| **Now send The Present **"
+                      )
+                      .then(msg => {
+                        message.channel
+                          .awaitMessages(filter, {
+                            max: 1,
+                            time: 20000,
+                            errors: ["time"]
+                          })
+                          .then(collected => {
+                            title = collected.first().content;
+                            collected.first().delete();
+                            msg.delete();
+                            message.delete();
+                            
     sourcebin
       .create(
         [
@@ -28,7 +70,7 @@ module.exports = {
           }
         ],
         {
-          title: "JavaScript code" + client.user.username,
+          title: name,
           description:
             'This code was created in "' +
             new Intl.DateTimeFormat("en-US").format(Date.now()) +
