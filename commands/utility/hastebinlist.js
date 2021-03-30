@@ -18,23 +18,17 @@ module.exports = {
   run: async (client, message, args) => {
     //code
     message.delete();
-let list = clinet.db.get(
-    sourcebin
-      .get(list)
-
-      .then(bin =>
-        console.log(
-          `Name: ${bin.url} | Raw: ${bin.files[0].raw} | ${bin.title}`
+    let list = client.db.get(`hastebinlist_${message.author.id}`);
+    let li = ""
+    sourcebin.get(li)
+	.then(bin => console.log(`Name: ${bin.url} | Raw: ${bin.files[0].raw}`))  
+      let embed = new Discord.MessageEmbed()
+        .addField(
+          `Hastebin List ${message.author.username}`,
+          `**${list.join("\n")}**`
         )
-      )
-
-      .catch(console.error);
-    let embed = new Discord.MessageEmbed()
-      .addField(
-        `Hastebin List ${message.author.username}`,
-        `**${list.join("\n")}**`
-      )
-      .setColor("RANDOM");
-    message.channel.send(embed);
+        .setColor("RANDOM");
+      message.channel.send(embed);
+    
   }
 };
