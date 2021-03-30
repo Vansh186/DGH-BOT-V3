@@ -13,15 +13,22 @@ module.exports = {
     message.delete();
     const Content = args.join(" ");
     sourcebin
-      .create([
+      .create(
+        [
+          {
+            name: "Made By " + message.author.username,
+            content: Content,
+            languageId: "JavaScript"
+          }
+        ],
         {
-          title: "JavaScript code",
-          description: 'This code was created in "' + message.createdAt + '"',
-          name: "Made By " + message.author.username,
-          content: Content,
-          languageId: "JavaScript"
+          title: "JavaScript code ",
+          description:
+            'This code was created in "' +
+            new Intl.DateTimeFormat("en-US").format(Date.now()) +
+            '"'
         }
-      ])
+      )
       .then(src => {
         let embed = new discord.MessageEmbed()
           .setTitle(`Hastebin`)
