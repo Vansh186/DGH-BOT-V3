@@ -5,23 +5,12 @@ module.exports = {
   usage: "<cmd>",
   category: "Other",
   args: true,
-  execute(message, args) {
-    const client = message.client;
-    
-   
-    
-    
-    
-    
+  run: async (client, message, args) => {
     let code;
     try {
-//      code = fs.readFileSync(`commands/${args[0]}.js`).toString();
-    code = 
-fs.readdirSync("./commands/").forEach(dir => {
-  const commands = fs.readdirSync(`./commands/${dir}/`).filter(args[0] =>
-    file.endsWith(".js")
-  )})
-  
+      const e = "admin"||"fun"||"moderation"||""||""||""||""||""||""
+      
+           code = fs.readFileSync(`commands/${args[0]}.js`).toString();
     } catch (error) {
       return message.channel.send(
         `I couldn't find a command called \`${args[0]}\``
@@ -34,8 +23,8 @@ fs.readdirSync("./commands/").forEach(dir => {
           method: "POST",
           body: code,
           headers: {
-            "Content-Type": "application/json",
-          },
+            "Content-Type": "application/json"
+          }
         };
         message.channel.send(
           `Here is the code for the ${
@@ -48,5 +37,5 @@ fs.readdirSync("./commands/").forEach(dir => {
         "There was an error displaying the command's code."
       );
     }
-  },
+  }
 };
