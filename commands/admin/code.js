@@ -8,8 +8,6 @@ module.exports = {
   run: async (client, message, args) => {
     let code;
     try {
-      const e = "admin"||"fun"||"moderation"||""||""||""||""||""||""
-      
            code = fs.readFileSync(`commands/${args[0]}.js`).toString();
     } catch (error) {
       return message.channel.send(
