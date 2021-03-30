@@ -27,17 +27,23 @@ module.exports = {
     let prize = args.slice(1).join(" ");
     if (!prize) return message.channel.send(`No prize specified!`);
     
+   
     
-    
-    
+    //-----------Embeds----------
     let embed = new Discord.MessageEmbed()
-      .setTitle(`New giveaway!`)
-      .setDescription(
-        `Host: ${message.author}\nTime: ${args[0]}\nPrize: ${prize}`
+   //   .setTitle(`🎉🎉GIVEAWAY🎉🎉`)
+     .setTitle(prize)
+     .addField(`React with 🎉 to participate!\nTime remaining: \nHosted by: ${message.author}`
       )
       .setTimestamp(Date.now() + ms(args[0]))
-      .setColor(`BLUE`);
-    message.channel.send(embed).then(m => {
+      .setColor("RED");
+    
+    
+    
+    
+    
+    
+    message.channel.send(""+embed).then(m => {
       m.react("🎉");
       setTimeout(() => {
         if (m.reactions.cache.get("ðŸŽ‰").count <= 1) {
