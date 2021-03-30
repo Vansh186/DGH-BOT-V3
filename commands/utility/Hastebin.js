@@ -30,11 +30,11 @@ module.exports = {
         }
       )
       .then(src => {
-       client.db.push(`hastebinlist_${message.author.id}`, src)
+       client.db.push(`hastebinlist_${message.author.id}`, src.url)
         let embed = new discord.MessageEmbed()
           .setTitle(`Hastebin`)
           .setColor("RANDOM")
-          .setDescription(`Code:\`\`\`kt\n${Content}\n\`\`\`\n\n**(${src.url})**\nThis link has been saved to the hasebinlist`);
+          .setDescription(`Code:\`\`\`kt\n${Content}\n\`\`\`\n**(${src.url})**\nThis link has been saved to the hasebinlist`);
         message.channel.send(embed);
       })
       .catch(e => {

@@ -1,3 +1,4 @@
+const Discord = require("discord.js")
 module.exports = {
         name: "hastelist",
         aliases:["hastebinlist","hlist"],
@@ -9,10 +10,12 @@ module.exports = {
    bot: ['VIEW_CHANNEL','EMBED_LINKS','ATTACH_FILES','MANAGE_CHANNELS','MANAGE_GUILD'],
   run: async (client, message, args) => {
 //code
+    message.delete()
     let list = client.db.get(`hastebinlist_${message.author.id}`)
-    let embed = client.discord.MessageEmbed()
-    .addField(`Hastebin List ${message.author.username}`,`**(${list.join("\n")})**`)
-   
+    let embed = new Discord.MessageEmbed()
+    .addField(`Hastebin List ${message.author.username}`,`**${list.join("\n")}**`)
+    .setColor("RANDOM")
+    message.channel.send(embed)
     
     
     
