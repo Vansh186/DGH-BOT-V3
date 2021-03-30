@@ -63,7 +63,8 @@ module.exports = {
                           src.url
                         );
                         let embed = new discord.MessageEmbed()
-                          .setTitle(`Hastebin | ${room}`)
+                           .setAuthor('Sourceb.in', 'https://sourceb.in/icon.png')
+                          .setTitle(`${room}`)
                           .setColor("RANDOM")
                           .setDescription(
                             `Code:\`\`\`kt\n${consten}\n\`\`\`\n**(${src.url})**\nThis link has been saved to the hasebinlist`
