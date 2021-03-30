@@ -244,7 +244,7 @@ function xp(message) {
         .setCurrentXP(randomnumber)
         .setRequiredXP(xpNeeded)
         .setLevel(newLevel)
-        .setRank(rank)
+        .setRank(0,"a",false)
         .setStatus(user.presence.status)
         .setProgressBar("#00FFFF", "COLOR")
         .setUsername(user.username, color)
