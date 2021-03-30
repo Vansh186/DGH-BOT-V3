@@ -13,52 +13,59 @@ module.exports = {
 
   run: async (client, message, args) => {
     const input = args[0];
-    const input2 = args[;
-    var remainingTime = input,
-      remainingCount = 1,
-      status = "⏱️";
-    
+    var remainingTime = input;
     //-----------prize----------
     let prize = args.slice(1).join(" ");
     if (!prize) return message.channel.send(`No prize specified!`);
-
-    
-    
-    
-    
-    
-    
-    
-    var countdown = await message.channel.send(
-      new Discord.MessageEmbed()
+   new Discord.MessageEmbed()
+        .setTitle(prize)
         .addField(
-          "Loading-Time",
-          `Started! **${remainingTime}${input2 || "s"}** ${status}`
+          `React with 🎉 to participate!`,
+          `Time remaining: ${args[0]} \nHosted by: ${message.author}`
         )
-        .setColor("RANDOM")
+        .setTimestamp(Date.now() + ms(args[0]))
+        .setColor("RED")
     );
+   
+    var countdown = await message.channel.send(
+    await countdown.react("🎉");
+
     let clock = setInterval(() => {
       remainingTime--;
       countdown.edit(
         new Discord.MessageEmbed()
+          .setTitle(prize)
           .addField(
-            "Start-Time",
-            `**${remainingTime}${input2 || "s"}** remain ${status}`
+            `React with 🎉 to participate!`,
+            `Time remaining:${remainingTime} \nHosted by: ${message.author}`
           )
-          .setColor("RANDOM")
+          .setTimestamp(Date.now() + ms(args[0]))
+          .setColor("RED")
       );
+
       if (remainingTime == 0) {
-        status = "⏱️";
-        clearInterval(clock);
-        countdown.edit(
-          new Discord.MessageEmbed()
-            .addField(
-              "Done-Time",
-              `Done **${input}${input2 || "s"}** ${status}`
-            )
-            .setColor("RANDOM")
-        );
+           clearInterval(clock);
+       if (countdown.reactions.cache.get("🎉").count <= 1) {
+          const embed = new Discord.MessageEmbed()
+            .setColor("RED")
+            .setDescription("No winners");
+
+          countdown.edit(embed);
+          return message.channel.send(
+            `Couldnt generate a winner as there is no one in that giveaway!`
+          );
+          let winner = countdown.reactions.cache
+            .get("🎉")
+            .users.cache.filter(b => !b.bot)
+            .random();
+
+          let embe = new Discord.MessageEmbed()
+            .setColor("GREEN")
+            .setDescription(`Winner: ${winner}`);
+          countdown.edit(embe);
+          message.channel.send(`The winnder of the giveaway is ${winner}`);
+        }
       }
-    }, reply);
+    }, 1500);
   }
 };
