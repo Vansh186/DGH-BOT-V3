@@ -5,12 +5,13 @@ module.exports = {
   usage: `usage`,
   category: "category",
   description: "",
-  args: false,
+  args: true,
   cooldown: 0,
   permission: "",
   run: async (client, message, args) => {
     //code
-    if (!args[0]) return message.channel.send(`You did not specify your time!`);
+    
+   //-----------Time---------- 
     if (
       !args[0].endsWith("d") &&
       !args[0].endsWith("h") &&
@@ -22,9 +23,13 @@ module.exports = {
     if (isNaN(args[0][0]))
       return message.channel.send(`It must be a number you know that?`);
 
+    //-----------prize----------
     let prize = args.slice(1).join(" ");
     if (!prize) return message.channel.send(`No prize specified!`);
-
+    
+    
+    
+    
     let embed = new Discord.MessageEmbed()
       .setTitle(`New giveaway!`)
       .setDescription(
@@ -33,7 +38,7 @@ module.exports = {
       .setTimestamp(Date.now() + ms(args[0]))
       .setColor(`BLUE`);
     message.channel.send(embed).then(m => {
-      m.react("ðŸŽ‰");
+      m.react("🎉");
       setTimeout(() => {
         if (m.reactions.cache.get("ðŸŽ‰").count <= 1) {
           const embed = new Discord.MessageEmbed()
