@@ -217,6 +217,7 @@ client.on("message", async message => {
 function xp(message) {
   const randomnumber = Math.floor(Math.random() * 10) + 15;
   db.add(`guild_${message.guild.id}_xp_${message.author.id}`, randomnumber);
+ db.get(`guild_${message.guild.id}_xptotal_${message.guild.id}`, randomnumber)
   var level =
     db.get(`guild_${message.guild.id}_level_${message.author.id}`) || 1;
   var xp = db.get(`guild_${message.guild.id}_xp_${message.author.id}`);
