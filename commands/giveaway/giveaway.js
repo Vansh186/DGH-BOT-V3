@@ -20,6 +20,10 @@ module.exports = {
       return message.channel.send(
         `The time needs to have days (d) or hours (h) or minutes (m)`
       );
+    const remainingTime = args[0].startsWith("1")
+    
+    
+    
     if (isNaN(args[0][0]))
       return message.channel.send(`It must be a number you know that?`);
 
@@ -29,7 +33,6 @@ module.exports = {
 
     //-----------Embeds----------
     let embed = new Discord.MessageEmbed()
-      //   .setTitle(`🎉🎉GIVEAWAY🎉🎉`)
       .setTitle(prize)
       .addField(
         `React with 🎉 to participate!`,`Time remaining: \nHosted by: ${message.author}`
@@ -38,13 +41,18 @@ module.exports = {
       .setColor("RED");
 
     message.channel.send("**🎉🎉GIVEAWAY🎉🎉**")
-    
-    
-    
-    message.channel.send(embed).then(m => {
+    const msg = await message.channel.send(embed).then(m => {
       m.react("🎉");
-      setTimeout(() => {
-        if (m.reactions.cache.get("🎉").count <= 1) {
+      
+      
+      
+      
+      
+      
+      
+      let clock = setInterval(() => {
+        remainingTime--;
+      if (m.reactions.cache.get("🎉").count <= 1) {
           const embed = new Discord.MessageEmbed()
             .setColor("RED")
             .setDescription("No winners");
