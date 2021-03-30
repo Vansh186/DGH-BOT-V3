@@ -11,6 +11,11 @@ module.exports = {
   aliases: ["hastebin"],
   run: async (client, message, args) => {
     message.delete();
+    var filter = m => m.author.id === message.author.id;
+    
+    const embed = new discord.MessageEmbed()
+    . setDescription ("
+    
     const Content = args.join(" ");
     sourcebin
       .create(
