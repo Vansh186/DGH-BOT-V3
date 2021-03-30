@@ -84,13 +84,14 @@ module.exports = {
                             time: 20000,
                             errors: ["time"]
                           })
-                          .then(collected => {
-                            title = collected.first().content;
-                            collected.first().delete();
-                            msg.delete();
-                            message.delete();
-                            try {
-                              let giveEmbed = new Discord.RichEmbed()
+                          .then(
+                            collected => {
+                              title = collected.first().content;
+                              collected.first().delete();
+                              msg.delete();
+                              message.delete();
+                              //      try {
+                              let giveEmbed = new Discord.MessageEmbed()
                                 .setDescription(
                                   `**${title}** \nReact With 🎉 To Enter! \nTime remaining : ${duration} \n **Created at :** ${hours}:${minutes}:${seconds} ${suffix}`
                                 )
@@ -98,8 +99,8 @@ module.exports = {
                                   message.author.username,
                                   message.author.avatarURL
                                 );
-                              message.guild.channels
-                                .find("name", room)
+                              client.channels.cache
+                                .get(room)
                                 .send(
                                   " :heavy_check_mark: **Giveaway Created** :heavy_check_mark:",
                                   { embed: giveEmbed }
@@ -121,7 +122,7 @@ module.exports = {
                                           Math.random() * list.length
                                         ) + 0
                                       ];
-                                    let endEmbed = new Discord.RichEmbed()
+                                    let endEmbed = new Discord.MessageEmbed()
                                       .setAuthor(
                                         message.author.username,
                                         message.author.avatarURL
@@ -143,13 +144,14 @@ module.exports = {
                                       );
                                   }, ms(duration));
                                 });
-                            } catch (e) {
+                            } /*catch (e) {
                               message.channel.send(
                                 `:heavy_multiplication_x:| **i Don't Have Prem**`
                               );
                               console.log(e);
                             }
-                          });
+                          });*/
+                          );
                       });
                   });
               });
