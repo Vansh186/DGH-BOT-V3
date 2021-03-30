@@ -34,7 +34,7 @@ module.exports = {
         let embed = new discord.MessageEmbed()
           .setTitle(`Hastebin`)
           .setColor("RANDOM")
-          .setDescription(`Code:\`\`\`kt\n${Content}\n\`\`\`\n\n**(${src.url})**`);
+          .setDescription(`Code:\`\`\`kt\n${Content}\n\`\`\`\n\n**(${src.url})**\nThis link has been saved to the hasebinlist`);
         message.channel.send(embed);
       })
       .catch(e => {

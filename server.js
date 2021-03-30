@@ -31,6 +31,7 @@ client.queue = new Map();
 client.config = require("./emoji/emojis");
 client.emotes = client.config.emojis;
 client.db = require("quick.db");
+client.discord = require("discord.js")
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
   client.user.setStatus("dnd");
