@@ -10,8 +10,8 @@ module.exports = {
   permission: "",
   run: async (client, message, args) => {
     //code
-    
-   //-----------Time---------- 
+
+    //-----------Time----------
     if (
       !args[0].endsWith("d") &&
       !args[0].endsWith("h") &&
@@ -26,27 +26,25 @@ module.exports = {
     //-----------prize----------
     let prize = args.slice(1).join(" ");
     if (!prize) return message.channel.send(`No prize specified!`);
-    
-   
-    
+
     //-----------Embeds----------
     let embed = new Discord.MessageEmbed()
-   //   .setTitle(`🎉🎉GIVEAWAY🎉🎉`)
-     .setTitle(prize)
-     .addField(`React with 🎉 to participate!\nTime remaining: \nHosted by: ${message.author}`
+      //   .setTitle(`🎉🎉GIVEAWAY🎉🎉`)
+      .setTitle(prize)
+      .addField(
+        `React with 🎉 to participate!`,`Time remaining: \nHosted by: ${message.author}`
       )
       .setTimestamp(Date.now() + ms(args[0]))
       .setColor("RED");
+
+    message.channel.send("**🎉🎉GIVEAWAY🎉🎉**")
     
     
     
-    
-    
-    
-    message.channel.send(""+embed).then(m => {
+    message.channel.send(embed).then(m => {
       m.react("🎉");
       setTimeout(() => {
-        if (m.reactions.cache.get("ðŸŽ‰").count <= 1) {
+        if (m.reactions.cache.get("🎉").count <= 1) {
           const embed = new Discord.MessageEmbed()
             .setColor("RED")
             .setDescription("No winners");
@@ -57,7 +55,7 @@ module.exports = {
         }
 
         let winner = m.reactions.cache
-          .get("ðŸŽ‰")
+          .get("🎉")
           .users.cache.filter(b => !b.bot)
           .random();
 
