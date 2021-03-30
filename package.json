@@ -14,7 +14,6 @@
     "express": "^4.17.1",
     "fs": "^0.0.2",
     "dotenv": "^8.2.0",
-    "node-fetch": "^2.6.1",
     "moment": "^2.29.1",
     "mathjs": "^9.0.0",
     "canvas-senpai": "^1.0.0",
@@ -62,7 +61,8 @@
     "sourcebin_js": "^0.0.2",
     "mongoose": "^5.11.20",
     "discord.js": "^12.5.1",
-    "randomstring": "^1.1.5"
+    "randomstring": "^1.1.5",
+    "node-fetch": "^2.6.1"
   },
   "engines": {
     "node": "12.x"
