@@ -16,13 +16,13 @@ module.exports = {
       .create(
         [
           {
-            name: "Made By " + message.author.username,
+            name: "Made By " + message.author.username +"/"+message.author.tag,
             content: Content,
             languageId: "JavaScript"
           }
         ],
         {
-          title: "JavaScript code ",
+          title: "JavaScript code"+ client.user.username,
           description:
             'This code was created in "' +
             new Intl.DateTimeFormat("en-US").format(Date.now()) +
@@ -30,10 +30,11 @@ module.exports = {
         }
       )
       .then(src => {
+       client.db.push(`hastebinlist_${message.author.id}`, src)
         let embed = new discord.MessageEmbed()
           .setTitle(`Hastebin`)
           .setColor("RANDOM")
-          .setDescription(`Code:\n${Content}\n\n**[Click Here](${src.url})**`);
+          .setDescription(`Code:\`\`\`kt\n${Content}\n\`\`\`\n\n**(${src.url})**`);
         message.channel.send(embed);
       })
       .catch(e => {

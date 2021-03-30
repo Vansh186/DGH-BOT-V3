@@ -89,7 +89,7 @@ module.exports = {
    
     var date = moment.tz("Asia/Jakarta");
     let chx2 =
-      db.get(`welchannel_${message.guild.id}`) ||
+      client.db.get(`welchannel_${message.guild.id}`) ||
       db.get(`levchannel_${message.guild.id}`);
     let chx =
       db.get(`levchannel_${message.guild.id}`) ||
@@ -101,7 +101,7 @@ module.exports = {
       .replace(`{user}`, message.author) // Member mention substitution
       .replace(`{member}`, message.author) // Member mention substitution
       .replace(`{username}`, message.author.username) // Username substitution
-      .replace(`{position}`, joinPosition)
+      .replace(`{position}`, joinPosition || 1)
       .replace(`{tag}`, message.author.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, message.guild.name) // Name Server substitution
@@ -111,7 +111,7 @@ module.exports = {
       .replace(`{user}`, message.author) // Member mention substitution
       .replace(`{member}`, message.author) // Member mention substitution
       .replace(`{username}`, message.author.username) // Username substitution
-      .replace(`{position}`, joinPosition)
+      .replace(`{position}`, joinPosition|| 1)
       .replace(`{tag}`, message.author.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, message.guild.name) // Name Server substitution
