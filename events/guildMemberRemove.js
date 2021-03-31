@@ -53,7 +53,7 @@ module.exports = async client => {
     const members = member.guild.members.cache.array();
     members.sort((a, b) => a.joinedAt - b.joinedAt);
     for (let i = 0; i < members.length; i++) {
-      if (members[i].id == member.guild.member(member).id) joinPosition = i;
+      if (members[i].id == member.guild.member(member.user).id) joinPosition = i;
     }
 
     var date = moment.tz("Asia/Jakarta");
@@ -62,9 +62,10 @@ module.exports = async client => {
     const ch = ch5
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
+      .replace(`{id}`, member.user.id) // Member mention substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY HH:mm:ss z")) // member guild joinedAt
-      .replace(`{position}`, joinPosition)
+      .replace(`{position}`, joinPosition )
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
     if (ch === null) return;

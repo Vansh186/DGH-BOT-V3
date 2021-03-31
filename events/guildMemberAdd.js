@@ -54,19 +54,20 @@ module.exports = async client => {
       "welcome-image.png"
     );
     var date = moment.tz("Asia/Jakarta");
-    let chx = db.get(`welchannel_${member.guild.id}`);
+    let chx = db.get(`welchannel_${message.guild.id}`);
     let wrt = await db.get(`roles_${member.guild.id}`);
     let joinPosition;
     const members = member.guild.members.cache.array();
     members.sort((a, b) => a.joinedAt - b.joinedAt);
     for (let i = 0; i < members.length; i++) {
-      if (members[i].id == member.guild.member(member).id) joinPosition = i;
+      if (members[i].id == member.guild.member(member.user).id) joinPosition = i;
     }
 
     let ch =
       db.get(`welmsg_${member.guild.id}`) || "welcome to my server {member}";
     const messs = ch
       .replace(`{member}`, member) // Member mention substitution
+      .replace(`{id}`, member.user.id) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{position}`, joinPosition)
       .replace(`{tag}`, member.user.tag) // Tag substitution
