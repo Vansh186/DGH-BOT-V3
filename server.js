@@ -269,7 +269,8 @@ function xp(message) {
           .setImage("attachment://Rankcard.png")
           .attachFiles(attachment);
 
-        levelchannel.send(EmbedLevel);
+   if (wrt === null) return;
+         levelchannel.send(EmbedLevel);
       });
     } else {
       message.channel.send(
