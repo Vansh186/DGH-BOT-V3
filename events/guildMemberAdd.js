@@ -54,7 +54,7 @@ module.exports = async client => {
       "welcome-image.png"
     );
     var date = moment.tz("Asia/Jakarta");
-    let chx = db.get(`welchannel_${message.guild.id}`);
+    let chx = db.get(`welchannel_${member.guild.id}`);
     let wrt = await db.get(`roles_${member.guild.id}`);
     let joinPosition;
     const members = member.guild.members.cache.array();
@@ -81,8 +81,8 @@ module.exports = async client => {
       .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
     const sender = client.channels.cache.get(chx);
-    if (wrt === null) return;
     let role = await member.guild.roles.cache.get(wrt);
+    if (role === null) return;
     await member.roles.add(role);
     sender.send(welcomeembed);
   });
