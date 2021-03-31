@@ -15,7 +15,7 @@ module.exports = {
     const channel = message.mentions.channels.first();
     const [key, ...value] = args;
     switch (key) {
-      default:
+   /*   default:
         return message.channel.send(
           new Discord.MessageEmbed()
             .setColor("RED")
@@ -27,7 +27,7 @@ module.exports = {
             )
             .setDescription("Error: Invalid Key provided, Please try again.")
         );
-
+*/
       case "leave":
         {
           const msg = args.slice(1).join(" ");
