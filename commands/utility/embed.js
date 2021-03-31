@@ -26,12 +26,8 @@ module.exports = {
     }
     return message.channel.send(
       new Discord.MessageEmbed()
-        .setAuthor(
-          message.author.tag,
-          message.author.displayAvatarURL({ dynamic: true }) ||
-            client.user.displayAvatarURL({ dynamic: true })
-        )
         .setDescription(args.join(" "))
+        .setColor("RANDOM")
     );
   }
 };

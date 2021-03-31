@@ -18,11 +18,11 @@ const {
   DateDat,
   Dashboard
 } = require("./config.js");
-const fetch = require('node-fetch')
+const fetch = require("node-fetch");
 
 setInterval(async () => {
-  await fetch('https://grandiose-crocus-geograph.glitch.me/')
-}, 240000)
+  await fetch("https://grandiose-crocus-geograph.glitch.me/");
+}, 240000);
 //const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -31,7 +31,7 @@ client.queue = new Map();
 client.config = require("./emoji/emojis");
 client.emotes = client.config.emojis;
 client.db = require("quick.db");
-client.discord = require("discord.js")
+client.discord = require("discord.js");
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
   client.user.setStatus("dnd");
@@ -140,10 +140,7 @@ client.on("message", async message => {
 
   if (command.author) {
     const authorPerms = message.channel.permissionsFor(message.author);
-    if (
-      !authorPerms ||
-      !authorPerms.has(command.author || "ADMINISTRATOR")
-    ) {
+    if (!authorPerms || !authorPerms.has(command.author || "ADMINISTRATOR")) {
       return message.channel.send(
         new MessageEmbed()
           .setColor("RED")
@@ -156,7 +153,7 @@ client.on("message", async message => {
       );
     }
   }
- 
+
   if (command.guildOnly && message.channel.type === "dm") {
     return message.reply("I can't execute that command inside DMs!");
   }
@@ -218,7 +215,7 @@ client.on("message", async message => {
 function xp(message) {
   const randomnumber = Math.floor(Math.random() * 10) + 15;
   db.add(`guild_${message.guild.id}_xp_${message.author.id}`, randomnumber);
- db.get(`guild_${message.guild.id}_xptotal_${message.guild.id}`, randomnumber)
+  db.get(`guild_${message.guild.id}_xptotal_${message.guild.id}`, randomnumber);
   var level =
     db.get(`guild_${message.guild.id}_level_${message.author.id}`) || 1;
   var xp = db.get(`guild_${message.guild.id}_xp_${message.author.id}`);
@@ -246,7 +243,7 @@ function xp(message) {
         .setCurrentXP(randomnumber)
         .setRequiredXP(xpNeeded)
         .setLevel(newLevel)
-        .setRank(0,"a",false)
+        .setRank(0, "a", false)
         .setStatus(user.presence.status)
         .setProgressBar("#00FFFF", "COLOR")
         .setUsername(user.username, color)
@@ -269,8 +266,11 @@ function xp(message) {
           .setImage("attachment://Rankcard.png")
           .attachFiles(attachment);
 
-   if (wrt === null) return;
-         levelchannel.send(EmbedLevel);
+        if (levelchannel === null)
+          return message.channel.send(
+            `${message.author}, You Have Leveled Up To Level **${newLevel}**`
+          );
+        levelchannel.send(EmbedLevel);
       });
     } else {
       message.channel.send(
