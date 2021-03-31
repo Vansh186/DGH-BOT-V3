@@ -49,26 +49,17 @@ module.exports = async client => {
       canvas.toBuffer(),
       "welcome-image.png"
     );
-    let joinPosition;
-    const members = member.guild.members.cache.array();
-    members.sort((a, b) => a.joinedAt - b.joinedAt);
-    for (let i = 0; i < members.length; i++) {
-      if (members[i].id == member.guild.member(member.user).id) joinPosition = i;
-    }
-
     var date = moment.tz("Asia/Jakarta");
     let chx = db.get(`levchannel_${member.guild.id}`);
-    let ch5 = db.get(`levmsg_${member.guild.id}`) || "GoodBye {member}";
-    const ch = ch5
+    let ch = db
+      .get(`levmsg_${member.guild.id}`)
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
-      .replace(`{id}`, member.user.id) // Member mention substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY HH:mm:ss z")) // member guild joinedAt
-      .replace(`{position}`, joinPosition )
+      .replace(`{position}`, member.guild.members.cache.size)
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
-    if (ch === null) return;
     const leaveembed = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .setTimestamp()
@@ -76,7 +67,6 @@ module.exports = async client => {
       .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
     const sender = await client.channels.cache.get(chx);
-    if (chx === null) return;
     sender.send(leaveembed);
   });
 };
