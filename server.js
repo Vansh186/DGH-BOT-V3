@@ -156,25 +156,7 @@ client.on("message", async message => {
       );
     }
   }
-  if (command.permissions) {
-    const authorPerms = message.channel.permissionsFor(message.author);
-    if (
-      !authorPerms ||
-      !authorPerms.has(command.permissions || "ADMINISTRATOR")
-    ) {
-      return message.channel.send(
-        new MessageEmbed()
-          .setColor("RED")
-          .setTimestamp()
-          .setDescription(
-            `You do not have permission to use this command.\nThis command requires \`${command.permissions.join(
-              ", "
-            ) || "ADMINISTRATOR"}\``
-          )
-      );
-    }
-  }
-
+ 
   if (command.guildOnly && message.channel.type === "dm") {
     return message.reply("I can't execute that command inside DMs!");
   }

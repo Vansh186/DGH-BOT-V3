@@ -6,13 +6,12 @@ module.exports = {
   name: "setmsg",
   category: "settings",
   args: true,
-      permissions: "ADMINISTRATOR",
  bot: ['VIEW_CHANNEL','EMBED_LINKS','ATTACH_FILES','MANAGE_CHANNELS','MANAGE_GUILD'],
   author: 'VIEW_CHANNEL'||'EMBED_LINKS'||'ATTACH_FILES'||'MANAGE_CHANNELS'||'MANAGE_GUILD',
  usage: "setmsg <key // welcome/leave> <msg>",
   description: "Set the welcome",
   run: (client, message, args) => {
-    const channel = message.mentions.channels.first();
+//    const channel = message.mentions.channels.first();
     const [key, ...value] = args;
     switch (key) {
    /*   default:
