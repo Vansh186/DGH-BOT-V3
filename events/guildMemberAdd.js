@@ -72,10 +72,10 @@ module.exports = async client => {
       .setDescription(messs)
       .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
-    const sender = client.channels.cache.get(chx);
     if (wrt === null) return;
     let role = await member.guild.roles.cache.get(wrt);
     await member.roles.add(role);
+    const sender = client.channels.cache.get(chx);
     sender.send(welcomeembed);
   });
 };

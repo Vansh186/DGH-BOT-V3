@@ -89,12 +89,9 @@ module.exports = {
    
     var date = moment.tz("Asia/Jakarta");
     let chx2 =
-      client.db.get(`welchannel_${message.guild.id}`) ||
-      db.get(`levchannel_${message.guild.id}`);
+      client.db.get(`welchannel_${message.guild.id}`) 
     let chx =
-      db.get(`levchannel_${message.guild.id}`) ||
-      db.get(`welchannel_${message.guild.id}`);
-    // let role =  db.get(`roles_${.guild.id}`);
+      db.get(`levchannel_${message.guild.id}`) 
     let c =
       db.get(`welmsg_${message.guild.id}`) || "welcomer to My Server {member}";
     const ch2 = c
@@ -129,12 +126,8 @@ module.exports = {
       .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
     const sender = client.channels.cache.get(chx2);
+    
     const sender2 = client.channels.cache.get(chx);
-    //     member.roles.add(role);
-    /* sender.send({
-      embed: json
-    });*/
-
     const [key, ...value] = args;
     const seukes = new Discord.MessageEmbed()
       .setColor("RANDOM")
