@@ -142,7 +142,7 @@ client.on("message", async message => {
     const authorPerms = message.channel.permissionsFor(message.author);
     if (
       !authorPerms ||
-      !authorPerms.has(command.permissions || "ADMINISTRATOR")
+      !authorPerms.has(command.author || "ADMINISTRATOR")
     ) {
       return message.channel.send(
         new MessageEmbed()
@@ -156,7 +156,7 @@ client.on("message", async message => {
       );
     }
   }
-  if (command.permiss) {
+  if (command.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
     if (
       !authorPerms ||
