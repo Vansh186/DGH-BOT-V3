@@ -33,7 +33,7 @@ module.exports = async client => {
     ctx.font = "bold 60px Genta";
     ctx.fillStyle = "#f2f2f2";
     ctx.fillText(textString4, 750, canvas.height / 2 + 125);
-    var textString4 = `${member.guild.name} Leaves`;
+    var textString4 = `${member.guild.name} Leave`;
     ctx.font = "bold 60px Genta";
     ctx.fillStyle = "#f2f2f2";
     ctx.fillText(textString4, 700, canvas.height / 2 - 150);
