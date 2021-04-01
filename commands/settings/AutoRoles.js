@@ -13,7 +13,12 @@ module.exports = {
   author: 'VIEW_CHANNEL'||'EMBED_LINKS'||'ATTACH_FILES'||'MANAGE_CHANNELS'||'MANAGE_GUILD',
   run: (client, message, args) => {
     let r = message.mentions.roles.first();
-    const wel = new Discord.MessageEmbed()
+        if (message.guild.me.roles.highest.comparePositionTo(r) < 0) {
+      return message.channel.send(
+        `My role is not high enough than **${r.name}** role!`
+      );
+    }
+const wel = new Discord.MessageEmbed()
       .setDescription(`**Done** From now on I will autoRoles\n\`${r.name}\``)
       .setColor("RED");
     db.set(`roles_${message.guild.id}`, r.id);

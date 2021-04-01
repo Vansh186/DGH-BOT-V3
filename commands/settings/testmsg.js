@@ -51,7 +51,7 @@ module.exports = {
     ctx.fillStyle = "#f2f2f2";
     ctx.fillText(textString4, 750, canvas.height / 2 + 125);
     //get the Guild Name
-    var textString4 = `${message.guild.name}`;
+    var textString4 = `${message.guild.name} ${args}`;
     ctx.font = "bold 60px Genta";
     ctx.fillStyle = "#f2f2f2";
     ctx.fillText(textString4, 700, canvas.height / 2 - 150);
@@ -60,7 +60,7 @@ module.exports = {
     ctx.arc(315, canvas.height / 2, 250, 0, Math.PI * 2, true); //position of img
     ctx.closePath();
     ctx.clip();
-    //define the user avatar
+   //define the user avatar
     const avatar = await Canvas.loadImage(
       message.author.displayAvatarURL({ format: "jpg" })
     );
