@@ -13,13 +13,17 @@ module.exports = {
         "Please provide the message id of the user or bot"
       );
     }
-    const reactionEmoji = message.guild.emojis.cache.find(
+      if (args[0].length > 19)
+      return message.channel.send(
+      "Too Long ID - 18 Limit"
+      );
+   const reactionEmoji = message.guild.emojis.cache.find(
       emoji => emoji.name === args[1]
     );
     if (!reactionEmoji) {
       return message.channel.send(
         "Please name the emojis, don't mention the emojis and Default Emoji"
-      );
+      ).then(m=>m.delete({timeout:5000}).catch(e=>{}));
     }
     if (isNaN(reactionEmoji)) {
       return message.channel.send(
