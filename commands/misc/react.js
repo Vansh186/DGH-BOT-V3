@@ -11,12 +11,12 @@ module.exports = {
     if (isNaN(args[0])) {
       return message.channel.send(
         "Please provide the message id of the user or bot"
-      );
+      ).then(m=>m.delete({timeout:5000}).catch(e=>{}));
     }
       if (args[0].length > 19)
       return message.channel.send(
       "Too Long ID - 18 Limit"
-      );
+      ).then(m=>m.delete({timeout:5000}).catch(e=>{}));
    const reactionEmoji = message.guild.emojis.cache.find(
       emoji => emoji.name === args[1]
     );
@@ -28,7 +28,7 @@ module.exports = {
     if (isNaN(reactionEmoji)) {
       return message.channel.send(
         "Please name the emojis, don't mention the emojis and Default Emoji"
-      );
+      ).then(m=>m.delete({timeout:5000}).catch(e=>{}));
     }
     const m = await message.channel.messages.fetch(args[0]);
     const filter1 = (reaction, user) =>
