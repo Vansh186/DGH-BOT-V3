@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
         name: "eval",
         description: "Evaluates js code",
-        category: "owner",
+        category: "admin",
         aliases: ["e"],
         args: true,
         usage: 'eval <input>',
@@ -17,7 +17,7 @@ module.exports = {
         }
   
         try {
-            const code = args.join(" ");
+            const code = args.join(" ").replace("@","");
             let evaled = eval(code);
 
             if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
