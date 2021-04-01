@@ -14,7 +14,7 @@ module.exports = {
    message.delete();
       message.channel.send(new Discord.MessageEmbed()
             .setColor('RANDOM')
-            .setTitle(`Unicron v${version}`)
+            .setTitle(`DGH BOT v${version}`)
             .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
             .addField('Uptime', `${ms(client.uptime)}`, true)
             .addField('WebSocket Ping', `${client.ws.ping}ms`, true)
