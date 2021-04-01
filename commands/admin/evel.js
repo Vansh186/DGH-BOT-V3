@@ -1,46 +1,42 @@
-const { MessageEmbed } = require("discord.js");
-const Discord = require("discord.js");
-const client = new Discord.Client();
+const { MessageEmbed } = require('discord.js')
+
 module.exports = {
-  name: "---",
-  category: "admi",
-  usage: "evel <code>",
-  args: true,
-  run: async (client, message, args) => {
-    const embed = new MessageEmbed().setTitle("Evaluating...");
-    const msg = await message.channel.send(embed);
-    const info = args.join(" ")
-    const re = info.replace(/```/g, "").replace(`client.user.setStatus`,"ISBEOEBW-OWBSIEBR-OEJEOJ").replace(`client.user.setActivity`,"HAIEHSID-OEBEO").replace(`client.token`, "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0")
-    try {
-      const data = eval(re);
-      const embed = new MessageEmbed()
-        .setTitle("output:")
-        .setDescription(await data)
-        .setColor("GREEN");
-      await msg.edit(embed);
-      await msg.react("✅");
-      await msg.react("❌");
-      const filter = (reaction, user) =>
-        (reaction.emoji.name === "❌" || reaction.emoji.name === "✅") &&
-        user.id === message.author.id;
-      msg.awaitReactions(filter, { max: 1 }).then(collected => {
-        collected.map(emoji => {
-          switch (emoji._emoji.name) {
-            case "✅":
-              msg.reactions.removeAll();
-              break;
-            case "❌":
-              msg.delete();
-              break;
-          }
-        });
-      });
-    } catch (e) {
-      const embed = new MessageEmbed()
-        .setTitle("error")
-        .setDescription(e)
-        .setColor("#FF0000");
-      return await msg.edit(embed);
+        name: "eval",
+        description: "Evaluates js code",
+        category: "owner",
+        aliases: ["e"],
+        args: true,
+        usage: 'eval <input>',
+    run: async (bot, message, args) => {
+        function clean(text) {
+            if (typeof text === "string")
+                return text
+                    .replace(/`/g, "`" + String.fromCharCode(8203))
+                    .replace(/@/g, "@" + String.fromCharCode(8203));
+            else return text;
+        }
+  
+        try {
+            const code = args.join(" ");
+            let evaled = eval(code);
+
+            if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
+
+            message.react("✅");
+            var emb = new MessageEmbed()
+                .setTitle('Result')
+                .setDescription(`\`\`\`js` + '\n' + clean(evaled) + `\n` + `\`\`\``)
+                .setFooter(bot.user.username, bot.user.displayAvatarURL({ dynamic: true }))
+                .setColor(0xd26a0e)
+            message.channel.send(emb);
+        } catch (err) {
+            message.react("⚠");
+            var emb = new MessageEmbed()
+                .setTitle('Result')
+                .setDescription(`\`\`\`js` + '\n' + clean(err) + `\n` + `\`\`\``)
+                .setFooter(bot.user.username, bot.user.displayAvatarURL({ dynamic: true }))
+                .setColor(0xd26a0e)
+            message.channel.send(emb);
+        }
     }
-  }
-};
+}
