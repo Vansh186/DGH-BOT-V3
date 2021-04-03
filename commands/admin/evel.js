@@ -17,7 +17,7 @@ module.exports = {
         }
   
         try {
-            const code = args.join(" ").replace("@","");
+            const code = args.join(" ").replace("@","").replace(`client.token`,"​client.token").replace(`client.token`,"​client.set");
             let evaled = eval(code);
 
             if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
