@@ -7,7 +7,7 @@ module.exports = {
         aliases: ["e"],
         args: true,
         usage: 'eval <input>',
-    run: async (bot, message, args) => {
+    run: async (client, message, args) => {
         function clean(text) {
             if (typeof text === "string")
                 return text
@@ -26,7 +26,7 @@ module.exports = {
             var emb = new MessageEmbed()
                 .setTitle('Result')
                 .setDescription(`\`\`\`js` + '\n' + clean(evaled) + `\n` + `\`\`\``)
-                .setFooter(bot.user.username, bot.user.displayAvatarURL({ dynamic: true }))
+                .setFooter(client.user.username, client.user.displayAvatarURL({ dynamic: true }))
                 .setColor(0xd26a0e)
             message.channel.send(emb);
         } catch (err) {
@@ -34,7 +34,7 @@ module.exports = {
             var emb = new MessageEmbed()
                 .setTitle('Result')
                 .setDescription(`\`\`\`js` + '\n' + clean(err) + `\n` + `\`\`\``)
-                .setFooter(bot.user.username, bot.user.displayAvatarURL({ dynamic: true }))
+                .setFooter(client.user.username, client.user.displayAvatarURL({ dynamic: true }))
                 .setColor(0xd26a0e)
             message.channel.send(emb);
         }
