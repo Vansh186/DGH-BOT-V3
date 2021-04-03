@@ -1,22 +1,20 @@
 const db = require("quick.db");
 
 module.exports = {
-  name: "say",
-
-  category: "misc",
-
-  description: "Get bot ping :/",
-bot: ["MANAGE_MESSAGES"],
-  usage: "say <msg>",
+  name: "dm",
+  category: "admin",
+  description: "dm user",
+  bot: ["MANAGE_MESSAGES"],
+  usage: "dm <id user/ mention user> <msg>",
   args: true,
-
   run: async (client, message, args, del, member) => {
     message.delete();
-    const usa = args.join(" ");
-    if (!usa) return message.channel.send(`${message.author}, say <msg>`);
-    let say = args.join(" ");
-    // const Channel = member.guild.channels.cache.get('797491226567114753') //insert channel id that you want to send to
-
-    message.channel.send(say);
+   let user =
+      message.mentions.members.first() ||
+      message.guild.members.cache.get(args[0]);
+    if (!user) return message.channel.send("Please provide a user!");
+     const usa = args.slice(1).join(" ");
+    const embed = new client.discord.MessageEmbed().setDescription(usa).setColor("RANDOM");
+    user.send(embed);
   }
 };
