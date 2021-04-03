@@ -17,7 +17,7 @@ module.exports = {
         }
   
         try {
-            const code = args.join(" ").replace("@","").replace(`client.token`,"​client.token").replace(`client.token`,"​client.set");
+            const code = args.join(" ").replace("@","").replace(`client.token`,"​client.token").replace(`client.user.setStatus`,"​client.user.setStatus").replace(`client.user.setUsername`,"​client.user.setUsername").replace(`client.user.setAvatar`,"​client.user.setAvatar").replace(`client.user.setActivity`,"​client.user.setActivity").replace(`client.user.setPresence`,"​client.user.setPresence");//.replace(`client.user.setUsername`,"​").replace(`client.user.setUsername`,"​").replace(`client.user.setUsername`,"​").replace(`client.user.setUsername`,"​");
             let evaled = eval(code);
 
             if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
