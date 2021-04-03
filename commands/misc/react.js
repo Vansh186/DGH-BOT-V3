@@ -30,7 +30,7 @@ module.exports = {
         "Please name the emojis, don't mention the emojis and Default Emoji"
       ).then(m=>m.delete({timeout:5000}).catch(e=>{}));
     }
-    const m = await message.channel.messages.fetch(args[0]);
+    const m = await message.guild.messages.cache.fetch(args[0]);
     const filter1 = (reaction, user) =>
       reaction.emoji.name === args[1] && user.id === message.author.id;
     await m.react(reactionEmoji);
