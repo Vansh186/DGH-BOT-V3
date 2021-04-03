@@ -17,30 +17,19 @@ module.exports = {
         .send("Too Long ID - 18 Limit")
         .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
 
-    let Thinger = args[1] ||args[1].split(":");
-
-    let Animated;
-    if (Thinger[0] === "<a") {
-      Animated = true;
-    } else {
-      Animated = false;
-    }
-
-    const Name = Thinger[1];
-    const ID = Thinger[2].slice(0, -1);
-    const reactionEmoji = message.guild.emojis.cache.find(
-      emoji => emoji.name === Name
-    );
-    if (!reactionEmoji) {
+    let Thinger = args[1].split(":") || 0
+    const Name = Thinger[1] || args[1]//message.guild.emojis.cache.find(emoji => emoji.name === args[1]);
+    const ID = Thinger[2].slice(0, -1) || message.guild.emojis.cache.find(emoji => emoji.name === args[1]);
+  /*if (!reactionEmoji) {
       return message.channel
         .send("Please Give Emojis That Will Be In Reaction")
         .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
-    }
+    }*/
     const m = await message.channel.messages.fetch(args[0]);
     const filter1 = (reaction, user) =>
       reaction.emoji.name === Name &
       user.id === message.author.id;
-    await m.react(ID || reactionEmoji);
+    await m.react(ID);
 
     const collector1 = await m.createReactionCollector(filter1);
     collector1.on("collect", async (reaction, user) => {
