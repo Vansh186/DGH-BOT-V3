@@ -23,8 +23,6 @@ module.exports = {
     "MANAGE_CHANNELS" ||
     "MANAGE_GUILD",
   run: async (client, message, args) => {
-    const remove = await client.emit("guildMemberRemove", message.member);
-    const add = await client.emit("guildMemberAdd", message.member);
     const [key, ...value] = args;
     switch (key) {
       default:
@@ -42,14 +40,20 @@ module.exports = {
 
       case "leave":
         {
-          if(!remove){
-          message.channel.send("Sorry there is no message, please setup first")}
-          sender2.send(welcomeembed2);
+          const remove = await client.emit("guildMemberRemove", message.member);
+          if (!remove) {
+            message.channel.send(
+              "Sorry there is no message, please setup first"
+            );
+          }
         }
+
         break;
       case "welcome": {
-        message.channel.send(seukes);
-        sender.send(welcomeembed);
+        const add = await client.emit("guildMemberAdd", message.member);
+        if (!add) {
+          message.channel.send("Sorry there is no message, please setup first");
+        }
       }
     }
   }
