@@ -5,20 +5,17 @@ module.exports = {
   name: "leaderboard",
   category: "misc",
   bot: ["MANAGE_GUILD"],
-  
+
   run: async (client, message, args) => {
     const coins = db
       .all()
       .filter(data => data.ID.startsWith(`guild_${message.guild.id}_xp_`))
       .sort((a, b) => b.data - a.data);
-    const level = db
-      .all()
-      .filter(data => data.ID.startsWith(`guild_${message.guild.id}_level_`))
-      .sort((a, b) => b.data - a.data);
-    
-    const userBalance = await db.fetch(
-      `guild_${message.guild.id}_level_${message.author.id}`
-    );
+    let myrank =
+      coins
+        .map(m => m.ID)
+        .indexOf(`guild_${message.guild.id}_level_${message.author.id}`) + 1 ||
+      "N/A";
     coins.length = 10;
     let finalLb = "";
 
@@ -29,7 +26,8 @@ module.exports = {
         ? client.users.cache.get(coins[i].ID.split("_")[3]).tag
         : "Unknown#0000";
 
-      finalLb += `__**${coins.indexOf(coins[i]) + 1}.**__ **${userData} »\n\`XP: ${coins[i].data} | LEVEL: ${level[i].data} \`**\n`;
+      finalLb += `__**${coins.indexOf(coins[i]) +
+        1}.**__ **${userData} » \`${coins[i].data}\`**\n`;
     }
 
     let embed = new MessageEmbed()
@@ -37,7 +35,7 @@ module.exports = {
       .setDescription(`${finalLb}`)
       .setColor("#efcb83")
       .setFooter(
-        `Your Position » ${coins.indexOf(coins) +1} | Leaderboards are Global Statistics`
+        `Your Position » ${myrank} | Leaderboards are Global Statistics`
       );
 
     message.inlineReply(embed);
