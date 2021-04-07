@@ -9,6 +9,7 @@ const { MessageEmbed } = require("discord.js");
 const client = new Client({
   disableEveryone: true
 });
+require("./reply"); //<message.inlineReply>
 const {
   Default_Prefix,
   Token,
@@ -264,10 +265,11 @@ function xp(message) {
           .setImage("attachment://Rankcard.png")
           .attachFiles(attachment);
 
-        if (levelchannel === null)
+        if (levelchannel === null) {
           return message.channel.send(
             `${message.author}, You Have Leveled Up To Level **${newLevel}**`
           );
+        }
         levelchannel.send(EmbedLevel);
       });
     } else {
