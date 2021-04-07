@@ -105,6 +105,7 @@ module.exports = {
         .addField(`${client.emotes.misc || "📋"} Misc`, `\`misc\``, true)
         .addField(`${client.emotes.music || "🎶"} Music`, `\`music\``, true)
         .addField(`${client.emotes.fun || "😂"} Fun`, `\`fun\``, true)
+        .setImage("https://cdn.discordapp.com/attachments/821846294737715220/829368179163267082/video_1.gif")
         .setTimestamp()
     );
   }
