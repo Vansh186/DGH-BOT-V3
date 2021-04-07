@@ -24,6 +24,15 @@ module.exports = {
     let m = user;
     let image = db.get(`levelimg_${message.guild.id}`);
     var level = db.get(`guild_${message.guild.id}_level_${user.user.id}`) || 0;
+    const coins = db
+      .all()
+      .filter(data => data.ID.startsWith(`guild_${message.guild.id}_xp_`))
+      .sort((a, b) => b.data - a.data);
+    let myrank =
+      coins
+        .map(m => m.ID)
+        .indexOf(`guild_${message.guild.id}_level_${message.author.id}`) + 1 ||
+      "N/A";
     let xp = db.get(`guild_${message.guild.id}_xp_${user.user.id}`) || 0;
     var xpNeeded = level * 100;
     let every = db
@@ -66,7 +75,7 @@ module.exports = {
         .setAuthor(user.user.username, message.guild.iconURL())
         .setColor("#ff2050")
         .setDescription(
-          `**LEVEL** - ${level}\n**Rank** - ${rank}\n**XP** - ${xp}/${xpNeeded}`
+          `**LEVEL** - ${level}\n**Rank** - ${rank}\n**Position** - ${myrank}\n**XP** - ${xp}/${xpNeeded}`
         )
         .setImage("attachment://RankCard.png")
         .attachFiles(attachment);
