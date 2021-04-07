@@ -26,7 +26,7 @@ module.exports = {
       if (coins[i].data === null) coins[i].data = 1;
 
       let userData = client.users.cache.get(coins[i].ID.split("_")[3])
-        ? client.users.cache.get(coins[i].ID.split("_")[3]).username
+        ? client.users.cache.get(coins[i].ID.split("_")[3]).tag
         : "Unknown#0000";
 
       finalLb += `__**${coins.indexOf(coins[i]) + 1}.**__ **${userData} »\n\`XP: ${coins[i].data} | LEVEL: ${level[i].data} \`**\n`;
@@ -37,7 +37,7 @@ module.exports = {
       .setDescription(`${finalLb}`)
       .setColor("#efcb83")
       .setFooter(
-        `Your Level » ${userBalance} | Leaderboards are Global Statistics`
+        `Your Position » ${coins.indexOf(coins) +1} | Leaderboards are Global Statistics`
       );
 
     message.inlineReply(embed);
