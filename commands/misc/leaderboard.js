@@ -11,6 +11,10 @@ module.exports = {
       .all()
       .filter(data => data.ID.startsWith(`guild_${message.guild.id}_xp_`))
       .sort((a, b) => b.data - a.data);
+    const level = db
+      .all()
+      .filter(data => data.ID.startsWith(`guild_${message.guild.id}_xp_`))
+      .sort((a, b) => b.data - a.data);
     const userBalance = await db.fetch(
       `guild_${message.guild.id}_level_${message.author.id}`
     );
@@ -24,7 +28,7 @@ module.exports = {
         ? client.users.cache.get(coins[i].ID.split("_")[3]).tag
         : "Unknown#0000";
 
-      finalLb += `__**${coins.indexOf(coins[i]) + 1}.**__ **${userData} » \`${coins[i].data}\`**\n`;
+      finalLb += `__**${coins.indexOf(coins[i]) + 1}.**__ **${userData} » \`XP: ${coins[i].data} | LEVEL: ${level[i].data} \`**\n`;
     }
 
     let embed = new MessageEmbed()
@@ -35,6 +39,6 @@ module.exports = {
         `Your Level » ${userBalance} | Leaderboards are Global Statistics`
       );
 
-    message.channel.send(embed);
+    message.inlineReply(embed);
   }
 };
