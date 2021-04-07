@@ -19,11 +19,9 @@ const {
   Dashboard
 } = require("./config.js");
 const fetch = require("node-fetch");
-
 setInterval(async () => {
   await fetch("https://grandiose-crocus-geograph.glitch.me/");
 }, 240000);
-//const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 const cooldowns = new Discord.Collection();

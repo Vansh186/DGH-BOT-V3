@@ -15,11 +15,11 @@ module.exports = {
     const Embed = new Discord.MessageEmbed()
     .setColor("GREEN")
     .setTitle("🙏Thanks🙏")
-    .addField("Invite Me", `[Click Me](${Invite})`, true)
-    .addField("Support Server", `[Click Me](${Support})`, true)
-    .addField("Dashboard", `[Click Me](${Dashboard})`, true)
-    .addField("Owner", `${Owner}, true)
-    .addField("Developer",`${Developer}`)
+    .addField("Invite Me", `[Click Me](${Invite})`)
+    .addField("Support Server", `[Click Me](${Support})`)
+    .addField("Dashboard", `[Click Me](${Dashboard})`)
+    .addField("Owner", `<@${Owner}>`)
+    .addField("Developer", `<@${Developer}>`)
     .setTimestamp();
     
     return message.channel.send(Embed).catch(() => message.channel.send("Invite Link - " + Invite)).then(m=>m.delete({timeout:44000}).catch(e=>{}))
