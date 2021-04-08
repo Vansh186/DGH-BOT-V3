@@ -21,6 +21,14 @@ module.exports = async client => {
         true
       )
       .addField(
+        "DGH-BOT NQN",
+        "DGH-Bot has Emoji Send Command just like BOT NQN",
+        true
+      )
+      .setImage(
+        "https://cdn.discordapp.com/attachments/829696536396955649/829696583343144970/Kasih_Nama_Woi_23_1080p.gif"
+      )
+      .addField(
         "Permissions",
         "Give Permissions among others : MANAGE_WEBHOOKS,BAN_MEMBERS,KICK_MEMBERS_MANAGE_ROLES,MANAGE_NICKNAME",
         true
