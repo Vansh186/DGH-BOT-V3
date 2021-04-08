@@ -41,6 +41,22 @@ module.exports = {
           message.channel.send(leave);
         }
         break;
+      case "chat-bot":
+        {
+          if (!channel) {
+            return message.channel.send(
+              `${client.emotes.error}Pls Give Invalid channel... Try again...`
+            );
+          }
+          db.set(`chatbot_${message.guild.id}`, channel.id);
+          const chat = new Discord.MessageEmbed()
+            .setDescription(
+              `**Done** From now on I will send Chatbot in ${channel}`
+            )
+            .setColor("RED");
+          message.channel.send(chat);
+        }
+        break;
       case "welcome":
         {
           if (!channel) {

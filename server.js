@@ -279,6 +279,31 @@ function xp(message) {
     }
   }
 }
+//<Chat Bot>
+client.on("message", async message => {
+  const cchann = client.db.get(`chatbot_${message.guild.id}`);
+  if (cchann === null) return;
+  const sender = client.channels.cache.get(cchann);
+  if (message.channel.name == sender.name) {
+    if (message.author.bot) return;
+    message.content = message.content
+      .replace(/@(everyone)/gi, "everyone")
+      .replace(/@(here)/gi, "here");
+    message.channel.stopTyping();
+    message.channel.startTyping();
+    fetch(
+      `https://api.affiliateplus.xyz/api/chatbot?message=${encodeURIComponent(
+        message.content
+      )}&botname=${client.user.username}&ownername=lmon`
+    )
+      .then(res => res.json())
+      .then(data => {
+        message.inlineReply(data.message);
+      });
+    message.channel.stopTyping();
+  }
+});
+
 client
   .login(Token)
   .catch(() =>
