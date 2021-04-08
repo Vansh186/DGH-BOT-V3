@@ -5,7 +5,7 @@ module.exports = {
   name: "setchannel",
   category: "settings",
   args: true,
-  usage: "setchannel <key //welcome/leave/report/level/modlog> <channel>",
+  usage: "setchannel <key //welcome/leave/report/level/modlog/chat-bot> <channel>",
   description: "Set the channel",
   bot: ['VIEW_CHANNEL','EMBED_LINKS','ATTACH_FILES','MANAGE_CHANNELS','MANAGE_GUILD'],
   author: 'VIEW_CHANNEL'||'EMBED_LINKS'||'ATTACH_FILES'||'MANAGE_CHANNELS'||'MANAGE_GUILD',
