@@ -32,29 +32,19 @@ client.emotes = client.config.emojis;
 client.db = require("quick.db");
 client.discord = require("discord.js");
 client.on("ready", async () => {
-  console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
-  client.user.setStatus("dnd");
- /* client.user.setActivity(
-    `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
-    { type: "WATCHING" }
-  );*/
-  client.user.setPresence({ game: { name: 'with discord.js' , type: 'WATCHING' }, status: 'idle' })
+console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
+let status = [
+    `Perfix: ${Default_Prefix}help`,
+    `{client.guilds.cache.size} Server | ${client.users.cache.size} User`,
+   // `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
+    ]
+  client.user
+    .setActivity(
+  status[Math.floor(Math.random() * status.length)], {type:"WATCHING"})
+}, 5000)
+    
     .then(console.log)
     .catch(console.error);
-});
-setPresence(data) {
-    return new Promise(resolve => {
-      let status = this.localPresence.status || this.presence.status;
-      let game = this.localPresence.game;
-      let afk = this.localPresence.afk || this.presence.afk;
-
-      if (!game && this.presence.game) {
-        game = {
-          name: this.presence.game.name,
-          type: this.presence.game.type,
-          url: this.presence.game.url,
-        };
-      }
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
   const commands = readdirSync(`./commands/${dir}/`).filter(file =>
@@ -319,19 +309,20 @@ client.on("message", async message => {
   }
 });
 
-client.on("message", async (message) => {
+client.on("message", async message => {
   if (message.author.bot) return;
   let msg = message.content;
 
-  let emojis = msg.match(/(?<=:)([^:\s]+)(?=:)/g)
+  let emojis = msg.match(/(?<=:)([^:\s]+)(?=:)/g);
   if (!emojis) return;
   emojis.forEach(m => {
-    let emoji = client.emojis.cache.find(x => x.name === m)
+    let emoji = client.emojis.cache.find(x => x.name === m);
     if (!emoji) return;
-    let temp = emoji.toString()
-    if (new RegExp(temp, "g").test(msg)) msg = msg.replace(new RegExp(temp, "g"), emoji.toString())
+    let temp = emoji.toString();
+    if (new RegExp(temp, "g").test(msg))
+      msg = msg.replace(new RegExp(temp, "g"), emoji.toString());
     else msg = msg.replace(new RegExp(":" + m + ":", "g"), emoji.toString());
-  })
+  });
 
   if (msg === message.content) return;
 
@@ -346,27 +337,26 @@ client.on("message", async (message) => {
   }
 
   await webhook.edit({
-    name: message.member.nickname ? message.member.nickname : message.author.username,
+    name: message.member.nickname
+      ? message.member.nickname
+      : message.author.username,
     avatar: message.author.displayAvatarURL({ dynamic: true })
-  })
+  });
 
-  message.delete().catch(err => { })
-  webhook.send(msg).catch(err => { })
+  message.delete().catch(err => {});
+  webhook.send(msg).catch(err => {});
 
   await webhook.edit({
     name: `NQN` + number,
     avatar: client.user.displayAvatarURL({ dynamic: true })
-  })
-})
+  });
+});
 //--------------------------------------------------- F U N C T I O N S --------------------------------------
 function randomNumber(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
-} 
-
-
-
+}
 
 client
   .login(Token)
