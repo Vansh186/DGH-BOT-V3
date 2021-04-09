@@ -34,12 +34,27 @@ client.discord = require("discord.js");
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
   client.user.setStatus("dnd");
-  client.user.setActivity(
+ /* client.user.setActivity(
     `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
     { type: "WATCHING" }
-  );
+  );*/
+  client.user.setPresence({ game: { name: 'with discord.js' , type: 'WATCHING' }, status: 'idle' })
+    .then(console.log)
+    .catch(console.error);
 });
+setPresence(data) {
+    return new Promise(resolve => {
+      let status = this.localPresence.status || this.presence.status;
+      let game = this.localPresence.game;
+      let afk = this.localPresence.afk || this.presence.afk;
 
+      if (!game && this.presence.game) {
+        game = {
+          name: this.presence.game.name,
+          type: this.presence.game.type,
+          url: this.presence.game.url,
+        };
+      }
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
   const commands = readdirSync(`./commands/${dir}/`).filter(file =>
