@@ -1,6 +1,5 @@
 const discord = require("discord.js");
 const { Random } = require("something-random-on-discord");
-const random = new Random();
 
 module.exports = {
   name: "punch",
@@ -12,7 +11,7 @@ module.exports = {
     
     let target = message.mentions.members.first()
     
-    let data = await random.getAnimeImgURL("punch");
+    let data = await Random.getAnimeImgURL("punch");
     
     let embed = new discord.MessageEmbed()
     .setImage(data)

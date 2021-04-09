@@ -63,7 +63,8 @@
     "discord.js": "^12.5.1",
     "randomstring": "^1.1.5",
     "node-fetch": "^2.6.1",
-    "something-random-on-discord": "^3.3.2"
+    "something-random-on-discord": "^3.3.2",
+    "node-superfetch": "^0.2.1"
   },
   "engines": {
     "node": "12.x"

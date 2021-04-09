@@ -31,6 +31,7 @@ dependencies:
   moment-timezone: 0.5.33
   mongoose: 5.12.2
   node-fetch: 2.6.1
+  node-superfetch: 0.2.2
   novelcovid: 3.0.0
   one-liner-joke: 1.2.0
   path: 0.12.7
@@ -2696,6 +2697,16 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg==
+  /form-data/4.0.0:
+    dependencies:
+      asynckit: 0.4.0
+      combined-stream: 1.0.8
+      mime-types: 2.1.30
+    dev: false
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==
   /formidable/1.2.2:
     dev: false
     resolution:
@@ -3791,6 +3802,12 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-svXaP8UQRZ5K7or+ZmfNhg2xX3yKDMUzqadsSqi4NCH/KomcH75MAMYAGVlvXn4+b/xOPhS3I2uHKRUzvjY7BQ==
+  /mime-db/1.47.0:
+    dev: false
+    engines:
+      node: '>= 0.6'
+    resolution:
+      integrity: sha512-QBmA/G2y+IfeS4oktet3qRZ+P5kPhCKRXxXnQEudYqUaEioAU1/Lq2us3D/t1Jfo4hE9REQPrbB7K5sOczJVIw==
   /mime-types/2.1.29:
     dependencies:
       mime-db: 1.46.0
@@ -3799,6 +3816,14 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-Y/jMt/S5sR9OaqteJtslsFZKWOIIqMACsJSiHghlCAyhf7jfVYjKBmLiX8OgpWeW+fjJ2b+Az69aPFPkUOY6xQ==
+  /mime-types/2.1.30:
+    dependencies:
+      mime-db: 1.47.0
+    dev: false
+    engines:
+      node: '>= 0.6'
+    resolution:
+      integrity: sha512-crmjA4bLtR8m9qLpHvgxSChT+XoSlZi8J4n/aIdn3z92e/U47Z0V/yl+Wh9W046GgFVAmoNR/fmdbZYcSSIUeg==
   /mime/1.6.0:
     dev: false
     engines:
@@ -4103,6 +4128,15 @@ packages:
       node: '>=0.10'
     resolution:
       integrity: sha1-eQanxHplh9A0lr907GNKuqA/joA=
+  /node-superfetch/0.2.2:
+    dependencies:
+      form-data: 4.0.0
+      node-fetch: 2.6.1
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-u/nnm1B5itxgGbMIGOGxLqFRrMFkB9bRbT0YwdM61/KhOXd25PZugX++bzpS+arQimcsIekntapdSSFI2CoCEw==
   /noop-logger/0.1.1:
     dev: false
     resolution:
@@ -5979,6 +6013,7 @@ specifiers:
   moment-timezone: ^0.5.32
   mongoose: ^5.11.20
   node-fetch: ^2.6.1
+  node-superfetch: ^0.2.1
   novelcovid: ^3.0.0
   one-liner-joke: ^1.2.0
   path: ^0.12.7
