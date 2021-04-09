@@ -31,30 +31,17 @@ client.config = require("./emoji/emojis");
 client.emotes = client.config.emojis;
 client.db = require("quick.db");
 client.discord = require("discord.js");
-/*client.on("ready",
-    async () => {
-      console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
-      client.user.setActivity(
-           `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
- ,
-        { type: "WATCHING" }
-      );
-    },
-  )
-
-  .then(console.log)
-  .catch(console.error);*/
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
-  const status = [
-    `Perfix: ${Default_Prefix}help`,`${client.guilds.cache.size} Server | ${client.users.cache.size} User`
-  ];
-  setInterval(() => {
-    client.user.setActivity(status[Math.floor(Math.random() * status.length)], {
-      type: "WATCHING"
-    });
-  }, 5000)
+  client.user
+    .setActivity(
+      `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
+      { type: "WATCHING" }
+    )
+    .then(console.log)
+    .catch(console.error);
 });
+
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
   const commands = readdirSync(`./commands/${dir}/`).filter(file =>
