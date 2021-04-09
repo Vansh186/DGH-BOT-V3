@@ -62,7 +62,8 @@
     "mongoose": "^5.11.20",
     "discord.js": "^12.5.1",
     "randomstring": "^1.1.5",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "something-random-on-discord": "^3.3.2"
   },
   "engines": {
     "node": "12.x"

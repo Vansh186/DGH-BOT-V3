@@ -41,6 +41,7 @@ dependencies:
   request: 2.88.2
   scrape-yt: 1.4.8
   snekfetch: 4.0.4
+  something-random-on-discord: 3.3.2
   sourcebin_js: 0.0.2
   srod-v2: 1.0.2
   superagent: 6.1.0
@@ -5138,6 +5139,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-dyycG9fvwtSJqKPfMVOpXt+60qvMGe7vWLwOJDiSJaiAx+hs2EnFChG2bXCWn7ulz+zGzrHdN9/yeEb0YqEPww==
+  /something-random-on-discord/3.3.2:
+    dependencies:
+      axios: 0.21.1
+    dev: false
+    resolution:
+      integrity: sha512-UPZfYfcDurrxExxc70Jj7qdFB3Ml3klKOPuvcUa6HQ3m/3HhrE36IzdwjUoNgy0oZmQjW7p26S2RoOL975JU+Q==
   /sourcebin_js/0.0.2:
     dependencies:
       '@sourcebin/linguist': 0.0.3
@@ -5982,6 +5989,7 @@ specifiers:
   request: ^2.88.2
   scrape-yt: ^1.4.7
   snekfetch: ^4.0.4
+  something-random-on-discord: ^3.3.2
   sourcebin_js: ^0.0.2
   srod-v2: ^1.0.2
   superagent: ^6.1.0
