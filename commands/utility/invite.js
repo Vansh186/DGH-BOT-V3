@@ -11,7 +11,7 @@ module.exports = {
   cooldown: 5,
   run: async (client, message, args) => {
     message.delete();
-    const Invite = `https://discord.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2084568575`;
+    const Invite = `https://discord.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=3154952&redirect_uri=https%3A%2F%2Fdiscord.gg%2FrZ2Qa5wWFV`;
     const codeinvite = Support.replace("https://discord.gg/","");
     const image = `http://invidget.switchblade.xyz/${codeinvite}`;
 
