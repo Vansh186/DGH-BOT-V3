@@ -16,14 +16,15 @@ module.exports = {
       return message.channel
         .send("Too Long ID - 18 Limit")
         .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
-let ID
-let Name
+    let ID;
+    let Name;
     if (args[1].split(":")) {
       let Thinger = args[1].split(":");
       Name = Thinger[1];
-      ID = client.emojis.cache.find(x => x.name === Name)
+      ID = client.emojis.cache.find(x => x.name === Name);
     }
     const m = await message.channel.messages.fetch(args[0]);
+    if (!m) return message.channel.send(`:x: | **Message Not Found**`);
     const filter1 = (reaction, user) =>
       (reaction.emoji.name === Name) & (user.id === message.author.id);
     await m.react(ID);
