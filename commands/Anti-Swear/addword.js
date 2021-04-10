@@ -1,9 +1,25 @@
 const Discord = require("discord.js")
 module.exports = {
   name: "addword",
-  run: async (client, message, args, db) => {
+   bot: [
+    "VIEW_CHANNEL",
+    "EMBED_LINKS",
+    "ATTACH_FILES",
+    "MANAGE_CHANNELS",
+    "MANAGE_GUILD",
+    "MANAGE_ROLES"
+  ],
+  author:
+    "VIEW_CHANNEL" ||
+    "EMBED_LINKS" ||
+    "ATTACH_FILES" ||
+    "MANAGE_CHANNELS" ||
+    "MANAGE_GUILD" ||
+    "MANAGE_ROLES",
+category: 'anti-swear',
+  run: async (client, message, args) => {
     if (!message.channel.permissionsFor(message.author).has("MANAGE_GUILD")) return message.channel.send(":x: | **You dont have permissions to use this Command!**");
-    let pog = db.get(`words_${message.guild.id}`)
+    let pog = client.db.get(`words_${message.guild.id}`)
     let word = args[0]
     if (!word) {
       let embed = new Discord.MessageEmbed()
@@ -32,7 +48,7 @@ module.exports = {
       word: word,
       author: message.author.tag
         }
-        db.push(`words_${message.guild.id}`, yes)
+        client.db.push(`words_${message.guild.id}`, yes)
         let embed = new Discord.MessageEmbed()
         embed.setAuthor(message.guild.name, message.guild.iconURL())
         embed.setTitle("Success")

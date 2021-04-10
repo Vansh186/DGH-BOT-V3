@@ -1,9 +1,25 @@
 const Discord = require("discord.js")
 module.exports = {
   name: "delword",
-  run: async (client, message, args, db) => {
+  
+   bot: [
+    "VIEW_CHANNEL",
+    "EMBED_LINKS",
+    "ATTACH_FILES",
+    "MANAGE_CHANNELS",
+    "MANAGE_GUILD",
+    "MANAGE_ROLES"
+  ],
+  author:
+    "VIEW_CHANNEL" ||
+    "EMBED_LINKS" ||
+    "ATTACH_FILES" ||
+    "MANAGE_CHANNELS" ||
+    "MANAGE_GUILD" ||
+    "MANAGE_ROLES",
+category: 'anti-swear',run: async (client, message, args) => {
     if (!message.channel.permissionsFor(message.author).has("MANAGE_GUILD")) return message.channel.send(":x: | **You dont have permissions to use this Command!**");
-    let pog = db.get(`words_${message.guild.id}`)
+    let pog = client.db.get(`words_${message.guild.id}`)
     let word = args[0]
     if (!word) {
       let embed = new Discord.MessageEmbed()
@@ -33,7 +49,7 @@ module.exports = {
             var filter = pog.filter((x) => {
                 return x != null && x != '';
             });
-            db.set(`words_${message.guild.id}`, filter);
+            client.db.set(`words_${message.guild.id}`, filter);
             let embed = new Discord.MessageEmbed()
                 embed.setAuthor(message.author.tag, message.author.displayAvatarURL())
                 embed.setDescription(`**The word has been deleted!** `)

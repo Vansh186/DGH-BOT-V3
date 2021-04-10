@@ -1,13 +1,29 @@
 const Discord = require("discord.js")
 module.exports = {
   name: "set-warn-msg",
-  run: async (client, message, args, db) => {
+  
+   bot: [
+    "VIEW_CHANNEL",
+    "EMBED_LINKS",
+    "ATTACH_FILES",
+    "MANAGE_CHANNELS",
+    "MANAGE_GUILD",
+    "MANAGE_ROLES"
+  ],
+  author:
+    "VIEW_CHANNEL" ||
+    "EMBED_LINKS" ||
+    "ATTACH_FILES" ||
+    "MANAGE_CHANNELS" ||
+    "MANAGE_GUILD" ||
+    "MANAGE_ROLES",
+category: 'anti-swear',run: async (client, message, args) => {
     if (!message.channel.permissionsFor(message.author).has("MANAGE_GUILD")) return message.channel.send(":x: | **You dont have permissions to use this Command!**");
     let msg = args.join(" ")
     if (!msg) {
       return message.channel.send("Provide a message.")
     }
-    db.set(`message_${message.guild.id}`, msg)
+    client.db.set(`message_${message.guild.id}`, msg)
     let embed = new Discord.MessageEmbed()
     embed.setTitle("Message Set!")
     embed.setFooter(message.author.tag + " | made by LΣGΣПD#0001", message.author.displayAvatarURL({ dynamic: true }))
