@@ -91,17 +91,12 @@ client.on("message", async message => {
   if (yus === null) {
     yus = ":x: | **{user-mention}, The Word You said is blacklisted!**";
   }
-    let Prefix = await db.get(`Prefix_${message.guild.id}`);
+  let Prefix = await db.get(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
-
   if (message.content.startsWith(Prefix + "addword")) return;
-
   if (message.content.startsWith(Prefix + "delword")) return;
-
   if (message.content.startsWith(Prefix + "set-warn-msg")) return;
-
   if (message.content.startsWith(Prefix + "words")) return;
-
   let pog = yus
     .split("{user-mention}")
     .join("<@" + message.author.id + ">")
@@ -311,7 +306,7 @@ function xp(message) {
       var rank = db.get(`guild_${message.guild.id}_xptotal_${user.id}`);
       let color = message.member.displayHexColor;
 
-       if (color == "#000000") color = message.member.hoistRole.hexColor;
+      if (color == "#000000") color = message.member.hoistRole.hexColor;
       const rak = new canvacord.Rank();
 
       const ran = new canvacord.Rank()

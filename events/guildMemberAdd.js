@@ -55,7 +55,8 @@ module.exports = async client => {
     );
     var date = moment.tz("Asia/Jakarta");
     let chx = db.get(`welchannel_${member.guild.id}`);
-       let joinPosition;
+  if (chx === null) return;
+    let joinPosition;
     const me = member.guild.members.cache.array();
     me.sort((a, b) => a.joinedAt - b.joinedAt);
     for (let i = 0; i < me.length; i++) {
@@ -80,8 +81,10 @@ module.exports = async client => {
       .attachFiles(attachment);
     if (wrt === null) return;
     let role = await member.guild.roles.cache.get(wrt);
+    if (role === null) return;
     await member.roles.add(role);
     const sender = client.channels.cache.get(chx);
+    if (!sender) return;
     sender.send(welcomeembed);
   });
 };

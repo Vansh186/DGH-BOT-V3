@@ -9,6 +9,7 @@ category.set("moderation", "**Moderation Commands**");
 category.set("settings", "**Settings Commands**");
 category.set("ticket", "**Ticket Commands**");
 category.set("reaction", "**ReactionRoles Commands**");
+category.set("anti-swear", "**ReactionRoles Commands**");
 category.set("admin", "**Admin Commands**");
 category.set("music", "**Music Commands For Member**");
 category.set("search", "**Search Commands**");
@@ -58,10 +59,12 @@ module.exports = {
         .setColor("RANDOM")
         .setTitle(`**\`${command.name}\`** Command`)
         .setDescription(`\`${command.description || "No Description"}\``)
-        .addField(`Category`, `• \`${command.category|| "--"}\``, true)
+        .addField(`Category`, `• \`${command.category || "--"}\``, true)
         .addField(
           `Aliases`,
-          `\`\`\`html\n${"No Aliases" ||command.aliases.join(", ") || "No Aliases"}\n\`\`\``,
+          `\`\`\`html\n${"No Aliases" ||
+            command.aliases.join(", ") ||
+            "No Aliases"}\n\`\`\``,
           true
         )
         .addField(
@@ -105,9 +108,16 @@ module.exports = {
         .addField(`${client.emotes.search || "🔍"} Search`, `\`search\``, true)
         .addField(`${client.emotes.misc || "📋"} Misc`, `\`misc\``, true)
         .addField(`${client.emotes.music || "🎶"} Music`, `\`music\``, true)
-        .addField(`${client.emotes.add || "✅"} Music`, `\`music\``, true)
+        .addField(
+          `${client.emotes.add || "✅"} Reaction Roles`,
+          `\`reaction\``,
+          true
+        )
+        .addField(`🤐 Anti Swear`, `\`anti-swear\``, true)
         .addField(`${client.emotes.fun || "😂"} Fun`, `\`fun\``, true)
-        .setImage("https://cdn.discordapp.com/attachments/821846294737715220/829368179163267082/video_1.gif")
+        .setImage(
+          "https://cdn.discordapp.com/attachments/821846294737715220/829368179163267082/video_1.gif"
+        )
         .setTimestamp()
     );
   }
