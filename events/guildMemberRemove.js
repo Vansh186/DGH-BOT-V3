@@ -51,9 +51,8 @@ module.exports = async client => {
     );
     var date = moment.tz("Asia/Jakarta");
     let chx = db.get(`levchannel_${member.guild.id}`);
-    let ch = db
-      .get(`levmsg_${member.guild.id}`)
-    
+    let c = db.get(`levmsg_${member.guild.id}`) || "Good bye {member}";
+    let ch = c
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution

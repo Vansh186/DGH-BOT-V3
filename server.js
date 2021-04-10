@@ -86,34 +86,21 @@ client.on("messageDelete", function(message, channel) {
 });
 client.on("message", async message => {
   if (message.author.bot) return;
-
-  let Prefix = await db.get(`Prefix_${message.guild.id}`);
-
-  if (!Prefix) Prefix = Default_Prefix;
-
-  const escapeRegex = str =>
-    str.replace(/[.<>`•√π÷×¶∆£¢€¥*@_+?^${}()|[\]\\]/g, "\\$&");
-
-  const prefixRegex = new RegExp(
-    `^(<@!?${client.user.id}>|${escapeRegex(Prefix)})\\s*`
-  );
-
-  if (!prefixRegex.test(message.content)) return;
-
-  const [, matchedPrefix] = message.content.match(prefixRegex);
-
   let words = db.get(`words_${message.guild.id}`);
   let yus = db.get(`message_${message.guild.id}`);
   if (yus === null) {
     yus = ":x: | **{user-mention}, The Word You said is blacklisted!**";
   }
-  if (message.content.startsWith(matchedPrefix + "addword")) return;
+    let Prefix = await db.get(`Prefix_${message.guild.id}`);
+  if (!Prefix) Prefix = Default_Prefix;
 
-  if (message.content.startsWith(matchedPrefix + "delword")) return;
+  if (message.content.startsWith(Prefix + "addword")) return;
 
-  if (message.content.startsWith(matchedPrefix + "set-warn-msg")) return;
+  if (message.content.startsWith(Prefix + "delword")) return;
 
-  if (message.content.startsWith(matchedPrefix + "words")) return;
+  if (message.content.startsWith(Prefix + "set-warn-msg")) return;
+
+  if (message.content.startsWith(Prefix + "words")) return;
 
   let pog = yus
     .split("{user-mention}")
@@ -318,12 +305,13 @@ function xp(message) {
     if (message.guild.id === message.guild.id) {
       let channel_id = db.get(`levelch_${message.guild.id}`);
       let user = message.author;
+      if (channel_id === null) return;
       let levelchannel = client.channels.cache.get(channel_id);
       let image = db.get(`levelimg_${message.guild.id}`);
       var rank = db.get(`guild_${message.guild.id}_xptotal_${user.id}`);
       let color = message.member.displayHexColor;
 
-     // if (color == "#000000") color = message.member.hoistRole.hexColor;
+       if (color == "#000000") color = message.member.hoistRole.hexColor;
       const rak = new canvacord.Rank();
 
       const ran = new canvacord.Rank()
@@ -354,7 +342,6 @@ function xp(message) {
           .setImage("attachment://Rankcard.png")
           .attachFiles(attachment);
 
-        if (levelchannel === null) return;
         levelchannel.send(EmbedLevel);
       });
     } else {
