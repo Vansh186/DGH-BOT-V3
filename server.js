@@ -31,7 +31,7 @@ client.config = require("./emoji/emojis");
 client.emotes = client.config.emojis;
 client.db = require("quick.db");
 client.discord = require("discord.js");
-client.random = getRandomString
+client.random = getRandomString;
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
   client.user
@@ -356,10 +356,13 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function getRandomString(length) {
-  var s = '';
-  do { s += Math.random().toString(36).substr(2); } while (s.length < length);
-  s = s.substr(0, length);
-  
+  var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  var s = "";
+  for (var i = 0; i < length; i++) {
+    var rnum = Math.floor(Math.random() * chars.length);
+    s += chars.substring(rnum, rnum + 1);
+  }
+
   return s;
 }
 
