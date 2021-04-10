@@ -84,62 +84,37 @@ client.on("messageDelete", function(message, channel) {
       : null
   });
 });
-
-//<SETUP>
 client.on("message", async message => {
-  if (message.author.bot || !message.guild || message.webhookID) return;
-  xp(message);
+  if (message.author.bot) return;
+
   let Prefix = await db.get(`Prefix_${message.guild.id}`);
+
   if (!Prefix) Prefix = Default_Prefix;
+
   const escapeRegex = str =>
     str.replace(/[.<>`•√π÷×¶∆£¢€¥*@_+?^${}()|[\]\\]/g, "\\$&");
+
   const prefixRegex = new RegExp(
     `^(<@!?${client.user.id}>|${escapeRegex(Prefix)})\\s*`
   );
+
   if (!prefixRegex.test(message.content)) return;
+
   const [, matchedPrefix] = message.content.match(prefixRegex);
-  const args = message.content
-    .slice(matchedPrefix.length)
-    .trim()
-    .split(/ +/);
-  let cmd = args.shift().toLowerCase();
-  let command =
-    client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
-  if (!command) return;
-  
-  let status = db.get(`afkstatus_${message.guild.id}_${message.author.id}`);
-	let reason;
-	if (status === true) {
-		db.set(`afkstatus_${message.guild.id}_${message.author.id}`, false);
-		db.delete(`afk_${message.guild.id}_${message.author.id}`);
-		message.member.setNickname(message.author.username).catch(err => {});
-		return message.reply(`**Welcome Back**`);
-	}
-	if (message.mentions.users.size) {
-		let mentions = message.mentions.users;
-		mentions = mentions.filter(mention => mention.id !== message.author.id);
-		if (mentions.size) {
-			let victim = mentions.find(mention =>
-				db.get(`afk_${message.guild.id}_${mention.id}`)
-			);
-			if (victim) {
-			status = db.get(`afkstatus_${message.guild.id}_${victim.id}`);
-			reason = db.get(`afk_${message.guild.id}_${victim.id}`);
-				let time = db.get(`time_${message.guild.id}_${victim.id}`);
-				time = Date.now() - time;
-				return message.reply(
-					`**${victim.username} is currently AFK - ${reason} - ${format(
-						time
-					)} ago**`
-				);
-			}
-		}
-	}
+
   let words = db.get(`words_${message.guild.id}`);
   let yus = db.get(`message_${message.guild.id}`);
   if (yus === null) {
     yus = ":x: | **{user-mention}, The Word You said is blacklisted!**";
   }
+  if (message.content.startsWith(matchedPrefix + "addword")) return;
+
+  if (message.content.startsWith(matchedPrefix + "delword")) return;
+
+  if (message.content.startsWith(matchedPrefix + "set-warn-msg")) return;
+
+  if (message.content.startsWith(matchedPrefix + "words")) return;
+
   let pog = yus
     .split("{user-mention}")
     .join("<@" + message.author.id + ">")
@@ -164,7 +139,58 @@ client.on("message", async message => {
     message.delete();
     message.channel.send(pog);
   }
-//<COMMAND USAGE AND DESCRIPTION>
+});
+//<SETUP>
+client.on("message", async message => {
+  if (message.author.bot || !message.guild || message.webhookID) return;
+  xp(message);
+  let Prefix = await db.get(`Prefix_${message.guild.id}`);
+  if (!Prefix) Prefix = Default_Prefix;
+  const escapeRegex = str =>
+    str.replace(/[.<>`•√π÷×¶∆£¢€¥*@_+?^${}()|[\]\\]/g, "\\$&");
+  const prefixRegex = new RegExp(
+    `^(<@!?${client.user.id}>|${escapeRegex(Prefix)})\\s*`
+  );
+  if (!prefixRegex.test(message.content)) return;
+  const [, matchedPrefix] = message.content.match(prefixRegex);
+  const args = message.content
+    .slice(matchedPrefix.length)
+    .trim()
+    .split(/ +/);
+  let cmd = args.shift().toLowerCase();
+  let command =
+    client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
+  if (!command) return;
+
+  let status = db.get(`afkstatus_${message.guild.id}_${message.author.id}`);
+  let reason;
+  if (status === true) {
+    db.set(`afkstatus_${message.guild.id}_${message.author.id}`, false);
+    db.delete(`afk_${message.guild.id}_${message.author.id}`);
+    message.member.setNickname(message.author.username).catch(err => {});
+    return message.reply(`**Welcome Back**`);
+  }
+  if (message.mentions.users.size) {
+    let mentions = message.mentions.users;
+    mentions = mentions.filter(mention => mention.id !== message.author.id);
+    if (mentions.size) {
+      let victim = mentions.find(mention =>
+        db.get(`afk_${message.guild.id}_${mention.id}`)
+      );
+      if (victim) {
+        status = db.get(`afkstatus_${message.guild.id}_${victim.id}`);
+        reason = db.get(`afk_${message.guild.id}_${victim.id}`);
+        let time = db.get(`time_${message.guild.id}_${victim.id}`);
+        time = Date.now() - time;
+        return message.reply(
+          `**${victim.username} is currently AFK - ${reason} - ${format(
+            time
+          )} ago**`
+        );
+      }
+    }
+  }
+  //<COMMAND USAGE AND DESCRIPTION>
   if (command.args && !args.length) {
     return message.channel.send(
       new MessageEmbed()
@@ -253,7 +279,7 @@ client.on("message", async message => {
   }
   timestamps.set(message.author.id, now);
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
- 
+
   try {
     if (command) {
       command.run(client, message, args);
@@ -297,7 +323,7 @@ function xp(message) {
       var rank = db.get(`guild_${message.guild.id}_xptotal_${user.id}`);
       let color = message.member.displayHexColor;
 
-      if (color == "#000000") color = message.member.hoistRole.hexColor;
+     // if (color == "#000000") color = message.member.hoistRole.hexColor;
       const rak = new canvacord.Rank();
 
       const ran = new canvacord.Rank()

@@ -53,6 +53,7 @@ module.exports = async client => {
     let chx = db.get(`levchannel_${member.guild.id}`);
     let ch = db
       .get(`levmsg_${member.guild.id}`)
+    
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
