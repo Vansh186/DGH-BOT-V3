@@ -268,12 +268,8 @@ function xp(message) {
           .setImage("attachment://Rankcard.png")
           .attachFiles(attachment);
 
-        if (levelchannel === null) {
-          return message.channel.send(
-            `${message.author}, You Have Leveled Up To Level **${newLevel}**`
-          );
-        }
-        levelchannel.send(EmbedLevel);
+        if (levelchannel === null) return 
+          levelchannel.send(EmbedLevel);
       });
     } else {
       message.channel.send(
