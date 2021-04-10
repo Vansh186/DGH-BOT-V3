@@ -3,8 +3,13 @@ const emojis = require("../../emojis.js")
 
 module.exports = {
 name: "rradd",
+  args: true,
+  category: "reaction",
+  
+  
+  
 usage: "rradd [channel mention | channelID] [messageID] [role mention | roleID] [emoji]",
-run: async (client, message, args, db) => {
+run: async (client, message, args) => {
 if (!args[0]) return message.channel.send(`:x: | **Specify The ChannelID or mention The Channel**`);
 if (!args[1]) return message.channel.send(`:x: | **Specify The messageID**`);
 if (!args[2]) return message.channel.send(`:x: | **Specify The roleID or mention The Role**`);
@@ -22,7 +27,7 @@ if (emoji && !emojis.includes(args[3])) {
   let checking = await client.emojis.cache.find(x => x.id === emoji.id);
   if (!checking) return message.channel.send(`:x: | **Invalid Emoji**`);
 };
-let pog = db.get(`reactions_${message.guild.id}_${msg.id}`)
+let pog = client.db.get(`reactions_${message.guild.id}_${msg.id}`)
 if (pog && pog.find((x) => x.emoji == args[3])) {
             let embed = new Discord.MessageEmbed()
             embed.setAuthor(message.guild.name, message.guild.iconURL())
@@ -36,7 +41,7 @@ if (pog && pog.find((x) => x.emoji == args[3])) {
             });
         }
 await msg.react(args[3])
-db.push(`reactions_${message.guild.id}_${msg.id}`, {
+client.db.push(`reactions_${message.guild.id}_${msg.id}`, {
 emoji: args[3],
 roleId: role.id
 });
