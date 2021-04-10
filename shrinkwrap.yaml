@@ -23,6 +23,7 @@ dependencies:
   google-play-scraper: 8.0.2
   google-translate-api: 2.3.0
   hastebin-gen: 2.0.5
+  humanize-duration: 3.25.1
   instagram-api.js: 0.0.8
   jimp: 0.16.1
   lyrics-finder: 21.7.0
@@ -3089,6 +3090,10 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-EkYm5BcKUGiduxzSt3Eppko+PiNWNEpa4ySk9vTC6wDsQJW9rHSa+UhGNJoRYp7bz6Ht1eaRIa6QaJqO5rCFbA==
+  /humanize-duration/3.25.1:
+    dev: false
+    resolution:
+      integrity: sha512-P+dRo48gpLgc2R9tMRgiDRNULPKCmqFYgguwqOO2C0fjO35TgdURDQDANSR1Nt92iHlbHGMxOTnsB8H8xnMa2Q==
   /iconv-lite/0.4.24:
     dependencies:
       safer-buffer: 2.1.2
@@ -6005,6 +6010,7 @@ specifiers:
   google-play-scraper: ^8.0.2
   google-translate-api: ^2.3.0
   hastebin-gen: ^2.0.5
+  humanize-duration: ^3.25.1
   instagram-api.js: ^0.0.8
   jimp: ^0.16.1
   lyrics-finder: ^21.4.0

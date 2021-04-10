@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const { Client } = require("discord.js");
 const db = require("quick.db");
+const format = require(`humanize-duration`);
 const ms = require("pretty-ms");
 const canvacord = require("canvacord");
 const mongoose = require("mongoose");
@@ -105,7 +106,65 @@ client.on("message", async message => {
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!command) return;
-  //<COMMAND USAGE AND DESCRIPTION>
+  
+  let status = db.get(`afkstatus_${message.guild.id}_${message.author.id}`);
+	let reason;
+	if (status === true) {
+		db.set(`afkstatus_${message.guild.id}_${message.author.id}`, false);
+		db.delete(`afk_${message.guild.id}_${message.author.id}`);
+		message.member.setNickname(message.author.username).catch(err => {});
+		return message.reply(`**Welcome Back**`);
+	}
+	if (message.mentions.users.size) {
+		let mentions = message.mentions.users;
+		mentions = mentions.filter(mention => mention.id !== message.author.id);
+		if (mentions.size) {
+			let victim = mentions.find(mention =>
+				db.get(`afk_${message.guild.id}_${mention.id}`)
+			);
+			if (victim) {
+			status = db.get(`afkstatus_${message.guild.id}_${victim.id}`);
+			reason = db.get(`afk_${message.guild.id}_${victim.id}`);
+				let time = db.get(`time_${message.guild.id}_${victim.id}`);
+				time = Date.now() - time;
+				return message.reply(
+					`**${victim.username} is currently AFK - ${reason} - ${format(
+						time
+					)} ago**`
+				);
+			}
+		}
+	}
+  let words = db.get(`words_${message.guild.id}`);
+  let yus = db.get(`message_${message.guild.id}`);
+  if (yus === null) {
+    yus = ":x: | **{user-mention}, The Word You said is blacklisted!**";
+  }
+  let pog = yus
+    .split("{user-mention}")
+    .join("<@" + message.author.id + ">")
+    .split("{server-name}")
+    .join(message.guild.name)
+    .split("{user-tag}")
+    .join(message.author.tag)
+    .split("{user-username}")
+    .join(message.author.username);
+  if (words === null) return;
+  function check(msg) {
+    //is supposed to check if message includes da swear word
+    return words.some(word =>
+      message.content
+        .toLowerCase()
+        .split(" ")
+        .join("")
+        .includes(word.word.toLowerCase())
+    );
+  }
+  if (check(message.content) === true) {
+    message.delete();
+    message.channel.send(pog);
+  }
+//<COMMAND USAGE AND DESCRIPTION>
   if (command.args && !args.length) {
     return message.channel.send(
       new MessageEmbed()
@@ -194,6 +253,7 @@ client.on("message", async message => {
   }
   timestamps.set(message.author.id, now);
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+ 
   try {
     if (command) {
       command.run(client, message, args);
@@ -300,51 +360,6 @@ client.on("message", async message => {
         message.inlineReply(data.message);
       });
     message.channel.stopTyping();
-  }
-});
-client.on("message", async message => {
-  if (message.author.bot) return;
-  let Prefix = await db.get(`Prefix_${message.guild.id}`);
-  if (!Prefix) Prefix = Default_Prefix;
-  const escapeRegex = str =>
-    str.replace(/[.<>`•√π÷×¶∆£¢€¥*@_+?^${}()|[\]\\]/g, "\\$&");
-  const prefixRegex = new RegExp(
-    `^(<@!?${client.user.id}>|${escapeRegex(Prefix)})\\s*`
-  );
-  if (!prefixRegex.test(message.content)) return;
-  const [, matchedPrefix] = message.content.match(prefixRegex);
-  let words = db.get(`words_${message.guild.id}`);
-  let yus = db.get(`message_${message.guild.id}`);
-  if (yus === null) {
-    yus = ":x: | **{user-mention}, The Word You said is blacklisted!**";
-  }
-  if (message.content.startsWith(matchedPrefix + "addword")) return;
-  if (message.content.startsWith(matchedPrefix + "delword")) return;
-  if (message.content.startsWith(matchedPrefix + "set-warn-msg")) return;
-  if (message.content.startsWith(matchedPrefix + "words")) return;
-  let pog = yus
-    .split("{user-mention}")
-    .join("<@" + message.author.id + ">")
-    .split("{server-name}")
-    .join(message.guild.name)
-    .split("{user-tag}")
-    .join(message.author.tag)
-    .split("{user-username}")
-    .join(message.author.username);
-  if (words === null) return;
-  function check(msg) {
-    //is supposed to check if message includes da swear word
-    return words.some(word =>
-      message.content
-        .toLowerCase()
-        .split(" ")
-        .join("")
-        .includes(word.word.toLowerCase())
-    );
-  }
-  if (check(message.content) === true) {
-    message.delete();
-    message.channel.send(pog);
   }
 });
 
