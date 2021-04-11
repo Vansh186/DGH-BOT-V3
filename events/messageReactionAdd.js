@@ -17,7 +17,8 @@ const data = client.db.get(`reactions_${guild.id}_${reaction.message.id}`)
 member.roles.add(reaction2.roleId).catch(err => undefined);
   const embed = new client.discord.MessageEmbed()
   .setTitle("Role Added")
-  .setDescription(`You have got the ${reaction2.roleName} role by reacting in ${guild.name}`)
+  .setColor("RED")
+  .setDescription(`You have got the ${reaction2} role by reacting in ${guild.name}`)
 member.send(embed)
 });
 }
