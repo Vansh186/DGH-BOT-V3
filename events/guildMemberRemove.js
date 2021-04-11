@@ -67,6 +67,7 @@ module.exports = async client => {
       .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
     const sender = await client.channels.cache.get(chx);
+   if(!sender) return;
     sender.send(leaveembed);
   });
 };
