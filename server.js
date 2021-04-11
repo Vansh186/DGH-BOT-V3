@@ -119,7 +119,7 @@ client.on("message", async message => {
   }
   if (check(message.content) === true) {
     message.delete();
-    message.channel.send(pog);
+    message.channel.send(pog).then(m=>m.delete({timeout:5000}).catch(e=>{}));
   }
 });
 //<SETUP>
