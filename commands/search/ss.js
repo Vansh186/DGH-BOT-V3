@@ -17,11 +17,7 @@ module.exports = {
   run: async (client, message, args) => {
     message.delete();
     const user = message.author.tag
-    const urls = args[0].replace(`pornhub.com`,"❌");
-    if (!urls)
-      return message.channel
-        .send(`\`\`\`\n${user},where is the link -_\n\`\`\``)
-        .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
+    const urls = args[0].replace(`pornhub.com`,"❌").replace(`nhentai.net`,"❌");
     if (urls.length < 8)
       return message
         .reply(

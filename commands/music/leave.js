@@ -18,10 +18,10 @@ module.exports = {
     
     try {
     
-    await message.guild.me.voice.leave(client.user.id);
+    await Channel.leave();
       
     } catch (error) {
-      await message.guild.me.voice.kick(message.guild.me.id);
+      await  Channel.leave();
       return message.channel.send("Trying To Leave The Voice Channel...");
     };
     
