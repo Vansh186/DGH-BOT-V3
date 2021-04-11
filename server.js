@@ -8,7 +8,9 @@ const canvacord = require("canvacord");
 const mongoose = require("mongoose");
 const { MessageEmbed } = require("discord.js");
 const client = new Client({
-  disableEveryone: true
+  disableEveryone: 'everyone',
+  partials: ["REACTION", "MESSAGE", "CHANNEL"]
+
 });
 require("./reply"); //<message.inlineReply>
 const {
