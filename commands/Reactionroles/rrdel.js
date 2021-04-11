@@ -57,7 +57,7 @@ module.exports = {
       embed.setTitle("Error");
       embed.setDescription(`:x: | **Reaction Roles not Found!**`);
       embed.setFooter(
-        message.author.tag + " | made by LΣGΣПD#0001",
+        message.author.tag + " | made by 𝙁𝘾 么 Glitch Editz",
         message.author.displayAvatarURL({ dynamic: true })
       );
       embed.setTimestamp();
@@ -76,7 +76,7 @@ module.exports = {
       embed2.setAuthor(message.author.tag, message.author.displayAvatarURL());
       embed2.setDescription(`**The Reaction Role has been deleted!** `);
       embed2.setFooter(
-        message.guild.name + " | made by LΣGΣПD#0001",
+        message.guild.name + " | made by 𝙁𝘾 么 Glitch Editz",
         message.guild.iconURL()
       );
       embed2.setColor("GREEN");
@@ -90,7 +90,7 @@ module.exports = {
       embed.setTitle("Error");
       embed.setDescription(`:x: | **Reaction Roles not Found!**`);
       embed.setFooter(
-        message.author.tag + " | made by LΣGΣПD#0001",
+        message.author.tag + " | made by 𝙁𝘾 么 Glitch Editz",
         message.author.displayAvatarURL({ dynamic: true })
       );
       embed.setTimestamp();

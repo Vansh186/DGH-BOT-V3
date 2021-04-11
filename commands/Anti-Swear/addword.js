@@ -54,7 +54,7 @@ category: 'anti-swear',
         embed.setTitle("Success")
         embed.setThumbnail(message.guild.iconURL())
         embed.setDescription(`**The word has been added!**`)
-        embed.setFooter(message.author.tag + " | made by LΣGΣПD#0001", message.author.displayAvatarURL({ dynamic: true }))
+        embed.setFooter(message.author.tag + " | made by 𝙁𝘾 么 Glitch Editz", message.author.displayAvatarURL({ dynamic: true }))
         embed.setColor("RANDOM")
         embed.setTimestamp()
         message.channel.send({

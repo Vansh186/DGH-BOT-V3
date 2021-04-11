@@ -33,7 +33,7 @@ module.exports = {
 
       embed.setDescription(`${array.join("\n")}`);
       embed.setFooter(
-        message.author.tag + " | made by LΣGΣПD#0001",
+        message.author.tag + " | made by 𝙁𝘾 么 Glitch Editz",
         message.author.displayAvatarURL({ dynamic: true })
       );
     } else {

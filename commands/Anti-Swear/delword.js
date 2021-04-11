@@ -61,7 +61,7 @@ embed.setTimestamp()
             let embed = new Discord.MessageEmbed()
                 embed.setAuthor(message.author.tag, message.author.displayAvatarURL())
                 embed.setDescription(`:x: | **The word was not found!**`)
-                embed.setFooter(message.guild.name + " | made by LΣGΣПD#0001", message.guild.iconURL());
+                embed.setFooter(message.guild.name + " | made by 𝙁𝘾 么 Glitch Editz", message.guild.iconURL());
                 embed.setColor("#FF0000")
                 embed.setTimestamp()
 

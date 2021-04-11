@@ -61,7 +61,7 @@ module.exports = {
         `:x: | **The emoji is already being used in The message for reaction Roles!**`
       );
       embed.setFooter(
-        message.author.tag + " | made by LΣGΣПD#0001",
+        message.author.tag + " | made by 𝙁𝘾 么 Glitch Editz",
         message.author.displayAvatarURL({ dynamic: true })
       );
       embed.setTimestamp();
@@ -82,7 +82,7 @@ module.exports = {
     embed.setThumbnail(message.guild.iconURL());
     embed.setDescription(`**The Reaction Role has been Set up**`);
     embed.setFooter(
-      message.author.tag + " | made by LΣGΣПD#0001",
+      message.author.tag + " | made by 𝙁𝘾 么 Glitch Editz",
       message.author.displayAvatarURL({ dynamic: true })
     );
     embed.setColor("RANDOM");

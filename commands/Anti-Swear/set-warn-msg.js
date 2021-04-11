@@ -26,7 +26,7 @@ category: 'anti-swear',run: async (client, message, args) => {
     client.db.set(`message_${message.guild.id}`, msg)
     let embed = new Discord.MessageEmbed()
     embed.setTitle("Message Set!")
-    embed.setFooter(message.author.tag + " | made by LΣGΣПD#0001", message.author.displayAvatarURL({ dynamic: true }))
+    embed.setFooter(message.author.tag + " | made by 𝙁𝘾 么 Glitch Editz", message.author.displayAvatarURL({ dynamic: true }))
     embed.setTimestamp()
     embed.setAuthor(message.guild.name, message.guild.iconURL())
     embed.addField("message", msg)
