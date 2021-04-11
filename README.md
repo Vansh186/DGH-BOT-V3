@@ -26,11 +26,9 @@
 | **guildOnly** | this can only be on the server not on dm | `guildOnly: false/true` | 
 
 Your Ass If You Ever Say **This Is My Bot & Coded By Me Or Smth**, Make Sure To Give Credit (In Bot Or Commands) :D
-
 [![DevServer](https://discordapp.com/api/guilds/773194751411355698/widget.png?style=shield)](https://discord.gg/MKwyk4qdeb)
-
 - Author - 𝙁𝘾 么 Glitch Editz#5631 
-- Support - [Click Me](https://dsc.gg/mincoder)
+- Support - [Click Me](https://dsc.gg/mincoder) 
 - create cmd - 𝙁𝘾 么 Glitch Editz#5631
 - for cmd music - Legendary Emoji#1742
 - for additional feature settings - 𝙁𝘾 么 Glitch Editz#5631ttps://discord.gg/MKwyk4qdeb)
