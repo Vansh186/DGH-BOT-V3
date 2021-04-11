@@ -1,14 +1,24 @@
+const {
+  Default_Prefix,
+  Token,
+  Support,
+  id,
+  Color,
+  DateDat,
+  Dashboard
+} = require("../../config.js");
 const Discord = require("discord.js");
-const bot = new Discord.Client();
 module.exports = {
   name: "clear",
   category: "misc",
 
-  aliases: ["d", "delete", "prune"],
+  aliases: ["purge", "delete", "prune"],
 
-  run: async (bot, message, args) => {
+  run: async (client, message, args) => {
     // UPDATE ^ ACCORDING TO YOUR HANDLER
-    let prefix = "q";
+
+    let prefix = await client.db.get(`Prefix_${message.guild.id}`);
+    if (!prefix) prefix = Default_Prefix;
     try {
       if (!message.guild.me.hasPermission("MANAGE_MESSAGES"))
         return message.reply(
@@ -33,7 +43,7 @@ module.exports = {
         .setColor("BLUE")
         .setTitle("Purge | Clear | Delete | Prune")
         .setDescription(
-          `Delete a number of messages from a channel. (Ignores the pinned messages and limit is 100)`
+          `Delete a number of messages from a channel. (Ignores the pinned messages and limit is 500)`
         )
         .addField(
           "Usage",
@@ -51,9 +61,9 @@ module.exports = {
         return message.channel.send(
           "Please enter a number of messages to purge."
         );
-      if (!amount || amount < 2 || amount > 100)
+      if (!amount || amount < 2 || amount > 500)
         return message.channel.send(
-          "Please enter a number of message between 2 and 100."
+          "Please enter a number of message between 2 and 500."
         );
       if (!args[1]) {
         try {
