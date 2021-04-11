@@ -350,6 +350,7 @@ function xp(message) {
 client.on("message", async message => {
   const cchann = client.db.get(`chatbot_${message.guild.id}`);
   if (cchann === null) return;
+  if (!cchann) return;
   const sender = client.channels.cache.get(cchann);
   if (message.channel.name == sender.name) {
     if (message.author.bot) return;
