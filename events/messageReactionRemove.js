@@ -15,5 +15,10 @@ const data = client.db.get(`reactions_${guild.id}_${reaction.message.id}`)
   );
   if (!reaction3) return;
 member.roles.remove(reaction3.roleId).catch(err => undefined);
-});
+ const name = await guild.roles.cache.get(reaction3.roleId)
+  const embed = new client.discord.MessageEmbed()
+  .setTitle("Role Removed")
+  .setColor("RED")
+  .setDescription(`You have got the ${name.name} role removed by unreacting in ${guild.name}`)
+member.send(embed)});
 }
