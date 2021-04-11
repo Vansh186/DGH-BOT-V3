@@ -3,8 +3,7 @@ const Discord = module.require("discord.js");
 module.exports = {
    name: "lock",
    description: "Locks a Channel",
-   usage: "lock <channel>",
-  args: true,
+   usage: "lock",
  category: "admin",
   bot: ['MANAGE_SERVER', 'MANAGE_CHANNELS'],
   author: 'MANAGE_SERVER'||'MANAGE_CHANNELS',
