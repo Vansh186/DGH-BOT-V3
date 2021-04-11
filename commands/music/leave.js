@@ -18,7 +18,7 @@ module.exports = {
     
     try {
     
-    await message.guild.me.voice.kick(client.user.id);
+    await message.guild.me.voice.leave(client.user.id);
       
     } catch (error) {
       await message.guild.me.voice.kick(message.guild.me.id);
