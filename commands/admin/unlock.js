@@ -3,8 +3,7 @@ const Discord = module.require("discord.js");
 module.exports = {
    name: "unlock",
    description: "Unlocks a Channel",
-    usage: "unlock <channel>",
-  args: true,
+    usage: "unlock",
   category: "admin",
     permissions: "MANAGE_CHANNELS",
     bot: ["MANAGE_CHANNELS"],
