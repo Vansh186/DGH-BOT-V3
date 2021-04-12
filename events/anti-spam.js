@@ -1,7 +1,7 @@
 const usersMap = new Map();
 const LIMIT = 5;
-const TIME = 7000;
-const DIFF = 3000;
+const TIME = 15000;
+const DIFF = 9000;
 module.exports = async client => {
   client.on("message", async message => {
     if (message.author.bot) return;
@@ -54,7 +54,7 @@ module.exports = async client => {
             }
           }
           message.member.roles.add(muterole);
-          message.send("You have been muted!")
+          message.author.send("You have been muted!")
           message.channel.send("You have been muted!");
           setTimeout(() => {
             message.member.roles.remove(muterole);
