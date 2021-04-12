@@ -217,9 +217,34 @@ client.on("message", async message => {
           .setColor("RED")
           .setTimestamp()
           .setDescription(
-            `You do not have permission to use this command.\nThis command requires \`${command.permissions.join(
-              ", "
-            ) || "ADMINISTRATOR"}\``
+            `You do not have permission to use this command.\nThis command requires \`${command.author}\``
+          )
+      );
+    }
+  }
+ if (command.permissions) {
+    const authorPerms = message.channel.permissionsFor(message.author);
+    if (!authorPerms || !authorPerms.has(command.permissions || "ADMINISTRATOR")) {
+      return message.channel.send(
+        new MessageEmbed()
+          .setColor("RED")
+          .setTimestamp()
+          .setDescription(
+            `You do not have permission to use this command.\nThis command requires \`${command.permissions}\``
+          )
+      );
+    }
+  }
+
+ if (command.permission) {
+    const authorPerms = message.channel.permissionsFor(message.author);
+    if (!authorPerms || !authorPerms.has(command.permission || "ADMINISTRATOR")) {
+      return message.channel.send(
+        new MessageEmbed()
+          .setColor("RED")
+          .setTimestamp()
+          .setDescription(
+            `You do not have permission to use this command.\nThis command requires \`${command.permission}\``
           )
       );
     }
