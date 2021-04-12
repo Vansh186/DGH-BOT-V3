@@ -2,6 +2,7 @@ const Canvas = require("canvas");
 const Discord = require("discord.js");
 const db = require("quick.db");
 const moment = require("moment-timezone");
+const invites = {};
 module.exports = async client => {
   client.on("message", message => {
     var msg = `${Date.now() - message.createdTimestamp}`;
@@ -55,20 +56,26 @@ module.exports = async client => {
     );
     var date = moment.tz("Asia/Jakarta");
     let chx = db.get(`welchannel_${member.guild.id}`);
-  if (chx === null) return;
+    if (chx === null) return;
     let joinPosition;
     const me = member.guild.members.cache.array();
     me.sort((a, b) => a.joinedAt - b.joinedAt);
     for (let i = 0; i < me.length; i++) {
       if (me[i].id == member.guild.member(member).id) joinPosition = i;
     }
- let wrt = await db.get(`roles_${member.guild.id}`);
+    let wrt = await db.get(`roles_${member.guild.id}`);
+    member.guild.fetchInvites().then(async (guildInvites) => {
+  const ei = invites[member.guild.id];
+  invites[member.guild.id] = guildInvites;
+  const invite = guildInvites.find((i) => ei.get(i.code).uses < i.uses);
+  const inviter = await client.users.fetch(invite.inviter.id);
+
     let ch =
       db.get(`welmsg_${member.guild.id}`) || "welcome to my server {member}";
     const messs = ch
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
-      .replace(`{position}`, joinPosition || 1)//member.guild.members.cache.size)
+      .replace(`{position}`, joinPosition || 1) //member.guild.members.cache.size)
       .replace(`{tag}`, member.user.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, member.guild.name) // Name Server substitution
@@ -86,5 +93,5 @@ module.exports = async client => {
     const sender = client.channels.cache.get(chx);
     if (!sender) return;
     sender.send(welcomeembed);
-  });
+  })});
 };
