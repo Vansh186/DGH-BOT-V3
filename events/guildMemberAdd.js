@@ -2,7 +2,9 @@ const Canvas = require("canvas");
 const Discord = require("discord.js");
 const db = require("quick.db");
 const moment = require("moment-timezone");
-
+ const { promisify } = require('util');
+const wait = promisify(setTimeout);
+let invites;
 module.exports = async client => {
   client.on("message", message => {
     var msg = `${Date.now() - message.createdTimestamp}`;
@@ -64,12 +66,18 @@ module.exports = async client => {
       if (me[i].id == member.guild.member(member).id) joinPosition = i;
     }
     let wrt = await db.get(`roles_${member.guild.id}`);
-    member.guild.fetchInvites().then(async guildInvites => {
-      const invites = {};
-      const ei = invites[member.guild.id];
-      invites[member.guild.id] = guildInvites;
-      const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
-      const inviter = await client.users.fetch(invite.inviter.id);
+
+    
+
+    await wait(2000);
+
+    client.guilds.cache.get(member.guild.id).fetchInvites().then(inv => {
+
+        invites = inv;
+
+    })
+
+    member.guild.fetchInvites().then(gInvites => {
       let ch =
         db.get(`welmsg_${member.guild.id}`) || "welcome to my server {member}";
       const messs = ch
@@ -95,5 +103,5 @@ module.exports = async client => {
       if (!sender) return;
       sender.send(welcomeembed);
     });
-  });
-};
+  };
+;
