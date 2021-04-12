@@ -1,5 +1,5 @@
 const usersMap = new Map();
-const LIMIT = 5;
+const LIMIT = 0;
 const TIME = 15000;
 const DIFF = 9000;
 module.exports = async client => {
@@ -58,7 +58,7 @@ module.exports = async client => {
           message.channel.send("You have been muted!");
           setTimeout(() => {
             message.member.roles.remove(muterole);
-           message.send("You have been unmuted!")
+           message.author.send("You have been unmuted!")
             message.channel.send("You have been unmuted!");
           }, TIME);
         } else {
