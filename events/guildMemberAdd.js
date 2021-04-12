@@ -2,13 +2,7 @@ const Canvas = require("canvas");
 const Discord = require("discord.js");
 const db = require("quick.db");
 const moment = require("moment-timezone");
- const { promisify } = require('util');
-const wait = promisify(setTimeout);
-let invites;
 module.exports = async client => {
-  client.on("message", message => {
-    var msg = `${Date.now() - message.createdTimestamp}`;
-  });
   //fires every time when someone joins the server
   client.on("guildMemberAdd", async member => {
     let image = db.get(`welimage_${member.guild.id}`);
@@ -66,42 +60,28 @@ module.exports = async client => {
       if (me[i].id == member.guild.member(member).id) joinPosition = i;
     }
     let wrt = await db.get(`roles_${member.guild.id}`);
-
-    
-
-    await wait(2000);
-
-    client.guilds.cache.get(member.guild.id).fetchInvites().then(inv => {
-
-        invites = inv;
-
-    })
-
-    member.guild.fetchInvites().then(gInvites => {
-      let ch =
-        db.get(`welmsg_${member.guild.id}`) || "welcome to my server {member}";
-      const messs = ch
-        .replace(`{inviter}`, `${inviter.tag || "Unknown#0000"}`)
-        .replace(`{member}`, member) // Member mention substitution
-        .replace(`{username}`, member.user.username) // Username substitution
-        .replace(`{position}`, joinPosition || 1) //member.guild.members.cache.size)
-        .replace(`{tag}`, member.user.tag) // Tag substitution
-        .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
-        .replace(`{server}`, member.guild.name) // Name Server substitution
-        .replace(`{size}`, member.guild.members.cache.size);
-      const welcomeembed = new Discord.MessageEmbed()
-        .setColor("RANDOM")
-        .setTimestamp()
-        .setDescription(messs)
-        .setImage("attachment://welcome-image.png")
-        .attachFiles(attachment);
-      if (wrt === null) return;
-      let role = await member.guild.roles.cache.get(wrt);
-      if (role === null) return;
-      await member.roles.add(role);
-      const sender = client.channels.cache.get(chx);
-      if (!sender) return;
-      sender.send(welcomeembed);
-    });
-  };
-;
+    let ch =
+      db.get(`welmsg_${member.guild.id}`) || "welcome to my server {member}";
+    const messs = ch
+      .replace(`{member}`, member) // Member mention substitution
+      .replace(`{username}`, member.user.username) // Username substitution
+      .replace(`{position}`, joinPosition || 1) //member.guild.members.cache.size)
+      .replace(`{tag}`, member.user.tag) // Tag substitution
+      .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
+      .replace(`{server}`, member.guild.name) // Name Server substitution
+      .replace(`{size}`, member.guild.members.cache.size);
+    const welcomeembed = new Discord.MessageEmbed()
+      .setColor("RANDOM")
+      .setTimestamp()
+      .setDescription(messs)
+      .setImage("attachment://welcome-image.png")
+      .attachFiles(attachment);
+    if (wrt === null) return;
+    let role = await member.guild.roles.cache.get(wrt);
+    if (role === null) return;
+    await member.roles.add(role);
+    const sender = client.channels.cache.get(chx);
+    if (!sender) return;
+    sender.send(welcomeembed);
+  });
+};
