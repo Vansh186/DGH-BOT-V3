@@ -69,7 +69,7 @@ module.exports = {
         )
         .addField(
           `Required Permission`,
-          `\`\`\`html\n<${command.permissions || "No Permission"}>\n\`\`\``,
+          `\`\`\`html\n<${command.permissions ||command.permission ||command.author || "No Permission"}>\n\`\`\``,
           false
         )
         .addField(

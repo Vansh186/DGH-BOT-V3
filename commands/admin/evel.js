@@ -1,13 +1,16 @@
 const { MessageEmbed } = require('discord.js')
 
+const owner = "740947753135243354"||"767726828311543820"
 module.exports = {
         name: "eval",
         description: "Evaluates js code",
-        category: "admin",
+        category: "owner",
         aliases: ["e"],
         args: true,
         usage: 'eval <input>',
     run: async (client, message, args) => {
+       if (message.author.id != owner) return;
+ 
         function clean(text) {
             if (typeof text === "string")
                 return text
