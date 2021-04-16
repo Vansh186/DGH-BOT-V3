@@ -5,7 +5,7 @@ module.exports = {
   name: "setchannel",
   category: "settings",
   args: true,
-  usage: "setchannel <key //welcome/leave/report/level/modlog/chat-bot> <channel>",
+  usage: "setchannel <key //welcome/leave/report/level/modlog/chat-bot/starboard> <channel>",
   description: "Set the channel",
   bot: ['VIEW_CHANNEL','EMBED_LINKS','ATTACH_FILES','MANAGE_CHANNELS','MANAGE_GUILD'],
   author: 'VIEW_CHANNEL'||'EMBED_LINKS'||'ATTACH_FILES'||'MANAGE_CHANNELS'||'MANAGE_GUILD',
@@ -52,6 +52,22 @@ module.exports = {
           const chat = new Discord.MessageEmbed()
             .setDescription(
               `**Done** From now on I will send Chatbot in ${channel}`
+            )
+            .setColor("RED");
+          message.channel.send(chat);
+        }
+        break;
+      case "starboard":
+        {
+          if (!channel) {
+            return message.channel.send(
+              `${client.emotes.error}Pls Give Invalid channel... Try again...`
+            );
+          }
+          db.set(`handleStarboard_${message.guild.id}`, channel.id);
+          const chat = new Discord.MessageEmbed()
+            .setDescription(
+              `**Done** From now on I will send Starboard in ${channel}`
             )
             .setColor("RED");
           message.channel.send(chat);
