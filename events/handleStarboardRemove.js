@@ -1,5 +1,5 @@
 module.exports = async client => {
-  client.on('messageReactionAdd', async (reaction, user) => {
+  client.on('messageReactionRemove', async (reaction, user) => {
       let { guild } = reaction.message;
       let ss = client.db.get(`handleStarboard_${guild.id}`)
       let sender = client.channels.cache.get(ss)
@@ -22,10 +22,7 @@ module.exports = async client => {
         }
     }
     if(reaction.emoji.name === '⭐') {
-          let { guild } = reaction.message;
-      let ss = client.db.get(`handleStarboard_${guild.id}`)
-      let sender = client.channels.cache.get(ss)
-    if(reaction.message.channel.name.toLowerCase() === sender.name) return;
+        if(reaction.message.channel.name.toLowerCase() === 'starboard') return;
         if(reaction.message.partial) {
             await reaction.fetch();
             await reaction.message.fetch();
