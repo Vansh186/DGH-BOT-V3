@@ -1,7 +1,10 @@
 module.exports = async client => {
-  Client.on('messageReactionAdd', async (reaction, user) => {
+  client.on('messageReactionAdd', async (reaction, user) => {
     const handleStarboard = async () => {
-        const SBChannel = Client.channels.cache.find(channel => channel.name.toLowerCase() === 'starboard');
+      let { guild } = reaction.message;
+      let ss = client.db.get(`handleStarboard_${guild.id}`)
+      let name = client.channels
+        const SBChannel = client.channels.cache.find(channel => channel.name.toLowerCase() === 'starboard');
         const msgs = await SBChannel.messages.fetch({ limit: 100 });
         const SentMessage = msgs.find(msg => 
             msg.embeds.length === 1 ?
