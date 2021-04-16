@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const db = require("quick.db");
-const { Owner, Developer, Support, Dashboard } = require("../../config.js");
+const { Owner, Developer, Support, Dashboard, Server_ID } = require("../../config.js");
 module.exports = {
   name: "invite",
   aliases: ["invitelink"],
@@ -12,9 +12,7 @@ module.exports = {
   run: async (client, message, args) => {
     message.delete();
     const Invite = `https://discord.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=3154952&redirect_uri=https%3A%2F%2Fdiscord.gg%2FrZ2Qa5wWFV`;
-    const codeinvite = Support.replace("https://discord.gg/","");
-    const image = `http://invidget.switchblade.xyz/${codeinvite}`;
-
+    let image = `https://discordapp.com/api/guilds/${Server_ID}/embed.png?style=banner3`;
     const Embed = new Discord.MessageEmbed()
       .setColor("GREEN")
       .setTitle("🙏Thanks🙏")
