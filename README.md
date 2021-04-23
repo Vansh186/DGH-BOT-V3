@@ -26,7 +26,9 @@
 | **guildOnly** | this can only be on the server not on dm | `guildOnly: false/true` | 
 
 Your Ass If You Ever Say **This Is My Bot & Coded By Me Or Smth**, Make Sure To Give Credit (In Bot Or Commands) :D
-[![DevServer](https://discordapp.com/api/guilds/773194751411355698/widget.png?style=shield)](https://discord.gg/MKwyk4qdeb)
+
+[![DevServer](https://discordapp.com/api/guilds/773194751411355698/widget.png?style=shield)](https://dsc.gg/mincoder)
+
 - Author - 𝙁𝘾 么 Glitch Editz#5631 
 - Support - [Click Me](https://dsc.gg/mincoder) 
 - create cmd - 𝙁𝘾 么 Glitch Editz#5631
@@ -34,6 +36,8 @@ Your Ass If You Ever Say **This Is My Bot & Coded By Me Or Smth**, Make Sure To 
 - for additional feature settings - 𝙁𝘾 么 Glitch Editz#5631ttps://discord.gg/MKwyk4qdeb)
 - Channel - [Mit](https://www.youtube.com/channel/UCpLctSYrYYQm58ul219kMwg)
 
+- Vote My Bot: [Here](https://infinitybotlist.com/bots/790937024941129759)
+[![Vote](https://infinitybotlist.com/bots/790937024941129759/widget)]
+
 - Thank you for supporting my server.
-- every day these commands will be updated - I will tell you, never
- update the name wio.get. because this will be abet on cmd
+- every day these commands will be updated
