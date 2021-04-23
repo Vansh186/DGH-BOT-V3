@@ -33,7 +33,7 @@ Your Ass If You Ever Say **This Is My Bot & Coded By Me Or Smth**, Make Sure To 
 - Support - [Click Me](https://dsc.gg/mincoder) 
 - create cmd - 𝙁𝘾 么 Glitch Editz#5631
 - for cmd music - Legendary Emoji#1742
-- for additional feature settings - 𝙁𝘾 么 Glitch Editz#5631ttps://discord.gg/MKwyk4qdeb)
+- for additional feature settings - 𝙁𝘾 么 Glitch Editz#5631
 - Channel - [Mit](https://www.youtube.com/channel/UCpLctSYrYYQm58ul219kMwg)
 
 - Vote My Bot: [Here](https://infinitybotlist.com/bots/790937024941129759)
