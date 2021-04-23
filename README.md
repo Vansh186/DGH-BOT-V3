@@ -37,7 +37,8 @@ Your Ass If You Ever Say **This Is My Bot & Coded By Me Or Smth**, Make Sure To 
 - Channel - [Mit](https://www.youtube.com/channel/UCpLctSYrYYQm58ul219kMwg)
 
 - Vote My Bot: [Here](https://infinitybotlist.com/bots/790937024941129759)
-[![Vote](https://infinitybotlist.com/bots/790937024941129759/widget)]
+
+[![Vote](https://infinitybotlist.com/bots/790937024941129759/widget)](https://infinitybotlist.com/bots/790937024941129759)
 
 - Thank you for supporting my server.
 - every day these commands will be updated
